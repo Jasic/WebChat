@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lemontree.daemon.dbmgr.mapper.ServiceInfoMapper">
+    <resultMap id="BaseResultMap" type="com.lemontree.daemon.dbmgr.model.ServiceInfo">
+        <id column="PID" property="pid" jdbcType="INTEGER"/>
+        <result column="RestID" property="restid" jdbcType="INTEGER"/>
+        <result column="WebChatID" property="webchatid" jdbcType="VARCHAR"/>
+        <result column="URL" property="url" jdbcType="VARCHAR"/>
+        <result column="Token" property="token" jdbcType="VARCHAR"/>
+        <result column="BoundDate" property="bounddate" jdbcType="TIMESTAMP"/>
+        <result column="Status" property="status" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    PID, RestID, WebChatID, URL, Token, BoundDate, Status
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from ServiceInfo
+        where PID = #{pid,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ServiceInfo
+    where PID = #{pid,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.lemontree.daemon.dbmgr.model.ServiceInfo">
+    insert into ServiceInfo (PID, RestID, WebChatID,
+      URL, Token, BoundDate,
+      Status)
+    values (#{pid,jdbcType=INTEGER}, #{restid,jdbcType=INTEGER}, #{webchatid,jdbcType=VARCHAR},
+      #{url,jdbcType=VARCHAR}, #{token,jdbcType=VARCHAR}, #{bounddate,jdbcType=TIMESTAMP},
+      #{status,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.lemontree.daemon.dbmgr.model.ServiceInfo">
+        insert into ServiceInfo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pid != null">
+                PID,
+            </if>
+            <if test="restid != null">
+                RestID,
+            </if>
+            <if test="webchatid != null">
+                WebChatID,
+            </if>
+            <if test="url != null">
+                URL,
+            </if>
+            <if test="token != null">
+                Token,
+            </if>
+            <if test="bounddate != null">
+                BoundDate,
+            </if>
+            <if test="status != null">
+                Status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="pid != null">
+                #{pid,jdbcType=INTEGER},
+            </if>
+            <if test="restid != null">
+                #{restid,jdbcType=INTEGER},
+            </if>
+            <if test="webchatid != null">
+                #{webchatid,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null">
+                #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="token != null">
+                #{token,jdbcType=VARCHAR},
+            </if>
+            <if test="bounddate != null">
+                #{bounddate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lemontree.daemon.dbmgr.model.ServiceInfo">
+        update ServiceInfo
+        <set>
+            <if test="restid != null">
+                RestID = #{restid,jdbcType=INTEGER},
+            </if>
+            <if test="webchatid != null">
+                WebChatID = #{webchatid,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null">
+                URL = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="token != null">
+                Token = #{token,jdbcType=VARCHAR},
+            </if>
+            <if test="bounddate != null">
+                BoundDate = #{bounddate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                Status = #{status,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where PID = #{pid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lemontree.daemon.dbmgr.model.ServiceInfo">
+    update ServiceInfo
+    set RestID = #{restid,jdbcType=INTEGER},
+      WebChatID = #{webchatid,jdbcType=VARCHAR},
+      URL = #{url,jdbcType=VARCHAR},
+      Token = #{token,jdbcType=VARCHAR},
+      BoundDate = #{bounddate,jdbcType=TIMESTAMP},
+      Status = #{status,jdbcType=VARCHAR}
+    where PID = #{pid,jdbcType=INTEGER}
+  </update>
+
+
+    <!-- 自己定义 -->
+
+    <!-- 一对多的ServiceInfo实体 -->
+    <resultMap id="ServiceInfoResultMap" type="com.lemontree.daemon.dbmgr.model.ServiceInfo" extends="BaseResultMap">
+        <collection property="fansInfoList" javaType="list" ofType="com.lemontree.daemon.dbmgr.model.FansInfo">
+            <id column="FPID" property="pid" jdbcType="INTEGER"/>
+            <result column="FWebChatID" property="webchatid" jdbcType="VARCHAR"/>
+            <result column="FServiceInfoID" property="serviceinfoid" jdbcType="INTEGER"/>
+            <result column="FFanName" property="fanname" jdbcType="VARCHAR"/>
+            <result column="FAddress" property="address" jdbcType="VARCHAR"/>
+            <result column="FSex" property="sex" jdbcType="VARCHAR"/>
+            <result column="FFocusTime" property="focustime" jdbcType="TIMESTAMP"/>
+            <result column="FFocusType" property="focustype" jdbcType="INTEGER"/>
+
+            <association property="serviceInfo" resultMap="ServiceInfoResultMap"/>
+        </collection>
+    </resultMap>
+
+    <select id="getAll" resultMap="ServiceInfoResultMap" resultType="list">
+        <![CDATA[
+
+
+            SELECT
+               s.PID
+              ,s.RestID
+              ,s.WebChatID
+              ,s.URL
+              ,s.Token
+              ,s.BoundDate
+              ,s.Status
+
+              ,f.PID                 FPID
+              ,f.WebChatID           FWebChatID
+              ,f.ServiceInfoID       FServiceInfoID
+              ,f.FanName FFanName
+              ,f.Address FAddress
+              ,f.Sex FSex
+              ,f.FocusTime FFocusTime
+              ,f.FocusType FFocusType
+
+            FROM
+              ServiceInfo s
+            left JOIN
+              FansInfo f
+            ON
+              f.ServiceInfoID=s.PID
+
+        ]]>
+    </select>
+
+</mapper>

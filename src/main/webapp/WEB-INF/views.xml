@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    <bean id="errro403" class="org.springframework.web.servlet.view.JstlView">
+        <property name="url" value="/common/403.jsp"/>
+    </bean>
+    <bean id="errro404" class="org.springframework.web.servlet.view.JstlView">
+        <property name="url" value="/common/404.jsp"/>
+    </bean>
+    <bean id="errro500" class="org.springframework.web.servlet.view.JstlView">
+        <property name="url" value="/common/500.jsp"/>
+    </bean>
+
+    <bean id="wapindex" class="org.springframework.web.servlet.view.JstlView">
+        <property name="url" value="/WEB-INF/pages/wap/mainFrame.jsp"/>
+    </bean>
+
+    <bean id="mainFrame" class="org.springframework.web.servlet.view.JstlView">
+        <property name="url" value="/WEB-INF/pages/wap/mainFrame.jsp"/>
+    </bean>
+</beans>

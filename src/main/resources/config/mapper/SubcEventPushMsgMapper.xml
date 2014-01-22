@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lemontree.daemon.dbmgr.mapper.SubcEventPushMsgMapper">
+    <resultMap id="BaseResultMap" type="com.lemontree.daemon.dbmgr.model.SubcEventPushMsg">
+        <id column="PID" property="pid" jdbcType="INTEGER"/>
+        <result column="ServiceInfoID" property="serviceinfoid" jdbcType="INTEGER"/>
+        <result column="Type" property="type" jdbcType="VARCHAR"/>
+        <result column="MsgID" property="msgid" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    PID, ServiceInfoID, Type, MsgID
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from SubcEventPushMsg
+        where PID = #{pid,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from SubcEventPushMsg
+    where PID = #{pid,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.lemontree.daemon.dbmgr.model.SubcEventPushMsg">
+    insert into SubcEventPushMsg (PID, ServiceInfoID, Type, 
+      MsgID)
+    values (#{pid,jdbcType=INTEGER}, #{serviceinfoid,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, 
+      #{msgid,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="com.lemontree.daemon.dbmgr.model.SubcEventPushMsg">
+        insert into SubcEventPushMsg
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pid != null">
+                PID,
+            </if>
+            <if test="serviceinfoid != null">
+                ServiceInfoID,
+            </if>
+            <if test="type != null">
+                Type,
+            </if>
+            <if test="msgid != null">
+                MsgID,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="pid != null">
+                #{pid,jdbcType=INTEGER},
+            </if>
+            <if test="serviceinfoid != null">
+                #{serviceinfoid,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="msgid != null">
+                #{msgid,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lemontree.daemon.dbmgr.model.SubcEventPushMsg">
+        update SubcEventPushMsg
+        <set>
+            <if test="serviceinfoid != null">
+                ServiceInfoID = #{serviceinfoid,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                Type = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="msgid != null">
+                MsgID = #{msgid,jdbcType=INTEGER},
+            </if>
+        </set>
+        where PID = #{pid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lemontree.daemon.dbmgr.model.SubcEventPushMsg">
+    update SubcEventPushMsg
+    set ServiceInfoID = #{serviceinfoid,jdbcType=INTEGER},
+      Type = #{type,jdbcType=VARCHAR},
+      MsgID = #{msgid,jdbcType=INTEGER}
+    where PID = #{pid,jdbcType=INTEGER}
+  </update>
+
+    <resultMap id="SubcEventPushMsgResultMap" type="com.lemontree.daemon.dbmgr.model.SubcEventPushMsg"
+               extends="BaseResultMap">
+
+    </resultMap>
+
+    <select id="getAll" resultMap="SubcEventPushMsgResultMap">
+        select  * from SubcEventPushMsg
+
+    </select>
+</mapper>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lemontree.daemon.dbmgr.mapper.DaemonAdminInfoMapper">
+    <resultMap id="BaseResultMap" type="com.lemontree.daemon.dbmgr.model.DaemonAdminInfo">
+        <id column="PID" property="pid" jdbcType="INTEGER"/>
+        <result column="RestID" property="restid" jdbcType="INTEGER"/>
+        <result column="StaffName" property="staffname" jdbcType="VARCHAR"/>
+        <result column="Passwd" property="passwd" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    PID, RestID, StaffName, Passwd
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from DaemonAdminInfo
+        where PID = #{pid,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from DaemonAdminInfo
+    where PID = #{pid,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.lemontree.daemon.dbmgr.model.DaemonAdminInfo">
+    insert into DaemonAdminInfo (PID, RestID, StaffName, 
+      Passwd)
+    values (#{pid,jdbcType=INTEGER}, #{restid,jdbcType=INTEGER}, #{staffname,jdbcType=VARCHAR}, 
+      #{passwd,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.lemontree.daemon.dbmgr.model.DaemonAdminInfo">
+        insert into DaemonAdminInfo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pid != null">
+                PID,
+            </if>
+            <if test="restid != null">
+                RestID,
+            </if>
+            <if test="staffname != null">
+                StaffName,
+            </if>
+            <if test="passwd != null">
+                Passwd,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="pid != null">
+                #{pid,jdbcType=INTEGER},
+            </if>
+            <if test="restid != null">
+                #{restid,jdbcType=INTEGER},
+            </if>
+            <if test="staffname != null">
+                #{staffname,jdbcType=VARCHAR},
+            </if>
+            <if test="passwd != null">
+                #{passwd,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lemontree.daemon.dbmgr.model.DaemonAdminInfo">
+        update DaemonAdminInfo
+        <set>
+            <if test="restid != null">
+                RestID = #{restid,jdbcType=INTEGER},
+            </if>
+            <if test="staffname != null">
+                StaffName = #{staffname,jdbcType=VARCHAR},
+            </if>
+            <if test="passwd != null">
+                Passwd = #{passwd,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where PID = #{pid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lemontree.daemon.dbmgr.model.DaemonAdminInfo">
+    update DaemonAdminInfo
+    set RestID = #{restid,jdbcType=INTEGER},
+      StaffName = #{staffname,jdbcType=VARCHAR},
+      Passwd = #{passwd,jdbcType=VARCHAR}
+    where PID = #{pid,jdbcType=INTEGER}
+  </update>
+
+    <select id="getAll" resultMap="BaseResultMap">
+        select * from DaemonAdminInfo
+    </select>
+</mapper>

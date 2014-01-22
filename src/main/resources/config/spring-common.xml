@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+               http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <description>Spring配置</description>
+
+    <!-- 引入属性文件 -->
+    <context:property-placeholder location="classpath:config/dataSource.properties"/>
+
+    <context:annotation-config/>
+
+
+    <!-- 扫描的目录,不能移动到applicationContext.xml -->
+    <context:component-scan base-package="com"/>
+
+    <!-- 指定使用cglib -->
+    <!--<aop:aspectj-autoproxy proxy-target-class="true"/>-->
+
+
+    <!-- 转成string（StringHttpMessageConverter,默认是ISO8859-1，现在是修改-->
+    <bean id="stringHttpMessageConverter" class="org.springframework.http.converter.StringHttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <bean class="org.springframework.http.MediaType">
+                    <constructor-arg index="0" value="text"/>
+                    <constructor-arg index="1" value="plain"/>
+                    <constructor-arg index="2" value="UTF-8"/>
+                </bean>
+                <bean class="org.springframework.http.MediaType">
+                    <constructor-arg index="0" value="*"/>
+                    <constructor-arg index="1" value="*"/>
+                    <constructor-arg index="2" value="UTF-8"/>
+                </bean>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="jsonHttpMessageConverter"
+          class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+        <!--<property name="supportedMediaTypes">-->
+        <!--<list>-->
+        <!--<value>application/json;charset=UTF-8</value>-->
+        <!--</list>-->
+        <!--</property>-->
+    </bean>
+
+    <!--<bean id="marshallingHttpMessageConverter"-->
+    <!--class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">-->
+    <!--<property name="marshaller" ref="castorMarshaller"/>-->
+    <!--<property name="unmarshaller" ref="castorMarshaller"/>-->
+    <!--</bean>-->
+    <!--<bean id="castorMarshaller" class="org.springframework.oxm.castor.CastorMarshaller"/>-->
+    <!--&lt;!&ndash; spring定时任务配置 &ndash;&gt;-->
+    <!--<bean id="scheduledTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">-->
+    <!--<property name="timerTask">-->
+    <!--<ref bean="cn.tisson.web.adm.oa.job.SendJob" />-->
+    <!--</property>-->
+    <!--&lt;!&ndash; 任务执行周期 (单位:毫秒) &ndash;&gt;-->
+    <!--<property name="period">-->
+    <!--<value>120000</value>-->
+    <!--</property>-->
+    <!--&lt;!&ndash; 延时执行任务 (单位:毫秒) &ndash;&gt;-->
+    <!--<property name="delay">-->
+    <!--<value>60000</value>-->
+    <!--</property>-->
+    <!--</bean>-->
+    <!--<bean id="AdmAutoExpiredJob" class="org.springframework.scheduling.timer.ScheduledTimerTask">-->
+    <!--<property name="timerTask">-->
+    <!--<ref bean="cn.tisson.web.adm.job.AutoExpiredJob" />-->
+    <!--</property>-->
+    <!--&lt;!&ndash; 任务执行周期 (单位:毫秒) &ndash;&gt;-->
+    <!--<property name="period">-->
+    <!--<value>30000</value>-->
+    <!--</property>-->
+    <!--&lt;!&ndash; 延时执行任务 (单位:毫秒) &ndash;&gt;-->
+    <!--<property name="delay">-->
+    <!--<value>45000</value>-->
+    <!--</property>-->
+    <!--</bean>-->
+    <!--<bean id="TaskAutoExpiredJob" class="org.springframework.scheduling.timer.ScheduledTimerTask">-->
+    <!--<property name="timerTask">-->
+    <!--<ref bean="cn.tisson.web.common.job.AutoExpiredJob" />-->
+    <!--</property>-->
+    <!--&lt;!&ndash; 任务执行周期 (单位:毫秒) &ndash;&gt;-->
+    <!--<property name="period">-->
+    <!--<value>30000</value>-->
+    <!--</property>-->
+    <!--&lt;!&ndash; 延时执行任务 (单位:毫秒) &ndash;&gt;-->
+    <!--<property name="delay">-->
+    <!--<value>30000</value>-->
+    <!--</property>-->
+    <!--</bean>-->
+    <!---->
+    <!--&lt;!&ndash; 启动定时器 &ndash;&gt;-->
+    <!--<bean id="timerBean" class="org.springframework.scheduling.timer.TimerFactoryBean">-->
+    <!--<property name="scheduledTimerTasks">-->
+    <!--<list>-->
+    <!--<ref bean="scheduledTask" />-->
+    <!--<ref bean="AdmAutoExpiredJob" />-->
+    <!--</list>-->
+    <!--</property>-->
+    <!--</bean>-->
+
+
+</beans>

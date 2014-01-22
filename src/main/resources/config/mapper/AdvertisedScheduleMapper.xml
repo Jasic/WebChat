@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lemontree.daemon.dbmgr.mapper.AdvertisedScheduleMapper">
+    <resultMap id="BaseResultMap" type="com.lemontree.daemon.dbmgr.model.AdvertisedSchedule">
+        <id column="PID" property="pid" jdbcType="INTEGER"/>
+        <result column="ShopId" property="shopid" jdbcType="VARCHAR"/>
+        <result column="AdverID" property="adverid" jdbcType="INTEGER"/>
+        <result column="Priority" property="priority" jdbcType="INTEGER"/>
+        <result column="BeginTime" property="begintime" jdbcType="TIMESTAMP"/>
+        <result column="EndTime" property="endtime" jdbcType="TIMESTAMP"/>
+        <result column="Status" property="status" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    PID, ShopId, AdverID, Priority, BeginTime, EndTime, Status
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from AdvertisedSchedule
+        where PID = #{pid,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from AdvertisedSchedule
+    where PID = #{pid,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.lemontree.daemon.dbmgr.model.AdvertisedSchedule">
+    insert into AdvertisedSchedule (PID, ShopId, AdverID, 
+      Priority, BeginTime, EndTime, 
+      Status)
+    values (#{pid,jdbcType=INTEGER}, #{shopid,jdbcType=VARCHAR}, #{adverid,jdbcType=INTEGER}, 
+      #{priority,jdbcType=INTEGER}, #{begintime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.lemontree.daemon.dbmgr.model.AdvertisedSchedule">
+        insert into AdvertisedSchedule
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pid != null">
+                PID,
+            </if>
+            <if test="shopid != null">
+                ShopId,
+            </if>
+            <if test="adverid != null">
+                AdverID,
+            </if>
+            <if test="priority != null">
+                Priority,
+            </if>
+            <if test="begintime != null">
+                BeginTime,
+            </if>
+            <if test="endtime != null">
+                EndTime,
+            </if>
+            <if test="status != null">
+                Status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="pid != null">
+                #{pid,jdbcType=INTEGER},
+            </if>
+            <if test="shopid != null">
+                #{shopid,jdbcType=VARCHAR},
+            </if>
+            <if test="adverid != null">
+                #{adverid,jdbcType=INTEGER},
+            </if>
+            <if test="priority != null">
+                #{priority,jdbcType=INTEGER},
+            </if>
+            <if test="begintime != null">
+                #{begintime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endtime != null">
+                #{endtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lemontree.daemon.dbmgr.model.AdvertisedSchedule">
+        update AdvertisedSchedule
+        <set>
+            <if test="shopid != null">
+                ShopId = #{shopid,jdbcType=VARCHAR},
+            </if>
+            <if test="adverid != null">
+                AdverID = #{adverid,jdbcType=INTEGER},
+            </if>
+            <if test="priority != null">
+                Priority = #{priority,jdbcType=INTEGER},
+            </if>
+            <if test="begintime != null">
+                BeginTime = #{begintime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="endtime != null">
+                EndTime = #{endtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                Status = #{status,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where PID = #{pid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lemontree.daemon.dbmgr.model.AdvertisedSchedule">
+    update AdvertisedSchedule
+    set ShopId = #{shopid,jdbcType=VARCHAR},
+      AdverID = #{adverid,jdbcType=INTEGER},
+      Priority = #{priority,jdbcType=INTEGER},
+      BeginTime = #{begintime,jdbcType=TIMESTAMP},
+      EndTime = #{endtime,jdbcType=TIMESTAMP},
+      Status = #{status,jdbcType=VARCHAR}
+    where PID = #{pid,jdbcType=INTEGER}
+  </update>
+
+    <resultMap id="AdvertisedSchedule" type="com.lemontree.daemon.dbmgr.model.AdvertisedSchedule" extends="BaseResultMap">
+        <association property="advertisementInfo" javaType="com.lemontree.daemon.dbmgr.model.AdvertisementInfo">
+            <id column="APID" property="pid" jdbcType="INTEGER"/>
+            <result column="AImgUrl" property="imgurl" jdbcType="VARCHAR"/>
+            <result column="AForwardUrl" property="forwardurl" jdbcType="VARCHAR"/>
+            <result column="ADescription" property="description" jdbcType="VARCHAR"/>
+        </association>
+    </resultMap>
+
+    <select id="getAllEffect" resultMap="AdvertisedSchedule" resultType="list">
+         <![CDATA[
+          select
+             ats.PID
+            ,ats.ShopId
+            ,ats.AdverID
+            ,ats.Priority
+            ,ats.BeginTime
+            ,ats.EndTime
+            ,ats.Status
+
+            ,ati.PID    	APID
+            ,ati.ImgUrl		AImgUrl
+            ,ati.ForwardUrl	AForwardUrl
+            ,ati.Description	ADescription
+        from
+           (
+              select
+                *
+              from
+                AdvertisedSchedule
+              where
+                Status='A001'
+           ) ats
+        join
+            AdvertisementInfo ati
+        on
+            ats.AdverID=ati.PID
+        ]]>
+    </select>
+</mapper>

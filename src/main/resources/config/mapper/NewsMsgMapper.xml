@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lemontree.daemon.dbmgr.mapper.NewsMsgMapper">
+    <resultMap id="BaseResultMap" type="com.lemontree.daemon.dbmgr.model.NewsMsg">
+        <id column="PID" property="pid" jdbcType="INTEGER"/>
+        <result column="Description" property="description" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    PID, ArticleID
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from NewsMsg
+        where PID = #{pid,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from NewsMsg
+    where PID = #{pid,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.lemontree.daemon.dbmgr.model.NewsMsg">
+    insert into NewsMsg (PID, ArticleID)
+    values (#{pid,jdbcType=INTEGER}, #{articleid,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="com.lemontree.daemon.dbmgr.model.NewsMsg">
+        insert into NewsMsg
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pid != null">
+                PID,
+            </if>
+            <if test="articleid != null">
+                ArticleID,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="pid != null">
+                #{pid,jdbcType=INTEGER},
+            </if>
+            <if test="articleid != null">
+                #{articleid,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lemontree.daemon.dbmgr.model.NewsMsg">
+        update NewsMsg
+        <set>
+            <if test="articleid != null">
+                ArticleID = #{articleid,jdbcType=INTEGER},
+            </if>
+        </set>
+        where PID = #{pid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lemontree.daemon.dbmgr.model.NewsMsg">
+    update NewsMsg
+    set ArticleID = #{articleid,jdbcType=INTEGER}
+    where PID = #{pid,jdbcType=INTEGER}
+  </update>
+
+    <resultMap id="NewsMsgResultMap" type="com.lemontree.daemon.dbmgr.model.NewsMsg" extends="BaseResultMap">
+        <collection property="articles" javaType="list" ofType="com.lemontree.daemon.dbmgr.model.Article">
+            <id column="APID" property="pid" jdbcType="INTEGER"/>
+            <result column="ANewsMsgID" property="newsmsgid" jdbcType="INTEGER"/>
+            <result column="ATitle" property="title" jdbcType="VARCHAR"/>
+            <result column="ADescription" property="description" jdbcType="VARCHAR"/>
+            <result column="APicUrl" property="picurl" jdbcType="VARCHAR"/>
+            <result column="AUrl" property="url" jdbcType="VARCHAR"/>
+        </collection>
+
+    </resultMap>
+
+    <select id="getAll" resultMap="NewsMsgResultMap">
+        <![CDATA[
+
+
+        select
+            n.PID PID
+           ,n.Description Description
+
+            ,a.PID APID
+            ,a.NewsMsgID ANewsMsgID
+            ,a.Title ATitle
+            ,a.Description ADescription
+            ,a.PicUrl APicUrl
+            ,a.Url AUrl
+        from
+            NewsMsg n
+        join
+            Article a
+        on
+            a.NewsMsgID=n.PID
+
+
+        ]]>
+    </select>
+</mapper>

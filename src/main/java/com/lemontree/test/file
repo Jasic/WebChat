@@ -1,0 +1,2 @@
+Property 'configLocation' not specified, using default MyBatis Configuration
+[01-21 10:35:42][ERROR][com.alibaba.druid.filter.stat.StatFilter][Druid-ConnectionPool-Create]merge sql error, dbType null, sql : 

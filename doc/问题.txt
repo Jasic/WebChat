@@ -1,0 +1,2 @@
+把项目搬到macbook，tomcat启动出现乱码。
+运行java命令的时候使用-Dfile.encoding=UTF-8

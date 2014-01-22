@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lemontree.daemon.dbmgr.mapper.RestaurantInfoMapper">
+    <resultMap id="BaseResultMap" type="com.lemontree.daemon.dbmgr.model.RestaurantInfo">
+        <id column="PID" property="pid" jdbcType="INTEGER"/>
+        <result column="GroupID" property="groupid" jdbcType="INTEGER"/>
+        <result column="ShopID" property="shopid" jdbcType="VARCHAR"/>
+        <result column="Name" property="name" jdbcType="VARCHAR"/>
+        <result column="Address" property="address" jdbcType="VARCHAR"/>
+        <result column="Phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="Position" property="position" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    PID, GroupID, ShopID, Name, Address, Phone, Position
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from RestaurantInfo
+        where PID = #{pid,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from RestaurantInfo
+    where PID = #{pid,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.lemontree.daemon.dbmgr.model.RestaurantInfo">
+    insert into RestaurantInfo (PID, GroupID, ShopID, 
+      Name, Address, Phone, 
+      Position)
+    values (#{pid,jdbcType=INTEGER}, #{groupid,jdbcType=INTEGER}, #{shopid,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{position,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.lemontree.daemon.dbmgr.model.RestaurantInfo">
+        insert into RestaurantInfo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pid != null">
+                PID,
+            </if>
+            <if test="groupid != null">
+                GroupID,
+            </if>
+            <if test="shopid != null">
+                ShopID,
+            </if>
+            <if test="name != null">
+                Name,
+            </if>
+            <if test="address != null">
+                Address,
+            </if>
+            <if test="phone != null">
+                Phone,
+            </if>
+            <if test="position != null">
+                Position,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="pid != null">
+                #{pid,jdbcType=INTEGER},
+            </if>
+            <if test="groupid != null">
+                #{groupid,jdbcType=INTEGER},
+            </if>
+            <if test="shopid != null">
+                #{shopid,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="position != null">
+                #{position,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lemontree.daemon.dbmgr.model.RestaurantInfo">
+        update RestaurantInfo
+        <set>
+            <if test="groupid != null">
+                GroupID = #{groupid,jdbcType=INTEGER},
+            </if>
+            <if test="shopid != null">
+                ShopID = #{shopid,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                Name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                Address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                Phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="position != null">
+                Position = #{position,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where PID = #{pid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lemontree.daemon.dbmgr.model.RestaurantInfo">
+    update RestaurantInfo
+    set GroupID = #{groupid,jdbcType=INTEGER},
+      ShopID = #{shopid,jdbcType=VARCHAR},
+      Name = #{name,jdbcType=VARCHAR},
+      Address = #{address,jdbcType=VARCHAR},
+      Phone = #{phone,jdbcType=VARCHAR},
+      Position = #{position,jdbcType=VARCHAR}
+    where PID = #{pid,jdbcType=INTEGER}
+  </update>
+
+    <resultMap id="RestaurantInfoReslutMap" type="com.lemontree.daemon.dbmgr.model.RestaurantInfo"
+               extends="BaseResultMap">
+        <association property="group" javaType="com.lemontree.daemon.dbmgr.model.RestaurantGroup">
+            <id column="GPID" property="pid" jdbcType="INTEGER"/>
+            <result column="GGroupName" property="groupname" jdbcType="VARCHAR"/>
+        </association>
+
+        <collection property="serviceInfos" javaType="list" ofType="com.lemontree.daemon.dbmgr.model.ServiceInfo">
+            <id column="SPID" property="pid" jdbcType="INTEGER"/>
+            <result column="SRestID" property="restid" jdbcType="INTEGER"/>
+            <result column="SWebChatID" property="webchatid" jdbcType="VARCHAR"/>
+            <result column="SURL" property="url" jdbcType="VARCHAR"/>
+            <result column="SToken" property="token" jdbcType="VARCHAR"/>
+            <result column="SBoundDate" property="bounddate" jdbcType="TIMESTAMP"/>
+            <result column="SStatus" property="status" jdbcType="VARCHAR"/>
+        </collection>
+    </resultMap>
+
+    <select id="getAll" resultMap="RestaurantInfoReslutMap">
+
+        select
+          g.PID         GPID
+         ,g.GroupName   GGroupName
+
+          ,r.PID
+          ,r.GroupID
+          ,r.ShopID
+          ,r.Name
+          ,r.Address
+          ,r.Phone
+          ,r.Position
+
+          ,s.PID        SPID
+          ,s.RestID     SRestID
+          ,s.WebChatID  SWebChatID
+          ,s.URL        SURL
+          ,s.Token      SToken
+          ,s.BoundDate  SBoundDate
+          ,s.Status     SStatus
+
+        from
+          RestaurantGroup g
+        left join
+          RestaurantInfo r
+        on
+          g.pid= r.GroupID
+        RIGHT join
+          ServiceInfo s
+        on
+          r.pid =s.RestID
+
+    </select>
+
+</mapper>

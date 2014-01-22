@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lemontree.daemon.dbmgr.mapper.FansInfoMapper">
+    <resultMap id="BaseResultMap" type="com.lemontree.daemon.dbmgr.model.FansInfo">
+        <id column="PID" property="pid" jdbcType="INTEGER"/>
+        <result column="WebChatID" property="webchatid" jdbcType="VARCHAR"/>
+        <result column="ServiceInfoID" property="serviceinfoid" jdbcType="INTEGER"/>
+        <result column="FanName" property="fanname" jdbcType="VARCHAR"/>
+        <result column="Address" property="address" jdbcType="VARCHAR"/>
+        <result column="Sex" property="sex" jdbcType="VARCHAR"/>
+        <result column="FocusTime" property="focustime" jdbcType="TIMESTAMP"/>
+        <result column="FocusType" property="focustype" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    PID, WebChatID, ServiceInfoID, FanName, Address, Sex, FocusTime, FocusType
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from FansInfo
+        where PID = #{pid,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByWebChatID" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from FansInfo
+        where WebChatID = #{webchatid,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from FansInfo
+    where PID = #{pid,jdbcType=INTEGER}
+  </delete>
+
+    <delete id="deleteByWebChatID" parameterType="java.lang.Integer">
+    delete from FansInfo
+    where WebChatID = #{webchatid,jdbcType=VARCHAR}
+  </delete>
+
+    <insert id="insert" parameterType="com.lemontree.daemon.dbmgr.model.FansInfo">
+    insert into FansInfo (PID, WebChatID, ServiceInfoID, 
+      FanName, Address, Sex, 
+      FocusTime, FocusType)
+    values (#{pid,jdbcType=INTEGER}, #{webchatid,jdbcType=VARCHAR}, #{serviceinfoid,jdbcType=INTEGER}, 
+      #{fanname,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{focustime,jdbcType=TIMESTAMP}, #{focustype,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" parameterType="com.lemontree.daemon.dbmgr.model.FansInfo">
+        insert into FansInfo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pid != null">
+                PID,
+            </if>
+            <if test="webchatid != null">
+                WebChatID,
+            </if>
+            <if test="serviceinfoid != null">
+                ServiceInfoID,
+            </if>
+            <if test="fanname != null">
+                FanName,
+            </if>
+            <if test="address != null">
+                Address,
+            </if>
+            <if test="sex != null">
+                Sex,
+            </if>
+            <if test="focustime != null">
+                FocusTime,
+            </if>
+            <if test="focustype != null">
+                FocusType,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="pid != null">
+                #{pid,jdbcType=INTEGER},
+            </if>
+            <if test="webchatid != null">
+                #{webchatid,jdbcType=VARCHAR},
+            </if>
+            <if test="serviceinfoid != null">
+                #{serviceinfoid,jdbcType=INTEGER},
+            </if>
+            <if test="fanname != null">
+                #{fanname,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="focustime != null">
+                #{focustime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="focustype != null">
+                #{focustype,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lemontree.daemon.dbmgr.model.FansInfo">
+        update FansInfo
+        <set>
+            <if test="webchatid != null">
+                WebChatID = #{webchatid,jdbcType=VARCHAR},
+            </if>
+            <if test="serviceinfoid != null">
+                ServiceInfoID = #{serviceinfoid,jdbcType=INTEGER},
+            </if>
+            <if test="fanname != null">
+                FanName = #{fanname,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                Address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                Sex = #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="focustime != null">
+                FocusTime = #{focustime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="focustype != null">
+                FocusType = #{focustype,jdbcType=INTEGER},
+            </if>
+        </set>
+        where PID = #{pid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lemontree.daemon.dbmgr.model.FansInfo">
+    update FansInfo
+    set WebChatID = #{webchatid,jdbcType=VARCHAR},
+      ServiceInfoID = #{serviceinfoid,jdbcType=INTEGER},
+      FanName = #{fanname,jdbcType=VARCHAR},
+      Address = #{address,jdbcType=VARCHAR},
+      Sex = #{sex,jdbcType=VARCHAR},
+      FocusTime = #{focustime,jdbcType=TIMESTAMP},
+      FocusType = #{focustype,jdbcType=INTEGER}
+    where PID = #{pid,jdbcType=INTEGER}
+  </update>
+
+    <resultMap id="FansInfoResultMap" type="com.lemontree.daemon.dbmgr.model.FansInfo" extends="BaseResultMap">
+        <association property="serviceInfo"
+                     resultMap="com.lemontree.daemon.dbmgr.mapper.ServiceInfoMapper.ServiceInfoResultMap"/>
+    </resultMap>
+</mapper>

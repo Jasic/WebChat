@@ -1,0 +1,82 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+      http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!-- 扫描的目录,不能移动到applicationContext.xml -->
+    <context:component-scan base-package="com"/>
+
+    <mvc:annotation-driven>
+        <mvc:message-converters register-defaults="true">
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>text/plain;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+    <context:annotation-config/>
+    <!--优点：通过这一行的配置，框架中的ResourceHttpRequestHandler会帮你完成对静态资源的查找。缺点：同样不能访问位于 WEB-INF 下的资源-->
+    <!--<mvc:default-servlet-handler/>-->
+    <!--<mvc:resources location="/,classpath:/META-INF/publicResources/" mapping="/resources/**"/>-->
+    <mvc:resources location="/,resource/" mapping="/resource/**"/>
+
+    <!-- 注册Mapping -->
+    <!--<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping"/>-->
+    <!-- 注册HandlerAdaptor -->
+    <bean class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter"/>
+    <bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter"/>
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <ref bean="stringHttpMessageConverter"/>
+                <ref bean="jsonHttpMessageConverter"/>
+                <!--<ref bean="marshallingHttpMessageConverter"/>-->
+            </list>
+        </property>
+    </bean>
+
+    <!-- 使用xmlview进行分离 -->
+    <bean class="org.springframework.web.servlet.view.XmlViewResolver">
+        <property name="location" value="/WEB-INF/views.xml"/>
+        <property name="order" value="1"/>
+    </bean>
+    <!-- order默认最低 -->
+    <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/pages/wap/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!-- 使用annocation创建Controller的bean -->
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+        <property name="order" value="0"/>
+    </bean>
+
+
+    <!-- ——设置spring拦截器若mvc:mapping的path相同则按照配置先后形成拦截器链 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!-- 不会拦截/webchat/valiateToken/,会拦截/webchat/valiateToken/file -->
+            <mvc:mapping path="/webchat/?*/?*"/>
+            <ref bean="webChatInterceptor"/>
+        </mvc:interceptor>
+        <!--<mvc:interceptor>-->
+        <!--<mvc:mapping path="/webChat/**"/>-->
+        <!--<ref bean="webChatInterceptor"/>-->
+        <!--</mvc:interceptor>-->
+    </mvc:interceptors>
+
+    <!-- 定义webchat的拦截器 -->
+    <bean id="webChatInterceptor" class="com.lemontree.webchat.interceptor.WebChatReqIntc" scope="prototype">
+        <property name="remoteIp" value="127.0.0.1"/>
+        <property name="reqUrl" value="/webchat/valiateToken/Jasic_Token"/>
+    </bean>
+</beans>
