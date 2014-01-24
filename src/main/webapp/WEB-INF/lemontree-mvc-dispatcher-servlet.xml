@@ -64,7 +64,7 @@
     <!-- ——设置spring拦截器若mvc:mapping的path相同则按照配置先后形成拦截器链 -->
     <mvc:interceptors>
         <mvc:interceptor>
-            <!-- 不会拦截/webchat/valiateToken/,会拦截/webchat/valiateToken/file -->
+            <!-- 不会拦截/protocol/valiateToken/,会拦截/protocol/valiateToken/file -->
             <mvc:mapping path="/webchat/?*/?*"/>
             <ref bean="webChatInterceptor"/>
         </mvc:interceptor>

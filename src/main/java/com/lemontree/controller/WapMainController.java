@@ -34,14 +34,20 @@ public class WapMainController {
         String baPath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path;
 
 
+
         RestaurantInfo restInfo = LogicHelper.findResturant(shopId);
 
+        if(restInfo == null){
+            // TODO 没找到相关餐馆
+            return null;
+        }
         List<AdvertisedSchedule> ases = restInfo.getAdvertisedSchedules();
 
         model.put("ases", ases);
 
 
-        return "mainFrame";
+
+        return "wapindex";
     }
 
 }

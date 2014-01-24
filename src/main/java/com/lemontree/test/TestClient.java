@@ -37,7 +37,7 @@ public class TestClient {
     public static void testGet() throws IOException {
         HttpClient client = new DefaultHttpClient();
 
-        StringBuffer url = new StringBuffer("http://127.0.0.1/webchat/valiateToken/Jasic_Token");
+        StringBuffer url = new StringBuffer("http://127.0.0.1/protocol/valiateToken/Jasic_Token");
         url.append("?")
                 .append("signature=7e3f2e905c340f27c029ccd3befaeb6db98343a1")
                 .append("&")
@@ -61,7 +61,7 @@ public class TestClient {
         ArrayList<NameValuePair> pairs = new ArrayList<NameValuePair>();
 
 //        HttpPost post = new HttpPost("http://127.0.0.1/login");
-//        HttpPost post = new HttpPost("http://jasic.vicp.net/webchat/token/gh_b817172873c4");
+//        HttpPost post = new HttpPost("http://jasic.vicp.net/protocol/token/gh_b817172873c4");
         HttpPost post = new HttpPost("http://localhost:8080/terminal/cmd");
 
         Header Agent = new BasicHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36");
