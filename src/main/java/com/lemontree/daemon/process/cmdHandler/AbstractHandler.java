@@ -4,7 +4,7 @@ import com.lemontree.common.LogicHelper;
 import com.lemontree.daemon.domm.cmd.Account;
 import com.lemontree.daemon.domm.cmd.BaseCmd;
 import com.lemontree.daemon.domm.reslt.BaseReslt;
-import com.lemontree.daemon.domm.reslt.Status;
+import com.lemontree.service.Status;
 import com.lemontree.daemon.process.Administrator;
 import com.lemontree.service.CheckAuthService;
 import org.jasic.util.Asserter;
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 import static com.lemontree.common.GlobalConstants.HANDLE_CMD_ERROR;
 import static com.lemontree.common.GlobalConstants.HANDLE_CMD_LOGIN_ERROR;
 import static com.lemontree.common.GlobalVariables.DAEMON_HANDLE_CMD_CODE_MAP;
-import static com.lemontree.daemon.domm.reslt.Status.ProcessStatus;
+import static com.lemontree.service.Status.ProcessStatus;
 
 /**
  * Author Jasic

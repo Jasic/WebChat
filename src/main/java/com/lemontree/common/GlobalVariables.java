@@ -17,7 +17,7 @@ public class GlobalVariables {
     public static RefreshHelper REFRESH_HELPER;
 
     //--------------------------------------- 路径设置 --------------------------------------
-    public static String PATH_WEB_CHAT_TOKEN = "/protocol/token";
+    public static String PATH_WEB_CHAT_TOKEN = "/platform/token";
 
 
     // 微信错误码

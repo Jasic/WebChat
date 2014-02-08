@@ -1,4 +1,4 @@
-package com.lemontree.daemon.domm.reslt;
+package com.lemontree.service;
 
 /**
  * Author Jasic

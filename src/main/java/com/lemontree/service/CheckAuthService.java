@@ -5,7 +5,6 @@ import com.lemontree.common.GlobalCaches;
 import com.lemontree.daemon.dbmgr.model.DaemonAdminInfo;
 import com.lemontree.daemon.dbmgr.model.RestaurantInfo;
 import com.lemontree.daemon.domm.cmd.Account;
-import com.lemontree.daemon.domm.reslt.Status;
 import com.lemontree.daemon.process.Administrator;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Lazy;

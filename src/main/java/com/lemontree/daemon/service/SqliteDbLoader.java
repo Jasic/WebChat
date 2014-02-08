@@ -382,7 +382,7 @@ public class SqliteDbLoader {
             ResultSet rs = st.executeQuery(selectSql);
 
 
-            tblDataList = convertToEitity(rs, "com.lemontree.daemon.service.pojo." + tblName);
+            tblDataList = convertToEitity(rs, "com.lemontree.daemon.manager.pojo." + tblName);
         } catch (Exception e) {
             logger.error(ExceptionUtil.getStackTrace(e) + " tableName=" + tblName);
 

@@ -15,7 +15,7 @@
         </commentGenerator>
 
         <jdbcConnection driverClass="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-                        connectionURL="jdbc:sqlserver://192.168.43.118:1433;databaseName=WebChatDining"
+                        connectionURL="jdbc:sqlserver://192.168.1.118:1433;databaseName=CPlatform"
                         userId="sa"
                         password="sa123">
         </jdbcConnection>
@@ -25,7 +25,7 @@
         </javaTypeResolver>
 
         <!-- 实体类位置 -->
-        <javaModelGenerator targetPackage="com.lemontree.daemon.dbmgr.model" targetProject="./">
+        <javaModelGenerator targetPackage="cn.tisson.dbmgr.model" targetProject="./">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
@@ -36,7 +36,7 @@
         </sqlMapGenerator>
 
         <!-- Dao位置 -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.lemontree.daemon.dbmgr.mapper" targetProject="./">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="cn.tisson.dbmgr.mapper" targetProject="./">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
@@ -49,40 +49,32 @@
         <!--</table>-->
 
         <!-- 新增表 -->
-        <table tableName="AdvertisedSchedule" domainObjectName="AdvertisedSchedule" enableCountByExample="false"
-               enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"
-               selectByExampleQueryId="false"/>
-        <table tableName="AdvertisementInfo" domainObjectName="AdvertisementInfo" enableCountByExample="false"
-               enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"
-               selectByExampleQueryId="false"/>
-        <table tableName="Article" domainObjectName="Article" enableCountByExample="false" enableSelectByExample="false"
-               enableDeleteByExample="false" enableUpdateByExample="false" selectByExampleQueryId="false"/>
-        <table tableName="EventPushMsg" domainObjectName="EventPushMsg" enableCountByExample="false"
-               enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"
-               selectByExampleQueryId="false"/>
-        <table tableName="FansInfo" domainObjectName="FansInfo" enableCountByExample="false"
-               enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"
-               selectByExampleQueryId="false"/>
-        <table tableName="NewsMsg" domainObjectName="NewsMsg" enableCountByExample="false" enableSelectByExample="false"
-               enableDeleteByExample="false" enableUpdateByExample="false" selectByExampleQueryId="false"/>
-        <table tableName="RestaurantGroup" domainObjectName="RestaurantGroup" enableCountByExample="false"
-               enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"
-               selectByExampleQueryId="false"/>
-        <table tableName="RestaurantInfo" domainObjectName="RestaurantInfo" enableCountByExample="false"
-               enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"
-               selectByExampleQueryId="false"/>
         <table tableName="ServiceInfo" domainObjectName="ServiceInfo" enableCountByExample="false"
                enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"
                selectByExampleQueryId="false"/>
-        <table tableName="SubcEventPushMsg" domainObjectName="SubcEventPushMsg" enableCountByExample="false"
+        <table tableName="FansGroup" domainObjectName="FansGroup" enableCountByExample="false"
                enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"
                selectByExampleQueryId="false"/>
-        <table tableName="DaemonAdminInfo" domainObjectName="DaemonAdminInfo" enableCountByExample="false"
+        <table tableName="FansInfo" domainObjectName="FansInfo" enableCountByExample="false" enableSelectByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false" selectByExampleQueryId="false"/>
+        <table tableName="FansBlackList" domainObjectName="FansBlackList" enableCountByExample="false"
+               enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"
+               selectByExampleQueryId="false"/>
+        <table tableName="CmdConfig" domainObjectName="CmdConfig" enableCountByExample="false"
+               enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"
+               selectByExampleQueryId="false"/>
+        <table tableName="SubcEventRespMsg" domainObjectName="SubcEventRespMsg" enableCountByExample="false" enableSelectByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false" selectByExampleQueryId="false"/>
+        <table tableName="NewsMsg" domainObjectName="NewsMsg" enableCountByExample="false"
                enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"
                selectByExampleQueryId="false"/>
         <table tableName="Article" domainObjectName="Article" enableCountByExample="false"
                enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"
                selectByExampleQueryId="false"/>
+        <table tableName="Text" domainObjectName="Text" enableCountByExample="false"
+               enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"
+               selectByExampleQueryId="false"/>
+
 
 
     </context>

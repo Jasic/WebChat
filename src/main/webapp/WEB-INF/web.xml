@@ -15,7 +15,7 @@
     </servlet-mapping>
     <!--<servlet>-->
     <!--<servlet-name>ReqFromWebChat</servlet-name>-->
-    <!--<servlet-class>com.lemontree.protocol.servlet.ReqFromWebChat</servlet-class>-->
+    <!--<servlet-class>com.lemontree.platform.servlet.ReqFromWebChat</servlet-class>-->
     <!--</servlet>-->
     <!--<servlet-mapping>-->
     <!--<servlet-name>ReqFromWebChat</servlet-name>-->

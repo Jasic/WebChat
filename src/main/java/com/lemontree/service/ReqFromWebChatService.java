@@ -113,7 +113,7 @@ public class ReqFromWebChatService {
      */
     public Signature validatePara(Logger logger, HttpServletRequest req, HttpServletResponse resp, String token) {
 /*
- *        http://http://jasic.vicp.net//protocol/valiateToken/Jasic_Token?signature=9d7f3bf333e0bbab896521b0012100f195ce17c2&timestamp=1389358841&nonce=1389061545&echostr=abcd
+ *        http://http://jasic.vicp.net//platform/valiateToken/Jasic_Token?signature=9d7f3bf333e0bbab896521b0012100f195ce17c2&timestamp=1389358841&nonce=1389061545&echostr=abcd
  */
         try {
 //            String body = MessageUtil.getRequestBody(req);

@@ -30,22 +30,23 @@ import java.util.ArrayList;
 public class TestClient {
 
     public static void main(String[] args) throws IOException {
-        testPost();
+        testGet();
+//        testPost();
 //        System.out.println(testJsonCmd());
     }
 
     public static void testGet() throws IOException {
         HttpClient client = new DefaultHttpClient();
 
-        StringBuffer url = new StringBuffer("http://127.0.0.1/protocol/valiateToken/Jasic_Token");
+        StringBuffer url = new StringBuffer("http://bassice.gicp.net/webchat/token/gh_b817172873c4");
         url.append("?")
-                .append("signature=7e3f2e905c340f27c029ccd3befaeb6db98343a1")
+                .append("signature=5cbeee310990d9c54d9843b9a2dff96ec30d3565")
                 .append("&")
                 .append("timestamp=1371608072")
                 .append("&")
                 .append("nonce=1372170854")
                 .append("&")
-                .append("echostr=validate");
+                .append("echostr=5976194625791363975");
 
 
         HttpGet get = new HttpGet(url.toString());
@@ -61,7 +62,7 @@ public class TestClient {
         ArrayList<NameValuePair> pairs = new ArrayList<NameValuePair>();
 
 //        HttpPost post = new HttpPost("http://127.0.0.1/login");
-//        HttpPost post = new HttpPost("http://jasic.vicp.net/protocol/token/gh_b817172873c4");
+//        HttpPost post = new HttpPost("http://jasic.vicp.net/platform/token/gh_b817172873c4");
         HttpPost post = new HttpPost("http://localhost:8080/terminal/cmd");
 
         Header Agent = new BasicHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36");

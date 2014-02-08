@@ -23,7 +23,7 @@ public class AppContextConfig {
 //    @Bean(name = "reqFromWebChatService")
 //    @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 //    public ReqFromWebChatService reqFromWebChatService() {
-//        ReqFromWebChatService service = new ReqFromWebChatService();
-//        return service;
+//        ReqFromWebChatService manager = new ReqFromWebChatService();
+//        return manager;
 //    }
 }

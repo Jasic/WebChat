@@ -57,7 +57,7 @@
     <!--&lt;!&ndash; spring定时任务配置 &ndash;&gt;-->
     <!--<bean id="scheduledTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">-->
     <!--<property name="timerTask">-->
-    <!--<ref bean="cn.tisson.web.adm.oa.job.SendJob" />-->
+    <!--<ref bean="cn.cn.tisson.web.adm.oa.job.SendJob" />-->
     <!--</property>-->
     <!--&lt;!&ndash; 任务执行周期 (单位:毫秒) &ndash;&gt;-->
     <!--<property name="period">-->
@@ -70,7 +70,7 @@
     <!--</bean>-->
     <!--<bean id="AdmAutoExpiredJob" class="org.springframework.scheduling.timer.ScheduledTimerTask">-->
     <!--<property name="timerTask">-->
-    <!--<ref bean="cn.tisson.web.adm.job.AutoExpiredJob" />-->
+    <!--<ref bean="cn.cn.tisson.web.adm.job.AutoExpiredJob" />-->
     <!--</property>-->
     <!--&lt;!&ndash; 任务执行周期 (单位:毫秒) &ndash;&gt;-->
     <!--<property name="period">-->
@@ -83,7 +83,7 @@
     <!--</bean>-->
     <!--<bean id="TaskAutoExpiredJob" class="org.springframework.scheduling.timer.ScheduledTimerTask">-->
     <!--<property name="timerTask">-->
-    <!--<ref bean="cn.tisson.web.common.job.AutoExpiredJob" />-->
+    <!--<ref bean="cn.cn.tisson.web.common.job.AutoExpiredJob" />-->
     <!--</property>-->
     <!--&lt;!&ndash; 任务执行周期 (单位:毫秒) &ndash;&gt;-->
     <!--<property name="period">-->

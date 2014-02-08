@@ -155,10 +155,10 @@ public class PushServiceInfoHandler extends AbstractHandler<PushServiceInfoCmd> 
                     status = service.getStatus();
                 }
 //            //  已绑定但生效效状态则提示操作错误
-//            else if (service.getStatus().equalsIgnoreCase(STATUS_EFFETIVE)) {
+//            else if (manager.getStatus().equalsIgnoreCase(STATUS_EFFETIVE)) {
 //                code = HANDLE_CMD_ERROR;
 //                detail = "商户编号[" + restaurantInfo.getShopID() + "]与微信号[" + webChatId + "]已被绑定";
-//                status = service.getStatus();
+//                status = manager.getStatus();
 //            }
                 // 已绑定但失效状态则更新
                 else {
