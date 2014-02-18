@@ -106,7 +106,8 @@
                         data: $("form#registform").serialize(),
                         success: function (msg) {
                             if (msg == 'success') {
-                                location.href = "successRedirect";
+                                var url = "successRedirect?type=手机号码[" + $("#phone").val() + "]注册&redirectUrl=customer";
+                                location.href = url ;
 //                                $.mobile.changePage("successRedirect?type='aa'&redirectUrl='customer'", "slidedown", true, true);
                             } else {
                                 $("#submitError").text(msg);
@@ -171,7 +172,7 @@
         <div data-role="content" class="content" style="margin: 1%;">
             <form method="post" id="registform">
                 <label for="phone">手机号码</label>
-                <input type="number" name="phone" required="true" placeholder="填写自己11位的手机号码（必填）" id="phone"/>
+                <input type="text" name="phone" required="true" placeholder="填写自己11位的手机号码（必填）" id="phone"/>
 
                 <div id="phoneError"></div>
                 <label for="password">密码</label>
@@ -184,20 +185,20 @@
                 <div id="repasswordError"></div>
                 <label for="email">邮箱</label>
                 <input type="email" name="email" placeholder="填写常用邮箱（选填1）" id="email"/>
-                <label for="clietName">昵称</label>
-                <input type="text" name="clietName" placeholder="填写自己喜欢的昵称" id="clietName"/>
+                <label for="clientName">昵称</label>
+                <input type="text" name="clientName" placeholder="填写自己喜欢的昵称" id="clientName"/>
                 <label for="address">住宅地址</label>
                 <input type="text" name="address" placeholder="填写自己住宅地址" id="address"/>
                 <fieldset data-role="controlgroup">
                     <legend>身份:</legend>
                     <c:forEach var="type" items="${clientTypes}" varStatus="status">
-                        <input type="radio" name="indetity-${status.index}" id="indetity-${status.index}"
-                               value="choice-${status.index}"
+                        <input type="radio" name="indetity" id="indetity-${status.index}"
+                               value="indetity-${status.index}"
                                 <c:if test="${status.last}">
                                     <c:out value="checked='checked'" escapeXml="true" default="checked='checked'"/>
                                 </c:if>
                                 />
-                        <label for="radio-choice-${status.index}">${type.type}</label>
+                        <label for="indetity-${status.index}">${type.type}</label>
                     </c:forEach>
                 </fieldset>
                 <div>

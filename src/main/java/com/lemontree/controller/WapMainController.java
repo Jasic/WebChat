@@ -19,9 +19,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -204,6 +208,7 @@ public class WapMainController {
 
         model.put("type", request.getParameter("type"));
         model.put("redirectUrl", request.getParameter("redirectUrl"));
+        model.put("seconds", 3);
         return "successRedirect";
     }
 
@@ -278,6 +283,22 @@ public class WapMainController {
     }
 
     /**
+     * 登出动作处理
+     *
+     * @return
+     */
+    @RequestMapping(value = "/{shopId:[\\S]{1,30}}/logoutAction", method = {RequestMethod.GET, RequestMethod.POST})
+    public String logoutAction(ModelMap model, RedirectAttributes attr, HttpServletRequest request, HttpServletResponse response, @PathVariable("shopId") final String shopId) throws IOException {
+
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute(GlobalConstants.SESSION_USER_KEY);
+        attr.addAttribute("fanInfoId", user.getClientInfo().getPid());
+        model.addAttribute(attr);
+        session.removeAttribute(GlobalConstants.SESSION_USER_KEY);
+        return "redirect:/wap/" + shopId;
+    }
+
+    /**
      * 注册动作处理
      *
      * @return
@@ -317,11 +338,10 @@ public class WapMainController {
             String phone = request.getParameter("phone").trim();
             String password = request.getParameter("password").trim();
             String email = request.getParameter("email").trim();
-            String clietName = request.getParameter("clietName").trim();
+            String clientName = request.getParameter("clientName").trim();
             String address = request.getParameter("address").trim();
-            String identityStr = request.getParameter("indetity").trim();
+            String identityStr = request.getParameter("identity").trim();
             Integer identity = null;
-
 
             ClientInfo clientInfo = clientInfoService.selectByMemNo(phone);
             if (clientInfo != null) {
@@ -339,9 +359,13 @@ public class WapMainController {
 //                return "密码长度必大于等于4!";
 //            }
 
+            if (StringUtils.isNumeric(identityStr)) {
+                identity = Integer.valueOf(identityStr);
+            }
+
             clientInfo = new ClientInfo();
             clientInfo.setAddress(address);
-            clientInfo.setClientname(clietName);
+            clientInfo.setClientname(clientName);
             clientInfo.setFaninfoid(fansInfo.getPid());
             clientInfo.setEmail(email);
             clientInfo.setMemberno(phone);
@@ -349,12 +373,14 @@ public class WapMainController {
             clientInfo.setClienttypeid(identity);
 
             int success = clientInfoService.insertSelective(clientInfo);
+            clientInfo = clientInfoService.selectByMemNo(clientInfo.getMemberno());
 
             if (success <= 0) throw new BusinessException("插入微餐厅注册用户信息失败～");
 
             // 刚注册用户将信息保持在session中以保持登录
             User user = new User();
             user.setClientInfo(clientInfo);
+            user.setFansInfo(fansInfo);
             request.getSession().setAttribute(GlobalConstants.SESSION_USER_KEY, user);
 
             return "success";

@@ -38,7 +38,6 @@ public class EventReqProcessor extends AProcessor<EventReqMsg> {
      */
     private static final List<Object> EXCLUDE_DUPLICATE_LIST = new ArrayList<Object>();
 
-
     @Override
     protected List<Object> getExcludeDuplicate() {
         return EXCLUDE_DUPLICATE_LIST;

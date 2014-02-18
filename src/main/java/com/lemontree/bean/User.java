@@ -1,6 +1,7 @@
 package com.lemontree.bean;
 
 import com.lemontree.daemon.dbmgr.model.ClientInfo;
+import com.lemontree.daemon.dbmgr.model.FansInfo;
 
 /**
  * 登录用户的内存信息
@@ -11,6 +12,15 @@ public class User {
     private Long lastSessionTime;
     private Long validTimeStamp;
     private ClientInfo clientInfo;
+    private FansInfo fansInfo;
+
+    public FansInfo getFansInfo() {
+        return fansInfo;
+    }
+
+    public void setFansInfo(FansInfo fansInfo) {
+        this.fansInfo = fansInfo;
+    }
 
     public Long getCreateTime() {
         return createTime;
