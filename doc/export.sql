@@ -353,6 +353,12 @@ CREATE TABLE ZuoTaiQuYu (
 
 
 ---------------------------------------- 新增 ---------------------------------
+-- 17.客户类型（ClientType）
+IF EXISTS(SELECT
+            *
+          FROM INFORMATION_SCHEMA.TABLES
+          WHERE TABLE_NAME = 'ClientType')
+  DROP TABLE [ClientType];
 
 --删除表：
 --.10.	推送消息记录（PushMessageRecord）
@@ -447,7 +453,7 @@ IF EXISTS(SELECT
 CREATE TABLE RestaurantInfo (
     PID      INT IDENTITY (1, 1) PRIMARY KEY
   , GroupID  INT          NOT NULL
-  , ShopID   varchar (64) NOT NULL UNIQUE
+  , ShopID   VARCHAR(64)  NOT NULL UNIQUE
   , Name     VARCHAR(255) NOT NULL
   , Address  VARCHAR(255) NOT NULL
   , Phone    VARCHAR(32)
@@ -499,8 +505,8 @@ CREATE TABLE FansInfo (
   , FanName       VARCHAR(64)
   , Address       VARCHAR(255)
   , Sex           VARCHAR(10)
-  , FocusTime DATETIME DEFAULT GETDATE()
-  , FocusType INT DEFAULT 1
+  , FocusTime     DATETIME DEFAULT GETDATE()
+  , FocusType     INT DEFAULT 1
 );
 
 --6.	注册用户信息（ClientInfo）
@@ -510,13 +516,18 @@ IF EXISTS(SELECT
           WHERE TABLE_NAME = 'ClientInfo')
   DROP TABLE [ClientInfo];
 CREATE TABLE ClientInfo (
-    PID        INT IDENTITY (1, 1) PRIMARY KEY
-  , MemberNO   VARCHAR(64)  NOT NULL UNIQUE
-  , FanInfoId  INT          NOT NULL FOREIGN KEY REFERENCES FansInfo (PID)
-  , ClientName VARCHAR(64)  NOT NULL
-  , Phone      VARCHAR(32)  NOT NULL
-  , Address    VARCHAR(255) NOT NULL
+    PID          INT IDENTITY (1, 1) PRIMARY KEY
+  , MemberNO     VARCHAR(64) NOT NULL UNIQUE
+  , FanInfoId    INT         NOT NULL FOREIGN KEY REFERENCES FansInfo (PID)
+  , Email        VARCHAR(64)
+  , ClientName   VARCHAR(64)
+  , Password     VARCHAR(64) NOT NULL
+  , Address      VARCHAR(128)
+  , ClientTypeId INT
 );
+
+
+
 
 --7.	订单信息（BillInfo）
 IF EXISTS(SELECT
@@ -529,7 +540,7 @@ CREATE TABLE BillInfo (
   , BilllID       VARCHAR(255) UNIQUE NOT NULL
   , BillStatus    INT                 NOT NULL
   , BillType      INT                 NOT NULL
-  , ClientInfoID  INT FOREIGN KEY REFERENCES ClientInfo (PID)
+  , ClientInfoID  INT FOREIGN KEY  REFERENCES ClientInfo (PID)
   , ConsumeTime   DATETIME            NOT NULL
   , RoomID        INT DEFAULT -1
   , CustomerCount INT DEFAULT 1
@@ -590,9 +601,9 @@ IF EXISTS(SELECT
           WHERE TABLE_NAME = 'AdvertisementInfo')
   DROP TABLE [AdvertisementInfo];
 CREATE TABLE AdvertisementInfo (
-    PID          INT IDENTITY (1, 1) PRIMARY KEY
-  , ImgUrl VARCHAR(255)
-  , ForwardUrl VARCHAR(255)
+    PID         INT IDENTITY (1, 1) PRIMARY KEY
+  , ImgUrl      VARCHAR(255)
+  , ForwardUrl  VARCHAR(255)
   , Description VARCHAR(255)
 );
 
@@ -603,13 +614,13 @@ IF EXISTS(SELECT
           WHERE TABLE_NAME = 'AdvertisedSchedule')
   DROP TABLE [AdvertisedSchedule];
 CREATE TABLE AdvertisedSchedule (
-    PID          INT IDENTITY (1, 1) PRIMARY KEY
-  , ShopId VARCHAR(64)
-  , AdverID INT NOT NULL
-  , Priority INT DEFAULT 0
+    PID       INT IDENTITY (1, 1) PRIMARY KEY
+  , ShopId    VARCHAR(64)
+  , AdverID   INT NOT NULL
+  , Priority  INT DEFAULT 0
   , BeginTime DATETIME DEFAULT GETDATE()
-  , EndTime DATETIME
-  , Status VARCHAR (10)
+  , EndTime   DATETIME
+  , Status    VARCHAR(10)
 );
 
 -- 13.	关注事件推送消息表（SubcEventPushMsg）
@@ -619,10 +630,10 @@ IF EXISTS(SELECT
           WHERE TABLE_NAME = 'SubcEventPushMsg')
   DROP TABLE [SubcEventPushMsg];
 CREATE TABLE SubcEventPushMsg (
-    PID          INT IDENTITY (1, 1) PRIMARY KEY
-  , ServiceInfoID INT NOT NULL UNIQUE
-  , Type VARCHAR(32)   NOT NULL DEFAULT 'text'
-  , MsgID INT
+    PID           INT IDENTITY (1, 1) PRIMARY KEY
+  , ServiceInfoID INT         NOT NULL UNIQUE
+  , Type          VARCHAR(32) NOT NULL DEFAULT 'text'
+  , MsgID         INT
 );
 
 -- 14.	图文消息表（NewsMsg）
@@ -632,7 +643,7 @@ IF EXISTS(SELECT
           WHERE TABLE_NAME = 'NewsMsg')
   DROP TABLE [NewsMsg];
 CREATE TABLE NewsMsg (
-    PID       INT IDENTITY (1, 1) PRIMARY KEY
+    PID         INT IDENTITY (1, 1) PRIMARY KEY
   , Description VARCHAR(255)
 );
 
@@ -643,12 +654,12 @@ IF EXISTS(SELECT
           WHERE TABLE_NAME = 'Article')
   DROP TABLE [Article];
 CREATE TABLE Article (
-    PID       INT IDENTITY (1, 1) PRIMARY KEY
-  , NewsMsgID INT
-  , Title VARCHAR(255)
+    PID         INT IDENTITY (1, 1) PRIMARY KEY
+  , NewsMsgID   INT
+  , Title       VARCHAR(255)
   , Description VARCHAR(255)
-  , PicUrl VARCHAR(255)
-  , Url VARCHAR (255)
+  , PicUrl      VARCHAR(255)
+  , Url         VARCHAR(255)
 );
 -- 16.回复文字表（Text）
 IF EXISTS(SELECT
@@ -657,25 +668,41 @@ IF EXISTS(SELECT
           WHERE TABLE_NAME = 'Text')
   DROP TABLE [Text];
 CREATE TABLE Text (
-    PID       INT IDENTITY (1, 1) PRIMARY KEY
-  , Content VARCHAR(255)
+    PID         INT IDENTITY (1, 1) PRIMARY KEY
+  , Content     VARCHAR(255)
+  , Description VARCHAR(255)
+);
+-- 17.客户类型（ClientType）
+IF EXISTS(SELECT
+            *
+          FROM INFORMATION_SCHEMA.TABLES
+          WHERE TABLE_NAME = 'ClientType')
+  DROP TABLE [ClientType];
+CREATE TABLE ClientType (
+    PID         INT IDENTITY (1, 1) PRIMARY KEY
+  , Type        VARCHAR(255) NOT NULL
   , Description VARCHAR(255)
 );
 
+
 -- 插入新增表的部分数据
 INSERT INTO RestaurantGroup (GroupName) VALUES ('柠檬树餐饮集团');
-INSERT INTO RestaurantInfo (GroupID,ShopID, Name, Address, Phone, POSITION)
-VALUES (1, 'ZCX','珠江新城分店', '珠江新城华利路19号', '15989133025', '245,36');
+INSERT INTO RestaurantInfo (GroupID, ShopID, Name, Address, Phone, POSITION)
+VALUES (1, 'ZCX', '珠江新城分店', '珠江新城华利路19号', '15989133025', '245,36');
 INSERT INTO DaemonAdminInfo (RestID, StaffName, passwd) VALUES (1, 'Jasic', '123456')
-INSERT INTO ServiceInfo (WebChatID, restid,URL, TOKEN, BoundDate, Status)
-VALUES ('微信服务号1', 1,'http://bassice.vicp.net/webchat/token/gh_b817172873c4', 'gh_b817172873c4', getdate(), 'A001')
+INSERT INTO ServiceInfo (WebChatID, restid, URL, TOKEN, BoundDate, Status)
+VALUES ('微信服务号1', 1, 'http://bassice.vicp.net/webchat/token/gh_b817172873c4', 'gh_b817172873c4', getdate(), 'A001')
 INSERT INTO FansInfo (WEBCHATID, SERVICEINFOID, FanName, ADDRESS, SEX)
 VALUES ('关注用户1', 1, '张雄创', '广东省广州市珠江新城华利路19号', '男');
 INSERT INTO FansInfo (WEBCHATID, SERVICEINFOID, FanName, ADDRESS, SEX)
 VALUES ('关注用户2', 1, '张感觉', '广东省广州市珠江新城华利路19号', '男');
 
-INSERT INTO ClientInfo (MemberNO, FanInfoId, ClientName, Phone, Address)
-VALUES ('2013120001', 1, '张真名', '18122721695', '广东省外专真实地址');
+INSERT INTO ClientType(Type,Description) values ('学生族','这个类型是学生');
+INSERT INTO ClientType(Type,Description) values ('上班族','这个类型是上班族');
+INSERT INTO ClientType(Type,Description) values ('白领阶层','这个类型是白领阶层');
+
+INSERT INTO ClientInfo (MemberNO, password,FanInfoId, ClientName, Address)
+VALUES ('15989133047','zxcv1234', 1, '张真名', '广东省外专真实地址');
 INSERT INTO BillInfo (BILLLID, BillStatus, BillType, ClientInfoID, ConsumeTime, TotalCost, ACTUALPRICE)
 VALUES ('201312271321', 0, 0, 1, GETDATE(), 100.0, 100)
 
@@ -685,22 +712,35 @@ INSERT INTO BookFoodInfo (BillInfoID, FoodID, FoodCount, FoodSuggest) VALUES (1,
 INSERT INTO BookFoodInfo (BillInfoID, FoodID, FoodCount, FoodSuggest) VALUES (1, 2, 3, '请不要放辣啊');
 INSERT INTO BookFoodInfo (BillInfoID, FoodID, FoodCount, FoodSuggest) VALUES (1, 5, 1, '油盐酱醋都不要');
 INSERT INTO PushMessageRecord (WEBCHATID, SENTTIME) VALUES ('jasic', GETDATE());
-INSERT INTO SubcEventPushMsg (ServiceInfoID, Type,MsgID) VALUES (1, 'text',1);
-INSERT INTO NewsMsg(Description) VALUES ('图文描述');
-INSERT INTO Article (NewsMsgID,Title,Description,PicUrl,Url) VALUES (1,'测试图文消息标题1','测试图文消息的描述1','http://www.hackhome.com/newimg/20139/2013091252128393.png','http://baidu.com');
-INSERT INTO Article (NewsMsgID,Title,Description,PicUrl,Url) VALUES (1,'测试图文消息标题2','测试图文消息的描述2','http://nuomi.xnimg.cn/upload/deal/2013/7/V_L/310542-1373616839438.jpg','http://baidu.com');
+INSERT INTO SubcEventPushMsg (ServiceInfoID, Type, MsgID) VALUES (1, 'text', 1);
+INSERT INTO NewsMsg (Description) VALUES ('图文描述');
+INSERT INTO Article (NewsMsgID, Title, Description, PicUrl, Url)
+VALUES (1, '测试图文消息标题1', '测试图文消息的描述1', 'http://www.hackhome.com/newimg/20139/2013091252128393.png', 'http://baidu.com');
+INSERT INTO Article (NewsMsgID, Title, Description, PicUrl, Url) VALUES
+  (1, '测试图文消息标题2', '测试图文消息的描述2', 'http://nuomi.xnimg.cn/upload/deal/2013/7/V_L/310542-1373616839438.jpg',
+   'http://baidu.com');
 
-INSERT INTO Text (Content,Description) VALUES ('非常欢迎关注此餐厅，更多服务请看http://www.baidu.com','关注回复文字描述');
+INSERT INTO Text (Content, Description) VALUES ('非常欢迎关注此餐厅，更多服务请看http://www.baidu.com', '关注回复文字描述');
 
-// 首頁广告
-INSERT INTO AdvertisedSchedule (ShopId,AdverID,Priority,BeginTime,Status) VALUES ('ZCX',1,10,GETDATE(),'A001');
+-- 首頁广告
+truncate table AdvertisedSchedule
+
+INSERT INTO AdvertisedSchedule (ShopId, AdverID, Priority, BeginTime, Status)
+VALUES ('ZCX', 1, 10, GETDATE(), 'A001');
 INSERT INTO AdvertisedSchedule (ShopId,AdverID,Priority,BeginTime,Status) VALUES ('ZCX',2,10,GETDATE(),'A001');
+INSERT INTO AdvertisedSchedule (ShopId,AdverID,Priority,BeginTime,Status) VALUES ('ZCX',3,10,GETDATE(),'A001');
 
-INSERT INTO AdvertisementInfo (ImgUrl,ForwardUrl,Description)
-VALUES ('http://www.hackhome.com/newimg/20139/2013091252128393.png','http://google.com','广告信息描述');
+
+truncate table AdvertisementInfo
+
+insert AdvertisementInfo(ImgUrl,ForwardUrl,Description) values('apple.png','http://google.com','广告信息描述');
+insert AdvertisementInfo(ImgUrl,ForwardUrl,Description) values('blackberry_10.png','http://google.com','广告信息描述');
+insert AdvertisementInfo(ImgUrl,ForwardUrl,Description) values('firefox_os.png','http://baidu.com','广告信息描述');
 
 
 COMMIT TRANSACTION;
 -- Pragma foreign_keys=true;
 
-select * from ServiceInfo
+SELECT
+  *
+FROM ServiceInfo
