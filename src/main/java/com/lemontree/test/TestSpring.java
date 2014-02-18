@@ -4,6 +4,7 @@ import cn.tisson.framework.config.ConfigHandler;
 import com.lemontree.common.GlobalVariables;
 import com.lemontree.main.AppContextConfig;
 import com.lemontree.service.ReqFromWebChatService;
+import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -39,12 +40,13 @@ public class TestSpring {
     }
 
 
-    public static void testAop() {
+    @Test
+    public void testAop() {
         AnnotationConfigApplicationContext ctx2 = new AnnotationConfigApplicationContext(AppContextConfig.class);
 
-        TestValidateAspect aspect = ctx2.getBean(TestValidateAspect.class);
+//        TestValidateAspect aspect = ctx2.getBean(TestValidateAspect.class);
 //        System.out.println(aspect);
-
+//
 //        aspect.validateReqFromWebChat();
 
         TestAop aop = ctx2.getBean(TestAop.class);

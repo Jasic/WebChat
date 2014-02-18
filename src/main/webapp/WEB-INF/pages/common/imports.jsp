@@ -3,10 +3,12 @@
 <%@ taglib prefix="fmt"
            uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+
 <% String pa = request.getContextPath();
     String baPa = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + pa;
     String rePa = "/resource";
     String _cssPath = baPa + rePa + "/css";
+    String _imgPath = baPa + rePa + "/img";
     String _jspPath = baPa + rePa + "/js";%>
 <c:set var="basePath"
        value="<%=baPa%>"></c:set>
@@ -17,3 +19,5 @@
        value="<%=_cssPath%>"></c:set>
 <c:set var="_jsPath"
        value="<%=_jspPath%>"></c:set>
+<c:set var="_imgPath"
+       value="<%=_imgPath%>"></c:set>

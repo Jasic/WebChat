@@ -2,6 +2,7 @@ package com.lemontree.common;
 
 import com.lemontree.daemon.dbmgr.model.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,10 @@ import java.util.Map;
  * Date: 13-12-27
  */
 public class GlobalCaches {
+
+
+    // 用户类型信息(ID|实体）
+    public static List<ClientType> DB_CACHE_CLIENT_TYPE = new ArrayList<ClientType>();
 
     // 微信服务号（订阅号）信息（ServiceInfo）(微信号|实体）
     public static Map<String, ServiceInfo> DB_CACHE_SERVICE_INFO = new HashMap<String, ServiceInfo>();

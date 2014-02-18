@@ -68,10 +68,24 @@
             <mvc:mapping path="/webchat/?*/?*"/>
             <ref bean="webChatInterceptor"/>
         </mvc:interceptor>
-        <!--<mvc:interceptor>-->
-        <!--<mvc:mapping path="/webChat/**"/>-->
-        <!--<ref bean="webChatInterceptor"/>-->
-        <!--</mvc:interceptor>-->
+
+        <!--登录权限难 -->
+        <mvc:interceptor>
+            <!-- 需拦截的地址 -->
+            <!-- 一级目录 -->
+            <!--<mvc:mapping path="/wap/*" />-->
+
+            <!-- 二级目录 -->
+            <mvc:mapping path="/wap/*/*" />
+            <mvc:mapping path="/wap/*/*/" />
+            <!-- 需排除拦截的地址 -->
+            <mvc:exclude-mapping path="/login.htm"/>
+            <mvc:exclude-mapping path="/wap/*/register"/>
+            <mvc:exclude-mapping path="/wap/*/registerAction"/>
+            <mvc:exclude-mapping path="/wap/*/"/>
+
+            <bean class="com.lemontree.webchat.interceptor.WapSecurityIntc" />
+        </mvc:interceptor>
     </mvc:interceptors>
 
     <!-- 定义webchat的拦截器 -->
@@ -79,4 +93,12 @@
         <property name="remoteIp" value="127.0.0.1"/>
         <property name="reqUrl" value="/webchat/valiateToken/Jasic_Token"/>
     </bean>
+
+    <!-- 定义wap网站的拦截器 -->
+    <bean id="mainWebChatIntc" class="com.lemontree.webchat.interceptor.MainWebChatIntc" scope="prototype">
+
+    </bean>
+
+
+
 </beans>

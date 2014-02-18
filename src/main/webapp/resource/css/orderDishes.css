@@ -1,0 +1,110 @@
+@charset "utf-8";
+
+/* CSS Document */
+	/* Swipe works with mouse as well but often causes text selection. */
+#demo-page * {
+	    -webkit-user-select: none;
+	    -moz-user-select: none;
+	    -ms-user-select: none;
+	    -o-user-select: none;
+	    user-select: none;
+}
+
+/* Content styling. */
+dl {
+	font-family: "Times New Roman", Times, serif;
+	padding: 1em;
+}
+
+dt {
+	font-size: 2em;
+	font-weight: bold;
+}
+
+dt span {
+	font-size: .5em;
+	color: #777;
+	margin-left: .5em;
+}
+
+dd {
+	font-size: 1.25em;
+	margin: 1em 0 0;
+	padding-bottom: 1em;
+	border-bottom: 1px solid #eee;
+}
+
+.back-btn {
+	float: right;
+	margin: 0 2em 1em 0;
+}
+
+.order-add-btn {
+	widht: 30px;
+	height: 25px;
+	
+	font-weight: bold;
+	float: right;
+}
+
+.order-footer-btn {
+	widht: 35px;
+	height: 25px;
+	
+	font-weight: bold;
+}
+
+.tablist-left {
+	width: 25%;
+	display: inline-block;
+}
+
+.tablist-content {
+	width: 73%;
+	display: inline-block;
+	vertical-align: top;
+	margin-left: 5%;
+}
+
+.order-listview li a {
+	font-size: 12px;
+	font-weight: normal;
+	text-shadow: none;
+}
+
+.order-list-listview li span {
+	font-size: 14px;
+	text-shadow: none;
+	line-height: 25px;
+}
+
+.btn-span{
+	float: right;
+}
+
+.order-input {
+	width: 20px;
+	height: 20px;
+	float: right;
+	margin: 0px;
+	padding: 0px;
+	text-align: center;
+}
+
+.order-ui-content {
+	padding: 0px;
+}
+
+.order-header {
+	height: 30px;
+	line-height: 35px;
+}
+
+.order-header span {
+	line-height: 35px;
+	margin-left: 5px;
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+

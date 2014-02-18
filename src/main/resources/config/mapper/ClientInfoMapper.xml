@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lemontree.daemon.dbmgr.mapper.ClientInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.lemontree.daemon.dbmgr.model.ClientInfo" >
+    <id column="PID" property="pid" jdbcType="INTEGER" />
+    <result column="MemberNO" property="memberno" jdbcType="VARCHAR" />
+    <result column="FanInfoId" property="faninfoid" jdbcType="INTEGER" />
+    <result column="Email" property="email" jdbcType="VARCHAR" />
+    <result column="ClientName" property="clientname" jdbcType="VARCHAR" />
+    <result column="Password" property="password" jdbcType="VARCHAR" />
+    <result column="Address" property="address" jdbcType="VARCHAR" />
+    <result column="ClientTypeId" property="clienttypeid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    PID, MemberNO, FanInfoId, Email, ClientName, Password, Address, ClientTypeId
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ClientInfo
+    where PID = #{pid,jdbcType=INTEGER}
+  </select>
+    <select id="selectByMemNo" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from ClientInfo
+        where MemberNO = #{MemberNO,jdbcType=VARCHAR}
+    </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ClientInfo
+    where PID = #{pid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lemontree.daemon.dbmgr.model.ClientInfo" >
+    insert into ClientInfo (PID, MemberNO, FanInfoId, 
+      Email, ClientName, Password, 
+      Address, ClientTypeId)
+    values (#{pid,jdbcType=INTEGER}, #{memberno,jdbcType=VARCHAR}, #{faninfoid,jdbcType=INTEGER}, 
+      #{email,jdbcType=VARCHAR}, #{clientname,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{clienttypeid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lemontree.daemon.dbmgr.model.ClientInfo" >
+    insert into ClientInfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pid != null" >
+        PID,
+      </if>
+      <if test="memberno != null" >
+        MemberNO,
+      </if>
+      <if test="faninfoid != null" >
+        FanInfoId,
+      </if>
+      <if test="email != null" >
+        Email,
+      </if>
+      <if test="clientname != null" >
+        ClientName,
+      </if>
+      <if test="password != null" >
+        Password,
+      </if>
+      <if test="address != null" >
+        Address,
+      </if>
+      <if test="clienttypeid != null" >
+        ClientTypeId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pid != null" >
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="memberno != null" >
+        #{memberno,jdbcType=VARCHAR},
+      </if>
+      <if test="faninfoid != null" >
+        #{faninfoid,jdbcType=INTEGER},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="clientname != null" >
+        #{clientname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="clienttypeid != null" >
+        #{clienttypeid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lemontree.daemon.dbmgr.model.ClientInfo" >
+    update ClientInfo
+    <set >
+      <if test="memberno != null" >
+        MemberNO = #{memberno,jdbcType=VARCHAR},
+      </if>
+      <if test="faninfoid != null" >
+        FanInfoId = #{faninfoid,jdbcType=INTEGER},
+      </if>
+      <if test="email != null" >
+        Email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="clientname != null" >
+        ClientName = #{clientname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        Password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        Address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="clienttypeid != null" >
+        ClientTypeId = #{clienttypeid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where PID = #{pid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lemontree.daemon.dbmgr.model.ClientInfo" >
+    update ClientInfo
+    set MemberNO = #{memberno,jdbcType=VARCHAR},
+      FanInfoId = #{faninfoid,jdbcType=INTEGER},
+      Email = #{email,jdbcType=VARCHAR},
+      ClientName = #{clientname,jdbcType=VARCHAR},
+      Password = #{password,jdbcType=VARCHAR},
+      Address = #{address,jdbcType=VARCHAR},
+      ClientTypeId = #{clienttypeid,jdbcType=INTEGER}
+    where PID = #{pid,jdbcType=INTEGER}
+  </update>
+</mapper>

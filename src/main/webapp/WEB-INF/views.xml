@@ -14,7 +14,31 @@
     </bean>
 
     <bean id="wapindex" class="org.springframework.web.servlet.view.JstlView">
-        <property name="url" value="/WEB-INF/pages/wap/mainFrame.jsp"/>
+        <property name="url" value="/WEB-INF/pages/wap/views/index.jsp"/>
+    </bean>
+
+    <bean id="login" class="org.springframework.web.servlet.view.JstlView">
+        <property name="url" value="/WEB-INF/pages/wap/views/login.jsp"/>
+    </bean>
+
+    <bean id="register" class="org.springframework.web.servlet.view.JstlView">
+        <property name="url" value="/WEB-INF/pages/wap/views/register.jsp"/>
+    </bean>
+
+    <bean id="customer" class="org.springframework.web.servlet.view.JstlView">
+        <property name="url" value="/WEB-INF/pages/wap/views/customer.jsp"/>
+    </bean>
+
+    <bean id="address" class="org.springframework.web.servlet.view.JstlView">
+        <property name="url" value="/WEB-INF/pages/wap/views/address.jsp"/>
+    </bean>
+
+    <bean id="successRedirect" class="org.springframework.web.servlet.view.JstlView">
+        <property name="url" value="/WEB-INF/pages/wap/views/successRedirect.jsp"/>
+    </bean>
+
+    <bean id="editAddress" class="org.springframework.web.servlet.view.JstlView">
+        <property name="url" value="/WEB-INF/pages/wap/views/editAddress.jsp"/>
     </bean>
 
     <bean id="mainFrame" class="org.springframework.web.servlet.view.JstlView">

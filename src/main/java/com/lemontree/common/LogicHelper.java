@@ -106,11 +106,11 @@ public class LogicHelper {
         return detail + e == null ? "" : (!GlobalVariables.TERMIAL_EXEPTION_MSG_LOG_FLAG ? "" : ExceptionUtil.getStackTrace(e));
     }
 
-
+    /**
+     * 根据商店id位商店获得广告
+     */
     public static RestaurantInfo findResturant(String shopId) {
-        /**
-         * 1、根据商店id位商店获得广告
-         */
+
         Collection<RestaurantInfo> rests = GlobalCaches.DB_CACHE_RESTAURANT_INFO.values();
 
         for (RestaurantInfo info : rests) {

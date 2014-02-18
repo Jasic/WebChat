@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
  * Date: 13-12-30
  * 切面的所有验证类都集合于此
  */
-@Component("AspectDefine")
 @Aspect
 public class AspectDefine {
 
@@ -30,6 +29,16 @@ public class AspectDefine {
      */
     @Pointcut("execution(* com.lemontree.controller.ReqFromTerminal._handleCmd(..)))")
     public void handleCmd() {
+        // Doing Nothing
+    }
+
+    /**
+     * 验证请求的URL中的shopId是否存在
+     * 1、拦截验证
+     * 2、拦截消息推送
+     */
+    @Pointcut("execution(* com.lemontree.controller.WapMainController.*(..)))")
+    public void validateShopIdExist() {
         // Doing Nothing
     }
 }

@@ -43,6 +43,9 @@ public class RefreshHelper {
     @Resource
     AdvertisedScheduleService advertisedScheduleService;
 
+    @Resource
+    ClientTypeService clientTypeService;
+
     public void refresh() throws Exception {
 
 
@@ -52,6 +55,7 @@ public class RefreshHelper {
         refreshDaemonAdminInfo();
         refreshSubcEventPushMsg();
         refreshNewsMsg();
+        refreshClientType();
 
     }
 
@@ -192,9 +196,20 @@ public class RefreshHelper {
     }
 
 
+    /**
+     * 刷新客户类型
+     */
+    public void refreshClientType() {
+        List<ClientType> list = clientTypeService.getAll();
+        GlobalCaches.DB_CACHE_CLIENT_TYPE = list;
+        logger.info("--客户类型数量:" + list.size());
+
+    }
+
+    /**
+     * ---------------------------- 比较
+     */
     static class AdComparator implements Comparator<AdvertisedSchedule> {
-
-
         @Override
         public int compare(AdvertisedSchedule advertisedSchedule, AdvertisedSchedule advertisedSchedule2) {
             return advertisedSchedule.getPriority() - advertisedSchedule.getPriority();

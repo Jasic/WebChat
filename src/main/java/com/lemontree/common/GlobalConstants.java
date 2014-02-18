@@ -6,6 +6,7 @@ package com.lemontree.common;
  */
 public class GlobalConstants {
 
+    public static final String PHONE_REGEX_STR = "^(?:13\\d|15[89])-?\\d{5}(\\d{3}|\\*{3})$";
 
     //---------------------------------------- 与后端交互 ----------------------------------
     // 命令处理成功
@@ -38,5 +39,6 @@ public class GlobalConstants {
     // 待验证状态
     public static final String STATUS_WAITING_VERIFY = "A011";
 
-
+    // ---------------------------------- 与wap网站相关 ------------------------------------
+    public static final String SESSION_USER_KEY = "LOGIN_USER_KEY";
 }

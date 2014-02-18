@@ -693,8 +693,9 @@ INSERT INTO Article (NewsMsgID,Title,Description,PicUrl,Url) VALUES (1,'测试�
 INSERT INTO Text (Content,Description) VALUES ('非常欢迎关注此餐厅，更多服务请看http://www.baidu.com','关注回复文字描述');
 
 // 首頁广告
-INSERT INTO AdvertisedSchedule (ShopId,AdverID,Priority,BeginTime,Status)
-VALUES ('ZCX',1,10,GETDATE(),'A001');
+INSERT INTO AdvertisedSchedule (ShopId,AdverID,Priority,BeginTime,Status) VALUES ('ZCX',1,10,GETDATE(),'A001');
+INSERT INTO AdvertisedSchedule (ShopId,AdverID,Priority,BeginTime,Status) VALUES ('ZCX',2,10,GETDATE(),'A001');
+
 INSERT INTO AdvertisementInfo (ImgUrl,ForwardUrl,Description)
 VALUES ('http://www.hackhome.com/newimg/20139/2013091252128393.png','http://google.com','广告信息描述');
 
