@@ -4,7 +4,6 @@ import com.lemontree.webchat.protocol.req.TextReqMsg;
 import com.lemontree.webchat.protocol.resp.BaseRespMsg;
 import com.lemontree.webchat.protocol.resp.TextRespMsg;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,12 +29,8 @@ public class TextReqProcessor extends AProcessor<TextReqMsg> {
         respMsg.setToUserName(msg.getFromUserName());
         respMsg.setFromUserName(msg.getToUserName());
         String respText = null;
-        try {
-            respText = new String("这是回复文件请求".getBytes(), "GBK");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        respText = msg.getContent();
+
+        respText = "<a href='http://192.168.1.111:8080/wap/ZCX?fansInfoId=1'>" + msg.getContent() +" </a>";
 
         respMsg.setContent(respText);
         respMsg.setCreateTime(System.currentTimeMillis() / 1000);

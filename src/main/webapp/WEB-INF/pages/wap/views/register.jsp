@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-    <title>${shopId}商户注册</title>
+    <title>${shopId}商户的会员绑定</title>
     <link rel="stylesheet" href="${_cssPath}/jquery.mobile-1.4.0.css"/>
     <link rel="stylesheet" href="${_cssPath}/jqm-demos.css"/>
     <link rel="stylesheet" href="${_cssPath}/idangerous.swiper.css"/>
@@ -102,11 +102,11 @@
 
                     $.ajax({
                         type: "POST",
-                        url: 'registerAction<c:if  test="${sessionScope.fanInfoId!=null}"><c:out value="?fanInfoId=${sessionScope.fanInfoId}"/></c:if>',
+                        url: 'registerAction<c:if  test="${sessionScope.fansInfoId!=null}"><c:out value="?fansInfoId=${sessionScope.fansInfoId}"/></c:if>',
                         data: $("form#registform").serialize(),
                         success: function (msg) {
                             if (msg == 'success') {
-                                var url = "successRedirect?type=手机号码[" + $("#phone").val() + "]注册&redirectUrl=customer";
+                                var url = "successRedirect?type=会员[" + $("#phone").val() + "]绑定&redirectUrl=customer";
                                 location.href = url ;
 //                                $.mobile.changePage("successRedirect?type='aa'&redirectUrl='customer'", "slidedown", true, true);
                             } else {
@@ -163,8 +163,8 @@
             <div data-role="controlgroup">
                 <nav data-role="navbar">
                     <ul>
-                        <li><a href="#page1" class="ui-btn-active">[${shopId}]的会员注册</a></li>
-                        <li><a href="#page2">注册商户优惠</a></li>
+                        <li><a href="#page1" class="ui-btn-active">[${shopId}]的会员绑定</a></li>
+                        <li><a href="#page2">会员绑定优惠</a></li>
                     </ul>
                 </nav>
             </div>
@@ -192,13 +192,13 @@
                 <fieldset data-role="controlgroup">
                     <legend>身份:</legend>
                     <c:forEach var="type" items="${clientTypes}" varStatus="status">
-                        <input type="radio" name="indetity" id="indetity-${status.index}"
-                               value="indetity-${status.index}"
+                        <input type="radio" name="identity" id="identity-${status.index}"
+                               value="identity-${status.index}"
                                 <c:if test="${status.last}">
                                     <c:out value="checked='checked'" escapeXml="true" default="checked='checked'"/>
                                 </c:if>
                                 />
-                        <label for="indetity-${status.index}">${type.type}</label>
+                        <label for="identity-${status.index}">${type.type}</label>
                     </c:forEach>
                 </fieldset>
                 <div>

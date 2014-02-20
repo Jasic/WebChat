@@ -41,4 +41,10 @@ public class GlobalConstants {
 
     // ---------------------------------- 与wap网站相关 ------------------------------------
     public static final String SESSION_USER_KEY = "LOGIN_USER_KEY";
+    public static final String SESSION_FANSINFOID_KEY = "fansInfoId";
+    public static final String SESSION_CLIENTINFO_KEY = "clientInfo";
+    public static final String ADDRESS_ADD = "add";
+    public static final String ADDRESS_DELETE = "delete";
+    public static final String ADDRESS_UPDATE = "update";
+    public static final String EDIT_ADDRESS_TYPE = "type";
 }

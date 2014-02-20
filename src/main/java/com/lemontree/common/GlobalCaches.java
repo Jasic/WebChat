@@ -31,8 +31,6 @@ public class GlobalCaches {
     // 广告计划（ShopId/Entity)
     public static Map<String, List<AdvertisedSchedule>> DB_CACHE_DAEMON_ADVERTISE_SCHEDULE = new HashMap<String, List<AdvertisedSchedule>>();
 
-
-
     // 关注事件推送消息表(SubcEventPushMsg)(ServiceInfoID/Bean)
     public static Map<Integer, SubcEventPushMsg> DB_CACHE_SUBC_EVENT_PUSH_MSG = new HashMap<Integer, SubcEventPushMsg>();
     // 图文消息表(NewsMsg)(PID/BEAN)

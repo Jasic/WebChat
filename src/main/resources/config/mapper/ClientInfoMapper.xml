@@ -26,6 +26,12 @@
         from ClientInfo
         where MemberNO = #{MemberNO,jdbcType=VARCHAR}
     </select>
+    <select id="selectByFanInfoId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from ClientInfo
+        where FanInfoId = #{FanInfoId,jdbcType=INTEGER}
+    </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from ClientInfo
     where PID = #{pid,jdbcType=INTEGER}

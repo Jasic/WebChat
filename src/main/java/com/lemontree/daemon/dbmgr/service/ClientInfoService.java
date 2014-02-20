@@ -17,6 +17,9 @@ public class ClientInfoService extends BaseService<ClientInfo>{
         return mapper.selectByMemNo(menNo);
     }
 
+    public ClientInfo selectByFanInfoId(Integer fanInfoId) {
+        return mapper.selectByFanInfoId(fanInfoId);
+    }
     @Override
     public SuperMapper<ClientInfo> getMapper() {
         return mapper;

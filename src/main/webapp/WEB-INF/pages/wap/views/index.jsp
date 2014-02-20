@@ -39,14 +39,20 @@
             var interval = setInterval(playSwipe, 3000);
 
             $("#orderDishes").click(function(){
-                location.href = "orderDishes.html";
+                location.href = "/wap/${shopId}/orderDishes";
             });
 
             $("#customer").click(function(){
                 <c:choose>
-                <c:when test="${userName==null}">
-                var redrect = window.confirm("您未登录，请登录！");
-                if(redrect){
+                <c:when test="${clientInfo==null}">
+                var redrect = window.confirm("您未进行绑定，请先绑定个人信息！");
+                if (redrect) {
+                    location.href = "/wap/${shopId}/register";
+                }
+                </c:when>
+                <c:when test="${sessionScope.LOGIN_USER_KEY==null}">
+                var redrect = window.confirm("您未登录，请先登录！");
+                if (redrect) {
                     location.href = "/wap/${shopId}/login";
                 }
                 </c:when>

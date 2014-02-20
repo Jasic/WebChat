@@ -14,6 +14,11 @@ public class User {
     private ClientInfo clientInfo;
     private FansInfo fansInfo;
 
+    public User() {
+        this.createTime = System.currentTimeMillis();
+        this.lastSessionTime = createTime;
+    }
+
     public FansInfo getFansInfo() {
         return fansInfo;
     }

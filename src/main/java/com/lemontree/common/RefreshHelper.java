@@ -74,7 +74,6 @@ public class RefreshHelper {
             }
         }
         logger.info("--刷新餐厅组数量:" + list.size());
-
     }
 
     /**
@@ -86,10 +85,18 @@ public class RefreshHelper {
         List<ServiceInfo> list = serviceInfoServI.getAll();
         synchronized (GlobalCaches.DB_CACHE_SERVICE_INFO) {
             GlobalCaches.DB_CACHE_SERVICE_INFO = new HashMap<String, ServiceInfo>();
+            GlobalCaches.DB_CACHE_FANS_INFO = new HashMap<Integer, FansInfo>();
             for (ServiceInfo info : list) {
                 GlobalCaches.DB_CACHE_SERVICE_INFO.put(info.getWebchatid(), info);
+                List<FansInfo> fansInfos = info.getFansInfoList();
+                if(fansInfos!=null && fansInfos.size()>0){
+                    for(FansInfo fansInfo : fansInfos){
+                        GlobalCaches.DB_CACHE_FANS_INFO.put(fansInfo.getPid(),fansInfo);
+                    }
+                }
             }
         }
+        logger.info("--刷新粉丝数量:" + GlobalCaches.DB_CACHE_FANS_INFO.size());
         logger.info("--刷新服务号数量:" + list.size());
     }
 

@@ -1,6 +1,9 @@
 package com.lemontree.common;
 
 import cn.tisson.framework.utils.JsonUtils;
+import com.lemontree.bean.User;
+import com.lemontree.daemon.dbmgr.model.ClientInfo;
+import com.lemontree.daemon.dbmgr.model.FansInfo;
 import com.lemontree.daemon.dbmgr.model.RestaurantInfo;
 import com.lemontree.webchat.entity.BaseRespond;
 import com.lemontree.webchat.entity.ErrorRespond;
@@ -13,6 +16,7 @@ import org.apache.http.util.EntityUtils;
 import org.jasic.util.ExceptionUtil;
 import org.junit.Test;
 
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Collection;
 
@@ -120,5 +124,22 @@ public class LogicHelper {
         }
 
         return null;
+    }
+
+    public static void saveSessionUser(HttpSession session, ClientInfo clientInfo, FansInfo fansInfo) {
+        User user = new User();
+        user.setClientInfo(clientInfo);
+        user.setFansInfo(fansInfo);
+        session.setAttribute(GlobalConstants.SESSION_USER_KEY, user);
+    }
+
+    public static User getUser(HttpSession session) {
+
+        Object o = session.getAttribute(GlobalConstants.SESSION_USER_KEY);
+        if (o == null || !(o instanceof User)) {
+            return null;
+        }
+
+        return (User) o;
     }
 }

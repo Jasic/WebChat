@@ -48,8 +48,7 @@ public class WebChatReqIntc extends HandlerInterceptorAdapter {
      */
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
 
-        String reqUrl = request.getRequestURI();
-        modelAndView.addObject("Add", reqUrl);
+
     }
 
     public String getReqUrl() {

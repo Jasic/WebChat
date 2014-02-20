@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lemontree.daemon.dbmgr.mapper.TakeOutAddressMapper">
+    <resultMap id="BaseResultMap" type="com.lemontree.daemon.dbmgr.model.TakeOutAddress">
+        <id column="PID" property="pid" jdbcType="INTEGER"/>
+        <result column="MemberNO" property="memberno" jdbcType="VARCHAR"/>
+        <result column="Phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="ClientName" property="clientname" jdbcType="VARCHAR"/>
+        <result column="Address" property="address" jdbcType="VARCHAR"/>
+        <result column="Description" property="description" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    PID, MemberNO, Phone, ClientName, Address, Description
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from TakeOutAddress
+        where PID = #{pid,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from TakeOutAddress
+    where PID = #{pid,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.lemontree.daemon.dbmgr.model.TakeOutAddress">
+    insert into TakeOutAddress (PID, MemberNO, Phone, 
+      ClientName, Address, Description
+      )
+    values (#{pid,jdbcType=INTEGER}, #{memberno,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{clientname,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.lemontree.daemon.dbmgr.model.TakeOutAddress">
+        insert into TakeOutAddress
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pid != null">
+                PID,
+            </if>
+            <if test="memberno != null">
+                MemberNO,
+            </if>
+            <if test="phone != null">
+                Phone,
+            </if>
+            <if test="clientname != null">
+                ClientName,
+            </if>
+            <if test="address != null">
+                Address,
+            </if>
+            <if test="description != null">
+                Description,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="pid != null">
+                #{pid,jdbcType=INTEGER},
+            </if>
+            <if test="memberno != null">
+                #{memberno,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="clientname != null">
+                #{clientname,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.lemontree.daemon.dbmgr.model.TakeOutAddress">
+        update TakeOutAddress
+        <set>
+            <if test="memberno != null">
+                MemberNO = #{memberno,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                Phone = #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="clientname != null">
+                ClientName = #{clientname,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                Address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                Description = #{description,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where PID = #{pid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.lemontree.daemon.dbmgr.model.TakeOutAddress">
+    update TakeOutAddress
+    set MemberNO = #{memberno,jdbcType=VARCHAR},
+      Phone = #{phone,jdbcType=VARCHAR},
+      ClientName = #{clientname,jdbcType=VARCHAR},
+      Address = #{address,jdbcType=VARCHAR},
+      Description = #{description,jdbcType=VARCHAR}
+    where PID = #{pid,jdbcType=INTEGER}
+  </update>
+    <select id="getListByMemNo" resultMap="BaseResultMap" resultType="list" parameterType="java.lang.String">
+        <![CDATA[
+
+          SELECT * FROM TakeOutAddress WHERE  MemberNO = #{memberno,jdbcType=VARCHAR}
+
+        ]]>
+    </select>
+</mapper>

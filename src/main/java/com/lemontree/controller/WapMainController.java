@@ -9,7 +9,9 @@ import com.lemontree.common.LogicHelper;
 import com.lemontree.daemon.dbmgr.model.*;
 import com.lemontree.daemon.dbmgr.service.ClientInfoService;
 import com.lemontree.daemon.dbmgr.service.FansInfoService;
+import com.lemontree.daemon.dbmgr.service.TakeOutAddressService;
 import com.lemontree.exception.BusinessException;
+import org.jasic.util.Asserter;
 import org.jasic.util.ExceptionUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,7 +48,7 @@ public class WapMainController {
      * @return
      */
     @RequestMapping(value = "/{shopId:[\\S]{1,30}}", method = {RequestMethod.GET, RequestMethod.POST})
-    public String AccessMainFrame(ModelMap model, HttpServletRequest request, @PathVariable("shopId") final String shopId) {
+    public String MainFrame(ModelMap model, HttpServletRequest request, @PathVariable("shopId") final String shopId) {
 
         String path = request.getContextPath();
         String baPath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path;
@@ -62,19 +64,14 @@ public class WapMainController {
         List<AdvertisedSchedule> ases = restInfo.getAdvertisedSchedules();
         model.put("ases", ases);
         model.put("shopId", shopId);
-        String fanInfoId = request.getParameter("fanInfoId");
-        request.getSession().setAttribute("fanInfoId", fanInfoId);
-
-        String userName = null;
-
-        Object obj = request.getSession().getAttribute(GlobalConstants.SESSION_USER_KEY);
-        // 判断如果没有取到用户信息，就跳转到登陆页面，提示用户进行登陆
-        if (obj instanceof User) {
-            userName = ((User) obj).getClientInfo().getMemberno();
+        String fanInfoId = request.getParameter(GlobalConstants.SESSION_FANSINFOID_KEY);
+        request.getSession().setAttribute(GlobalConstants.SESSION_FANSINFOID_KEY, fanInfoId);
+        ClientInfo clientInfo = null;
+        if (StringUtils.isNumeric(fanInfoId)) {
+            Integer fid = Integer.valueOf(fanInfoId);
+            clientInfo = clientInfoService.selectByFanInfoId(fid);
+            request.getSession().setAttribute(GlobalConstants.SESSION_CLIENTINFO_KEY, clientInfo);
         }
-
-        model.put("userName", userName);
-
         return "wapindex";
     }
 
@@ -85,7 +82,7 @@ public class WapMainController {
      * @return
      */
     @RequestMapping(value = "/{shopId:[\\S]{1,30}}/customer", method = {RequestMethod.GET, RequestMethod.POST})
-    public String AccessCustomerFrame(ModelMap model, HttpServletRequest request, @PathVariable("shopId") final String shopId) {
+    public String CustomerFrame(ModelMap model, HttpServletRequest request, @PathVariable("shopId") final String shopId) {
 
         String path = request.getContextPath();
         String baPath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path;
@@ -128,8 +125,31 @@ public class WapMainController {
             // TODO 没找到相关餐馆
             return null;
         }
-
         return "login";
+    }
+
+    /**
+     * 访问菜单页面
+     *
+     * @return
+     */
+    @RequestMapping(value = "/{shopId:[\\S]{1,30}}/orderDishes", method = {RequestMethod.GET, RequestMethod.POST})
+    public String orderDishesFrame(ModelMap model, HttpServletRequest request, @PathVariable("shopId") final String shopId) {
+
+        String path = request.getContextPath();
+        String baPath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path;
+
+        RestaurantInfo restInfo = LogicHelper.findResturant(shopId);
+        model.put("shopId", shopId);
+
+        if (restInfo == null) {
+            // TODO 没找到相关餐馆
+            return null;
+        }
+
+
+
+        return "orderDishes";
     }
 
     /**
@@ -145,7 +165,6 @@ public class WapMainController {
 
         RestaurantInfo restInfo = LogicHelper.findResturant(shopId);
         model.put("shopId", shopId);
-
 
         if (restInfo == null) {
             // TODO 没找到相关餐馆
@@ -172,18 +191,13 @@ public class WapMainController {
      * @return
      */
     @RequestMapping(value = "/{shopId:[\\S]{1,30}}/address", method = {RequestMethod.GET, RequestMethod.POST})
-    public String AccessaddressFrame(ModelMap model, HttpServletRequest request, @PathVariable("shopId") final String shopId) {
+    public String addressFrame(ModelMap model, HttpServletRequest request, @PathVariable("shopId") final String shopId) {
 
-        String path = request.getContextPath();
-        String baPath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path;
-
-        RestaurantInfo restInfo = LogicHelper.findResturant(shopId);
-
-        if (restInfo == null) {
-            // TODO 没找到相关餐馆
-            return null;
-        }
-
+        User user = LogicHelper.getUser(request.getSession());
+        if (user == null) return null;
+        String memNo = user.getClientInfo().getMemberno();
+        List<TakeOutAddress> addresses = takeOutAddressService.getListByMemNo(memNo);
+        model.put("addresses", addresses);
         return "address";
     }
 
@@ -194,7 +208,7 @@ public class WapMainController {
      * @return
      */
     @RequestMapping(value = "/{shopId:[\\S]{1,30}}/successRedirect", method = {RequestMethod.GET, RequestMethod.POST})
-    public String AccesssuccessRedirectFrame(ModelMap model, HttpServletRequest request, @PathVariable("shopId") final String shopId) {
+    public String successRedirectFrame(ModelMap model, HttpServletRequest request, @PathVariable("shopId") final String shopId) {
 
         String path = request.getContextPath();
         String baPath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path;
@@ -218,7 +232,7 @@ public class WapMainController {
      * @return
      */
     @RequestMapping(value = "/{shopId:[\\S]{1,30}}/editAddress", method = {RequestMethod.GET, RequestMethod.POST})
-    public String AccessEditAddressFrame(ModelMap model, HttpServletRequest request, @PathVariable("shopId") final String shopId) {
+    public String editAddressFrame(ModelMap model, HttpServletRequest request, @PathVariable("shopId") final String shopId) {
 
         String path = request.getContextPath();
         String baPath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path;
@@ -229,6 +243,20 @@ public class WapMainController {
             // TODO 没找到相关餐馆
             return null;
         }
+
+        String name = request.getParameter("name");
+        String phone = request.getParameter("phone");
+        String address = request.getParameter("address");
+        String type = request.getParameter(GlobalConstants.EDIT_ADDRESS_TYPE);
+        if (type.equalsIgnoreCase(GlobalConstants.ADDRESS_UPDATE)) {
+            model.put(GlobalConstants.EDIT_ADDRESS_TYPE, type);
+            model.put("pid", request.getParameter("pid"));
+        } else {
+            model.put(GlobalConstants.EDIT_ADDRESS_TYPE, GlobalConstants.ADDRESS_ADD);
+        }
+        model.put("name", name);
+        model.put("phone", phone);
+        model.put("address", address);
 
         return "editAddress";
     }
@@ -265,21 +293,32 @@ public class WapMainController {
      * @return
      */
     @RequestMapping(value = "/{shopId:[\\S]{1,30}}/loginAction", method = {RequestMethod.GET, RequestMethod.POST})
-    public String loginAction(ModelMap model, HttpServletRequest request, @PathVariable("shopId") final String shopId) {
-
-        String path = request.getContextPath();
-        String baPath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path;
-
-        RestaurantInfo restInfo = LogicHelper.findResturant(shopId);
+    public
+    @ResponseBody
+    String loginAction(ModelMap model, HttpServletRequest request, @PathVariable("shopId") final String shopId) {
         model.put("shopId", shopId);
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
 
-        if (restInfo == null) {
-            // TODO 没找到相关餐馆
-            return null;
+        ClientInfo clientInfo = (ClientInfo) request.getSession().getAttribute(GlobalConstants.SESSION_CLIENTINFO_KEY);
+        clientInfo = (clientInfo != null) ? clientInfo : clientInfoService.selectByMemNo(username);
+
+
+        if (clientInfo == null) {
+            return "用户绑定手机号码[" + username + "]不在存";
         }
 
+        if (StringUtils.isEmpty(password)) {
+            return "密码不能为空";
+        }
+//        if (!clientInfo.getPassword().equals(MD5Utils.getMD5(password))) {
+//            return "密码不正确";
+//        }
 
-        return "login";
+        Integer fansInfoId = Integer.valueOf((String) request.getSession().getAttribute(GlobalConstants.SESSION_FANSINFOID_KEY));
+        FansInfo fansInfo = GlobalCaches.DB_CACHE_FANS_INFO.get(fansInfoId);
+        LogicHelper.saveSessionUser(request.getSession(), clientInfo, fansInfo);
+        return "success";
     }
 
     /**
@@ -292,7 +331,7 @@ public class WapMainController {
 
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(GlobalConstants.SESSION_USER_KEY);
-        attr.addAttribute("fanInfoId", user.getClientInfo().getPid());
+        attr.addAttribute(GlobalConstants.SESSION_FANSINFOID_KEY, user.getFansInfo().getPid());
         model.addAttribute(attr);
         session.removeAttribute(GlobalConstants.SESSION_USER_KEY);
         return "redirect:/wap/" + shopId;
@@ -303,7 +342,7 @@ public class WapMainController {
      *
      * @return
      */
-    @RequestMapping(value = "/{shopId:[\\S]{1,30}}/registerAction", params = {"fanInfoId"}, method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "/{shopId:[\\S]{1,30}}/registerAction", params = {GlobalConstants.SESSION_FANSINFOID_KEY}, method = {RequestMethod.GET, RequestMethod.POST})
     public
     @ResponseBody
     String registerAction(ModelMap model, HttpServletRequest request, @PathVariable("shopId") final String shopId) {
@@ -320,21 +359,15 @@ public class WapMainController {
                 // TODO 没找到相关餐馆
                 return null;
             }
-
-            String fanInfoIdStr = request.getParameter("fanInfoId");
-
+            String fanInfoIdStr = request.getParameter(GlobalConstants.SESSION_FANSINFOID_KEY);
             if (!StringUtils.isNumeric(fanInfoIdStr)) {
                 return "系统参数错误！";
             }
-
             Integer fanInfoId = Integer.valueOf(fanInfoIdStr);
-
             FansInfo fansInfo = fansInfoService.selectByPrimaryKey(fanInfoId);
-
             if (fansInfo == null) {
                 return "您未关注本商户[" + shopId + "],请先关注再注册！";
             }
-
             String phone = request.getParameter("phone").trim();
             String password = request.getParameter("password").trim();
             String email = request.getParameter("email").trim();
@@ -390,10 +423,85 @@ public class WapMainController {
         }
     }
 
+    /**
+     * 对外卖地址的增、删、改
+     *
+     * @return
+     */
+    @RequestMapping(value = "/{shopId:[\\S]{1,30}}/addressAction", params = {GlobalConstants.EDIT_ADDRESS_TYPE}, method = {RequestMethod.GET, RequestMethod.POST})
+    public
+    @ResponseBody
+    String addressAction(ModelMap model, RedirectAttributes attr, HttpServletRequest request, HttpServletResponse response, @PathVariable("shopId") final String shopId) throws IOException {
+
+//        HttpSession session = request.getSession();
+//        User user = (User) session.getAttribute(GlobalConstants.SESSION_USER_KEY);
+//        attr.addAttribute(GlobalConstants.SESSION_FANSINFOID_KEY, user.getFansInfo().getPid());
+//        model.addAttribute(attr);
+//        session.removeAttribute(GlobalConstants.SESSION_USER_KEY);
+
+        User user = LogicHelper.getUser(request.getSession());
+
+        Asserter.notNull(user);
+        Asserter.notNull(user.getClientInfo());
+
+        String type = request.getParameter("type");
+        Asserter.notNull(type);
+
+        String name = request.getParameter("name");
+        String phone = request.getParameter("phone");
+        String address = request.getParameter("address");
+        String pidStr = request.getParameter("pid");
+        Integer pid = null;
+        if (StringUtils.isNumeric(pidStr)) {
+            pid = Integer.valueOf(pidStr);
+        }
+
+        // 增加
+        // 更改
+        if (type.equalsIgnoreCase(GlobalConstants.ADDRESS_ADD) || type.equalsIgnoreCase(GlobalConstants.ADDRESS_UPDATE)) {
+            if (StringUtils.hasEmpty(name)) {
+                return "联系人不能为空";
+            }
+            if (StringUtils.hasEmpty(phone)) {
+                return "联系电话不能为空";
+            }
+            if (StringUtils.hasEmpty(address)) {
+                return "外卖地址不能为空";
+            }
+
+            TakeOutAddress takeOutAddress = new TakeOutAddress();
+            takeOutAddress.setAddress(address);
+            takeOutAddress.setPhone(phone);
+            takeOutAddress.setClientname(name);
+            takeOutAddress.setMemberno(user.getClientInfo().getMemberno());
+            if (pid == null) {
+                takeOutAddressService.insertSelective(takeOutAddress);
+            } else {
+                takeOutAddress.setPid(pid);
+                takeOutAddressService.updateByPrimaryKeySelective(takeOutAddress);
+            }
+        }
+
+        // 删除
+        else if (type.equalsIgnoreCase(GlobalConstants.ADDRESS_DELETE)) {
+            if (pid != null) {
+                int count = takeOutAddressService.deleteByPrimaryKey(pid);
+                logger.info("删除[" + phone + "]的外卖地址数量为" + count);
+            }
+        } else {
+            return "系统错误，没指定操作类型!";
+        }
+
+        return "success";
+    }
+
 
     @Resource
     private ClientInfoService clientInfoService;
 
     @Resource
     private FansInfoService fansInfoService;
+
+    @Resource
+    private TakeOutAddressService takeOutAddressService;
 }

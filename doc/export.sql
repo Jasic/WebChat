@@ -527,8 +527,6 @@ CREATE TABLE ClientInfo (
 );
 
 
-
-
 --7.	订单信息（BillInfo）
 IF EXISTS(SELECT
             *
@@ -540,7 +538,7 @@ CREATE TABLE BillInfo (
   , BilllID       VARCHAR(255) UNIQUE NOT NULL
   , BillStatus    INT                 NOT NULL
   , BillType      INT                 NOT NULL
-  , ClientInfoID  INT FOREIGN KEY  REFERENCES ClientInfo (PID)
+  , ClientInfoID  INT FOREIGN KEY REFERENCES ClientInfo (PID)
   , ConsumeTime   DATETIME            NOT NULL
   , RoomID        INT DEFAULT -1
   , CustomerCount INT DEFAULT 1
@@ -684,6 +682,22 @@ CREATE TABLE ClientType (
   , Description VARCHAR(255)
 );
 
+-- 18.	外卖地址信息（TakeOutAddress）
+IF EXISTS(SELECT
+            *
+          FROM INFORMATION_SCHEMA.TABLES
+          WHERE TABLE_NAME = 'TakeOutAddress')
+  DROP TABLE [TakeOutAddress];
+CREATE TABLE TakeOutAddress (
+    PID         INT IDENTITY (1, 1) PRIMARY KEY
+  , MemberNO    VARCHAR(64)  NOT NULL
+  , Phone       VARCHAR(64)  NOT NULL
+  , ClientName  VARCHAR(64)
+  , Address     VARCHAR(256) NOT NULL
+  , Description VARCHAR(255)
+);
+
+
 
 -- 插入新增表的部分数据
 INSERT INTO RestaurantGroup (GroupName) VALUES ('柠檬树餐饮集团');
@@ -697,12 +711,12 @@ VALUES ('关注用户1', 1, '张雄创', '广东省广州市珠江新城华利�
 INSERT INTO FansInfo (WEBCHATID, SERVICEINFOID, FanName, ADDRESS, SEX)
 VALUES ('关注用户2', 1, '张感觉', '广东省广州市珠江新城华利路19号', '男');
 
-INSERT INTO ClientType(Type,Description) values ('学生族','这个类型是学生');
-INSERT INTO ClientType(Type,Description) values ('上班族','这个类型是上班族');
-INSERT INTO ClientType(Type,Description) values ('白领阶层','这个类型是白领阶层');
+INSERT INTO ClientType (Type, Description) VALUES ('学生族', '这个类型是学生');
+INSERT INTO ClientType (Type, Description) VALUES ('上班族', '这个类型是上班族');
+INSERT INTO ClientType (Type, Description) VALUES ('白领阶层', '这个类型是白领阶层');
 
-INSERT INTO ClientInfo (MemberNO, password,FanInfoId, ClientName, Address)
-VALUES ('15989133047','zxcv1234', 1, '张真名', '广东省外专真实地址');
+INSERT INTO ClientInfo (MemberNO, password, FanInfoId, ClientName, Address)
+VALUES ('15989133047', 'zxcv1234', 1, '张真名', '广东省外专真实地址');
 INSERT INTO BillInfo (BILLLID, BillStatus, BillType, ClientInfoID, ConsumeTime, TotalCost, ACTUALPRICE)
 VALUES ('201312271321', 0, 0, 1, GETDATE(), 100.0, 100)
 
@@ -723,19 +737,19 @@ INSERT INTO Article (NewsMsgID, Title, Description, PicUrl, Url) VALUES
 INSERT INTO Text (Content, Description) VALUES ('非常欢迎关注此餐厅，更多服务请看http://www.baidu.com', '关注回复文字描述');
 
 -- 首頁广告
-truncate table AdvertisedSchedule
+TRUNCATE TABLE AdvertisedSchedule
 
 INSERT INTO AdvertisedSchedule (ShopId, AdverID, Priority, BeginTime, Status)
 VALUES ('ZCX', 1, 10, GETDATE(), 'A001');
-INSERT INTO AdvertisedSchedule (ShopId,AdverID,Priority,BeginTime,Status) VALUES ('ZCX',2,10,GETDATE(),'A001');
-INSERT INTO AdvertisedSchedule (ShopId,AdverID,Priority,BeginTime,Status) VALUES ('ZCX',3,10,GETDATE(),'A001');
+INSERT INTO AdvertisedSchedule (ShopId, AdverID, Priority, BeginTime, Status) VALUES ('ZCX', 2, 10, GETDATE(), 'A001');
+INSERT INTO AdvertisedSchedule (ShopId, AdverID, Priority, BeginTime, Status) VALUES ('ZCX', 3, 10, GETDATE(), 'A001');
 
 
-truncate table AdvertisementInfo
+TRUNCATE TABLE AdvertisementInfo
 
-insert AdvertisementInfo(ImgUrl,ForwardUrl,Description) values('apple.png','http://google.com','广告信息描述');
-insert AdvertisementInfo(ImgUrl,ForwardUrl,Description) values('blackberry_10.png','http://google.com','广告信息描述');
-insert AdvertisementInfo(ImgUrl,ForwardUrl,Description) values('firefox_os.png','http://baidu.com','广告信息描述');
+INSERT AdvertisementInfo (ImgUrl, ForwardUrl, Description) VALUES ('apple.png', 'http://google.com', '广告信息描述');
+INSERT AdvertisementInfo (ImgUrl, ForwardUrl, Description) VALUES ('blackberry_10.png', 'http://google.com', '广告信息描述');
+INSERT AdvertisementInfo (ImgUrl, ForwardUrl, Description) VALUES ('firefox_os.png', 'http://baidu.com', '广告信息描述');
 
 
 COMMIT TRANSACTION;

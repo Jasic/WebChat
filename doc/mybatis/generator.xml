@@ -15,7 +15,7 @@
         </commentGenerator>
 
         <jdbcConnection driverClass="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-                        connectionURL="jdbc:sqlserver://192.168.43.18:1433;databaseName=WebChatDining"
+                        connectionURL="jdbc:sqlserver://192.168.1.111:1433;databaseName=WebChatDining"
                         userId="sa"
                         password="sa123">
         </jdbcConnection>
@@ -90,5 +90,11 @@
         <table tableName="ClientType" domainObjectName="ClientType" enableCountByExample="false"
                enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"
                selectByExampleQueryId="false"/>
+
+        <table tableName="TakeOutAddress" domainObjectName="TakeOutAddress" enableCountByExample="false"
+               enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"
+               selectByExampleQueryId="false"/>
+
+
     </context>
 </generatorConfiguration>

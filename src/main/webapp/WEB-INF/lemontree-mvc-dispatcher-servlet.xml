@@ -79,8 +79,9 @@
             <mvc:mapping path="/wap/*/*" />
             <mvc:mapping path="/wap/*/*/" />
             <!-- 需排除拦截的地址 -->
-            <mvc:exclude-mapping path="/login.htm"/>
             <mvc:exclude-mapping path="/wap/*/register"/>
+            <mvc:exclude-mapping path="/wap/*/orderDishes"/>
+            <mvc:exclude-mapping path="/wap/*/loginAction"/>
             <mvc:exclude-mapping path="/wap/*/registerAction"/>
             <mvc:exclude-mapping path="/wap/*/"/>
 

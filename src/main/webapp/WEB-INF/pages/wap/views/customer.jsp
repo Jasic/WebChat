@@ -39,8 +39,8 @@
                 location.href = "orderDishes.html";
             });
 
-            $("#customer").click(function () {
-                location.href = "customer.html";
+            $("#myAddress").click(function () {
+                location.href = "address";
             });
 
             $("#logout").click(function () {
@@ -50,11 +50,7 @@
                 }
             });
 
-
-
             $("#myMenu").click(function () {
-
-
 
                 //                $.post("validateHasLogin", { name: "John", time: "2pm" }, function(data){ process(data); }, "xml");
 
@@ -92,7 +88,7 @@
                    href=""
                    data-ajax="false">我的预定</a></li>
             <li><a id="myAddress"
-                   href=""
+                   href="address"
                    data-ajax="false">外卖地址管理</a></li>
         </ul>
 
