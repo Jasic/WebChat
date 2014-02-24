@@ -31,6 +31,9 @@ public class GlobalVariables {
     // 数据库刷新基础数据的时间间隔
     public static int DB_REFRESH_INTERVAL = 30;
 
+    // Sqlite数据库刷新基础数据的时间间隔(>=数据库刷新基础数据的时间间隔)
+    public static int DB_SQLITE_REFRESH_INTERVAL = 30;
+
 
     // 运行标志
     public static volatile boolean GLOBAL_APP_RUNNING_FLAG = true;

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lemontree.daemon.dbmgr.mapper.CaiPingMapper" >
+  <resultMap id="BaseResultMap" type="com.lemontree.daemon.dbmgr.model.CaiPing" >
+    <result column="PID" property="pid" jdbcType="INTEGER" />
+    <result column="CaiPingID" property="caipingid" jdbcType="VARCHAR" />
+    <result column="CaiPingName" property="caipingname" jdbcType="VARCHAR" />
+    <result column="CaiPingName2" property="caipingname2" jdbcType="VARCHAR" />
+    <result column="CaiPingName3" property="caipingname3" jdbcType="VARCHAR" />
+    <result column="JiaGe" property="jiage" jdbcType="VARCHAR" />
+    <result column="MoRenDanWei" property="morendanwei" jdbcType="VARCHAR" />
+    <result column="MoRenDanWei2" property="morendanwei2" jdbcType="VARCHAR" />
+    <result column="MoRenDanWei3" property="morendanwei3" jdbcType="VARCHAR" />
+    <result column="ShowOrder" property="showorder" jdbcType="INTEGER" />
+    <result column="YinCan" property="yincan" jdbcType="VARCHAR" />
+    <result column="JianJie" property="jianjie" jdbcType="VARCHAR" />
+    <result column="JianJie2" property="jianjie2" jdbcType="VARCHAR" />
+    <result column="JianJie3" property="jianjie3" jdbcType="VARCHAR" />
+    <result column="XiaoLei" property="xiaolei" jdbcType="VARCHAR" />
+    <result column="YinCanInPad" property="yincaninpad" jdbcType="VARCHAR" />
+    <result column="FuZhuID" property="fuzhuid" jdbcType="VARCHAR" />
+    <result column="PingYing" property="pingying" jdbcType="VARCHAR" />
+    <result column="BuJiChengTYZF" property="bujichengtyzf" jdbcType="VARCHAR" />
+    <result column="BuJiChengDLZF" property="bujichengdlzf" jdbcType="VARCHAR" />
+    <result column="BuJiChengXLZF" property="bujichengxlzf" jdbcType="VARCHAR" />
+    <result column="NoShowZuoFa" property="noshowzuofa" jdbcType="VARCHAR" />
+    <result column="ShiJia" property="shijia" jdbcType="VARCHAR" />
+    <result column="CanModName" property="canmodname" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.lemontree.daemon.dbmgr.model.CaiPing" >
+    insert into CaiPing (PID, CaiPingID, CaiPingName,
+      CaiPingName2, CaiPingName3, JiaGe,
+      MoRenDanWei, MoRenDanWei2, MoRenDanWei3,
+      ShowOrder, YinCan, JianJie,
+      JianJie2, JianJie3, XiaoLei,
+      YinCanInPad, FuZhuID, PingYing,
+      BuJiChengTYZF, BuJiChengDLZF, BuJiChengXLZF,
+      NoShowZuoFa, ShiJia, CanModName
+      )
+    values (#{pid,jdbcType=INTEGER}, #{caipingid,jdbcType=VARCHAR}, #{caipingname,jdbcType=VARCHAR}, 
+      #{caipingname2,jdbcType=VARCHAR}, #{caipingname3,jdbcType=VARCHAR}, #{jiage,jdbcType=VARCHAR}, 
+      #{morendanwei,jdbcType=VARCHAR}, #{morendanwei2,jdbcType=VARCHAR}, #{morendanwei3,jdbcType=VARCHAR}, 
+      #{showorder,jdbcType=INTEGER}, #{yincan,jdbcType=VARCHAR}, #{jianjie,jdbcType=VARCHAR}, 
+      #{jianjie2,jdbcType=VARCHAR}, #{jianjie3,jdbcType=VARCHAR}, #{xiaolei,jdbcType=VARCHAR}, 
+      #{yincaninpad,jdbcType=VARCHAR}, #{fuzhuid,jdbcType=VARCHAR}, #{pingying,jdbcType=VARCHAR}, 
+      #{bujichengtyzf,jdbcType=VARCHAR}, #{bujichengdlzf,jdbcType=VARCHAR}, #{bujichengxlzf,jdbcType=VARCHAR}, 
+      #{noshowzuofa,jdbcType=VARCHAR}, #{shijia,jdbcType=VARCHAR}, #{canmodname,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lemontree.daemon.dbmgr.model.CaiPing" >
+    insert into CaiPing
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pid != null" >
+        PID,
+      </if>
+      <if test="caipingid != null" >
+        CaiPingID,
+      </if>
+      <if test="caipingname != null" >
+        CaiPingName,
+      </if>
+      <if test="caipingname2 != null" >
+        CaiPingName2,
+      </if>
+      <if test="caipingname3 != null" >
+        CaiPingName3,
+      </if>
+      <if test="jiage != null" >
+        JiaGe,
+      </if>
+      <if test="morendanwei != null" >
+        MoRenDanWei,
+      </if>
+      <if test="morendanwei2 != null" >
+        MoRenDanWei2,
+      </if>
+      <if test="morendanwei3 != null" >
+        MoRenDanWei3,
+      </if>
+      <if test="showorder != null" >
+        ShowOrder,
+      </if>
+      <if test="yincan != null" >
+        YinCan,
+      </if>
+      <if test="jianjie != null" >
+        JianJie,
+      </if>
+      <if test="jianjie2 != null" >
+        JianJie2,
+      </if>
+      <if test="jianjie3 != null" >
+        JianJie3,
+      </if>
+      <if test="xiaolei != null" >
+        XiaoLei,
+      </if>
+      <if test="yincaninpad != null" >
+        YinCanInPad,
+      </if>
+      <if test="fuzhuid != null" >
+        FuZhuID,
+      </if>
+      <if test="pingying != null" >
+        PingYing,
+      </if>
+      <if test="bujichengtyzf != null" >
+        BuJiChengTYZF,
+      </if>
+      <if test="bujichengdlzf != null" >
+        BuJiChengDLZF,
+      </if>
+      <if test="bujichengxlzf != null" >
+        BuJiChengXLZF,
+      </if>
+      <if test="noshowzuofa != null" >
+        NoShowZuoFa,
+      </if>
+      <if test="shijia != null" >
+        ShiJia,
+      </if>
+      <if test="canmodname != null" >
+        CanModName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pid != null" >
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="caipingid != null" >
+        #{caipingid,jdbcType=VARCHAR},
+      </if>
+      <if test="caipingname != null" >
+        #{caipingname,jdbcType=VARCHAR},
+      </if>
+      <if test="caipingname2 != null" >
+        #{caipingname2,jdbcType=VARCHAR},
+      </if>
+      <if test="caipingname3 != null" >
+        #{caipingname3,jdbcType=VARCHAR},
+      </if>
+      <if test="jiage != null" >
+        #{jiage,jdbcType=VARCHAR},
+      </if>
+      <if test="morendanwei != null" >
+        #{morendanwei,jdbcType=VARCHAR},
+      </if>
+      <if test="morendanwei2 != null" >
+        #{morendanwei2,jdbcType=VARCHAR},
+      </if>
+      <if test="morendanwei3 != null" >
+        #{morendanwei3,jdbcType=VARCHAR},
+      </if>
+      <if test="showorder != null" >
+        #{showorder,jdbcType=INTEGER},
+      </if>
+      <if test="yincan != null" >
+        #{yincan,jdbcType=VARCHAR},
+      </if>
+      <if test="jianjie != null" >
+        #{jianjie,jdbcType=VARCHAR},
+      </if>
+      <if test="jianjie2 != null" >
+        #{jianjie2,jdbcType=VARCHAR},
+      </if>
+      <if test="jianjie3 != null" >
+        #{jianjie3,jdbcType=VARCHAR},
+      </if>
+      <if test="xiaolei != null" >
+        #{xiaolei,jdbcType=VARCHAR},
+      </if>
+      <if test="yincaninpad != null" >
+        #{yincaninpad,jdbcType=VARCHAR},
+      </if>
+      <if test="fuzhuid != null" >
+        #{fuzhuid,jdbcType=VARCHAR},
+      </if>
+      <if test="pingying != null" >
+        #{pingying,jdbcType=VARCHAR},
+      </if>
+      <if test="bujichengtyzf != null" >
+        #{bujichengtyzf,jdbcType=VARCHAR},
+      </if>
+      <if test="bujichengdlzf != null" >
+        #{bujichengdlzf,jdbcType=VARCHAR},
+      </if>
+      <if test="bujichengxlzf != null" >
+        #{bujichengxlzf,jdbcType=VARCHAR},
+      </if>
+      <if test="noshowzuofa != null" >
+        #{noshowzuofa,jdbcType=VARCHAR},
+      </if>
+      <if test="shijia != null" >
+        #{shijia,jdbcType=VARCHAR},
+      </if>
+      <if test="canmodname != null" >
+        #{canmodname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+
+    <select id="getAll" resultMap="BaseResultMap" resultType="list">
+      <![CDATA[
+          select
+           PID, CaiPingID, CaiPingName, CaiPingName2, CaiPingName3, JiaGe, CanModName
+          from
+            CaiPing
+          ]]>
+
+    </select>
+    <select id="countAll" resultType="java.lang.Integer">
+    select count(*) from CaiPing
+    </select>
+</mapper>

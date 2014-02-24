@@ -5,7 +5,12 @@
 
 <generatorConfiguration>
     <!-- 引入数据库驱动包路径 -->
-    <classPathEntry location="sqljdbc4.jar"/>
+
+    <!-- sqlserver驱动-->
+    <!--<classPathEntry location="sqljdbc4.jar"/>-->
+
+    <!-- sqlite驱动-->
+    <classPathEntry location="/opt/wspace/employ/WebChat/src/main/webapp/WEB-INF/lib/sqlite-jdbc-3.6.20.1.jar"/>
 
 
     <context id="Tables" targetRuntime="MyBatis3">
@@ -14,11 +19,20 @@
             <property name="suppressAllComments" value="true"/>
         </commentGenerator>
 
-        <jdbcConnection driverClass="com.microsoft.sqlserver.jdbc.SQLServerDriver"
-                        connectionURL="jdbc:sqlserver://192.168.1.111:1433;databaseName=WebChatDining"
-                        userId="sa"
-                        password="sa123">
+        <!-- sqlserver-->
+        <!--<jdbcConnection driverClass="com.microsoft.sqlserver.jdbc.SQLServerDriver"-->
+                        <!--connectionURL="jdbc:sqlserver://192.168.1.18:1433;databaseName=WebChatDining"-->
+                        <!--userId="sa"-->
+                        <!--password="sa123">-->
+        <!--</jdbcConnection>-->
+
+        <!-- sqlite-->
+        <jdbcConnection driverClass="org.sqlite.JDBC"
+                        connectionURL="jdbc:sqlite:/opt/wspace/employ/WebChat/doc/lemontree.db"
+                        userId=""
+                        password="">
         </jdbcConnection>
+
 
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
@@ -40,60 +54,62 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <!--<table schema="DB2ADMIN" tableName="ALLTYPES" domainObjectName="Customer" >-->
-        <!--<property name="useActualColumnNames" value="true"/>-->
-        <!--<generatedKey column="ID" sqlStatement="DB2" identity="true" />-->
-        <!--<columnOverride column="DATE_FIELD" property="startDate" />-->
-        <!--<ignoreColumn column="FRED" />-->
-        <!--<columnOverride column="LONG_VARCHAR_FIELD" jdbcType="VARCHAR" />-->
-        <!--</table>-->
 
         <!-- 新增表 -->
-        <table tableName="AdvertisedSchedule" domainObjectName="AdvertisedSchedule" enableCountByExample="false"
-               enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"
-               selectByExampleQueryId="false"/>
-        <table tableName="AdvertisementInfo" domainObjectName="AdvertisementInfo" enableCountByExample="false"
-               enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"
-               selectByExampleQueryId="false"/>
-        <table tableName="Article" domainObjectName="Article" enableCountByExample="false" enableSelectByExample="false"
-               enableDeleteByExample="false" enableUpdateByExample="false" selectByExampleQueryId="false"/>
-        <table tableName="EventPushMsg" domainObjectName="EventPushMsg" enableCountByExample="false"
-               enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"
-               selectByExampleQueryId="false"/>
-        <table tableName="FansInfo" domainObjectName="FansInfo" enableCountByExample="false"
-               enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"
-               selectByExampleQueryId="false"/>
-        <table tableName="NewsMsg" domainObjectName="NewsMsg" enableCountByExample="false" enableSelectByExample="false"
-               enableDeleteByExample="false" enableUpdateByExample="false" selectByExampleQueryId="false"/>
-        <table tableName="RestaurantGroup" domainObjectName="RestaurantGroup" enableCountByExample="false"
-               enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"
-               selectByExampleQueryId="false"/>
-        <table tableName="RestaurantInfo" domainObjectName="RestaurantInfo" enableCountByExample="false"
-               enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"
-               selectByExampleQueryId="false"/>
-        <table tableName="ServiceInfo" domainObjectName="ServiceInfo" enableCountByExample="false"
-               enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"
-               selectByExampleQueryId="false"/>
-        <table tableName="SubcEventPushMsg" domainObjectName="SubcEventPushMsg" enableCountByExample="false"
-               enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"
-               selectByExampleQueryId="false"/>
-        <table tableName="DaemonAdminInfo" domainObjectName="DaemonAdminInfo" enableCountByExample="false"
-               enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"
-               selectByExampleQueryId="false"/>
-        <table tableName="Article" domainObjectName="Article" enableCountByExample="false"
+        <table tableName="CaiPingXiaoLei" domainObjectName="CaiPingXiaoLei" enableCountByExample="false"
                enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"
                selectByExampleQueryId="false"/>
 
-        <table tableName="ClientInfo" domainObjectName="ClientInfo" enableCountByExample="false"
-               enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"
-               selectByExampleQueryId="false"/>
-        <table tableName="ClientType" domainObjectName="ClientType" enableCountByExample="false"
+        <table tableName="CaiPing" domainObjectName="CaiPing" enableCountByExample="false"
                enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"
                selectByExampleQueryId="false"/>
 
-        <table tableName="TakeOutAddress" domainObjectName="TakeOutAddress" enableCountByExample="false"
-               enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"
-               selectByExampleQueryId="false"/>
+
+        <!--<table tableName="AdvertisedSchedule" domainObjectName="AdvertisedSchedule" enableCountByExample="false"-->
+               <!--enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+        <!--<table tableName="AdvertisementInfo" domainObjectName="AdvertisementInfo" enableCountByExample="false"-->
+               <!--enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+        <!--<table tableName="Article" domainObjectName="Article" enableCountByExample="false" enableSelectByExample="false"-->
+               <!--enableDeleteByExample="false" enableUpdateByExample="false" selectByExampleQueryId="false"/>-->
+        <!--<table tableName="EventPushMsg" domainObjectName="EventPushMsg" enableCountByExample="false"-->
+               <!--enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+        <!--<table tableName="FansInfo" domainObjectName="FansInfo" enableCountByExample="false"-->
+               <!--enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+        <!--<table tableName="NewsMsg" domainObjectName="NewsMsg" enableCountByExample="false" enableSelectByExample="false"-->
+               <!--enableDeleteByExample="false" enableUpdateByExample="false" selectByExampleQueryId="false"/>-->
+        <!--<table tableName="RestaurantGroup" domainObjectName="RestaurantGroup" enableCountByExample="false"-->
+               <!--enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+        <!--<table tableName="RestaurantInfo" domainObjectName="RestaurantInfo" enableCountByExample="false"-->
+               <!--enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+        <!--<table tableName="ServiceInfo" domainObjectName="ServiceInfo" enableCountByExample="false"-->
+               <!--enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+        <!--<table tableName="SubcEventPushMsg" domainObjectName="SubcEventPushMsg" enableCountByExample="false"-->
+               <!--enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+        <!--<table tableName="DaemonAdminInfo" domainObjectName="DaemonAdminInfo" enableCountByExample="false"-->
+               <!--enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+        <!--<table tableName="Article" domainObjectName="Article" enableCountByExample="false"-->
+               <!--enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+
+        <!--<table tableName="ClientInfo" domainObjectName="ClientInfo" enableCountByExample="false"-->
+               <!--enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+        <!--<table tableName="ClientType" domainObjectName="ClientType" enableCountByExample="false"-->
+               <!--enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
+
+        <!--<table tableName="TakeOutAddress" domainObjectName="TakeOutAddress" enableCountByExample="false"-->
+               <!--enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
 
 
     </context>

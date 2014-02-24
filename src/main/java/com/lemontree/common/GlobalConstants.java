@@ -47,4 +47,11 @@ public class GlobalConstants {
     public static final String ADDRESS_DELETE = "delete";
     public static final String ADDRESS_UPDATE = "update";
     public static final String EDIT_ADDRESS_TYPE = "type";
+
+    // ---------------------------------- 客户端文件目录 ------------------------------------
+    // 客户端基础目录
+    public static final String RESTAURANT_BASE_DIR = "/opt/wspace/employ/WebChat/src/main/webapp/resource/restaurant";
+
+    public static final String RESTAURANT_SOURCE_TYPE_IMG = "img";
+    public static final String RESTAURANT_SOURCE_TYPE_DB = "db";
 }

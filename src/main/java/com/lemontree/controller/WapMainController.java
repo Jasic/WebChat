@@ -30,6 +30,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * User: Jasic
@@ -147,7 +148,13 @@ public class WapMainController {
             return null;
         }
 
+        String shopName = restInfo.getName();
+        model.put("shopName", shopName == null ? shopId : shopName);
+        model.put("shopId", shopId);
 
+        Map<String, List<SqlitePojo>> cache = GlobalCaches.DB_CACHE_RESTAURANT_SQLITE_DATA.get(shopId);
+        List<SqlitePojo> caiPingXiaoLeis = cache.get(CaiPingXiaoLei.class.getSimpleName());
+        model.put("caiPingXiaoLeis", caiPingXiaoLeis);
 
         return "orderDishes";
     }
@@ -379,6 +386,11 @@ public class WapMainController {
             ClientInfo clientInfo = clientInfoService.selectByMemNo(phone);
             if (clientInfo != null) {
                 return "已存在注册用户[" + phone + "]";
+            }
+
+            clientInfo = clientInfoService.selectByFanInfoId(fanInfoId);
+            if (clientInfo == null) {
+                return "已经绑定手机号码[" + clientInfo.getMemberno() + "]";
             }
 
 //            if (!StringUtil.isMatch(GlobalConstants.PHONE_REGEX_STR, phone)) {

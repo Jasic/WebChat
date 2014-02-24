@@ -3,19 +3,19 @@
 <%@ include file="/WEB-INF/pages/common/imports.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
+<head>
     <meta http-equiv="Content-Type"
-          content="text/html; charset=utf-8" />
+          content="text/html; charset=utf-8"/>
     <meta name="viewport"
-          content="width=device-width, initial-scale=1" />
+          content="width=device-width, initial-scale=1"/>
 
     <title>点餐</title>
 
-    <link rel="stylesheet" href="${_cssPath}/jquery.mobile-1.4.0.css" />
-    <link rel="stylesheet" href="${_cssPath}/jqm-demos.css" />
-    <link rel="stylesheet" href="${_cssPath}/idangerous.swiper.css" />
-    <link rel="stylesheet" href="${_cssPath}/common.css" />
-    <link rel="stylesheet" href="${_cssPath}/orderDishes.css" />
+    <link rel="stylesheet" href="${_cssPath}/jquery.mobile-1.4.0.css"/>
+    <link rel="stylesheet" href="${_cssPath}/jqm-demos.css"/>
+    <link rel="stylesheet" href="${_cssPath}/idangerous.swiper.css"/>
+    <link rel="stylesheet" href="${_cssPath}/common.css"/>
+    <link rel="stylesheet" href="${_cssPath}/orderDishes.css"/>
 
     <script language="javascript" src="${_jsPath}/jquery.js"></script>
     <script language="javascript" src="${_jsPath}/jquery.mobile-1.4.0.js"></script>
@@ -62,191 +62,97 @@
     }
     --></script>
 
-  </head>
+</head>
 
-  <body>
+<body>
 
-		<div data-role="page">
-            <div data-role="header" >
-                <h1>点餐菜单</h1>
+<div data-role="page">
+    <div data-role="header">
+        <h1>点餐菜单</h1>
+    </div>
+    <div role="main"
+         class="ui-content order-ui-content">
+        <div class="order-header">
+            <span>${shopName}</span>
+        </div>
+
+        <div data-demo-html="true"
+             data-demo-css="#inset-tablist">
+            <div data-role="tabs">
+                <ul data-role="listview"
+                    data-inset="true"
+                    class="tablist-left order-listview">
+                    <c:forEach begin="0" step="1" items="${caiPingXiaoLeis}" var="caiPingXiaoLei"
+                               varStatus="xaioLeiStatus">
+                        <c:if test="${caiPingXiaoLei.caiPingXiaoLeiName!=null}">
+                            <li data-icon="false">
+                                <a href="#link${xaioLeiStatus.count}"
+                                   data-ajax="false">
+                                    <c:out value="${caiPingXiaoLei.caiPingXiaoLeiName}"/>
+                                </a>
+                            </li>
+                        </c:if>
+                    </c:forEach>
+                </ul>
+
+                <c:forEach begin="0" step="1" items="${caiPingXiaoLeis}" var="caiPingXiaoLei"
+                           varStatus="xaioLeiStatus">
+                    <c:if test="${caiPingXiaoLei.caiPingXiaoLeiName!=null}">
+                        <ul id="link${xaioLeiStatus.count}"
+                            class="tablist-content order-list-listview"
+                            data-role="listview"
+                            data-inset="true">
+                            <c:forEach begin="0" step="1" items="${caiPingXiaoLei.caiPings}" var="caiPing"
+                                       varStatus="caiPingStatus">
+                                <c:if test="${caiPing.caiPingName!=null}">
+                                    <li data-icon="false">
+                                        <div>
+                                            <%
+                                            // TODO 找不到图片则统一一个图片
+                                            // %>
+                                            <img src="${_restaurantPath}/${shopId}/img/foods/${caiPing.caiPingID}.jpg" height="30%" width="30%" alt="">
+
+                                            <br/>
+                                            <span><c:out value="${caiPing.caiPingName}"/></span>
+                                            <span class="orange font-b">￥${caiPing.jiaGe}</span>
+                                        </div>
+                                    <span class="btn-span">
+                                    <button data-role="none"
+                                            class="order-add-btn count-add"
+                                            onclick="addCount(this);">+
+                                    </button>
+                                    <input data-role="none"
+                                           class="order-input dn"
+                                           readonly="readonly"
+                                           value="0"/>
+                                    <button data-role="none"
+                                            class="order-add-btn count-cut dn"
+                                            onclick="cutCount(this);">-
+                                    </button>
+                                    </span>
+                                    </li>
+                                </c:if>
+                            </c:forEach>
+                        </ul>
+                    </c:if>
+                </c:forEach>
+                </ul>
             </div>
-			<div role="main"
-                 class="ui-content order-ui-content">
-				<div class="order-header">
-					<span>老乡村农家庄</span>
-				</div>
+        </div>
+    </div>
+    <!-- /content --
 
-				<div data-demo-html="true"
-                     data-demo-css="#inset-tablist">
-					<div data-role="tabs">
-						<ul data-role="listview"
-                            data-inset="true"
-                            class="tablist-left order-listview">
-							<li data-icon="false">
-								<a href="#one"
-                                   data-ajax="false">冷菜系列</a>
-							</li>
-							<li data-icon="false">
-								<a href="#two"
-                                   data-ajax="false">特色菜</a>
-							</li>
-							<li data-icon="false">
-								<a href="#three"
-                                   data-ajax="false">厨师推荐</a>
-							</li>
-							<li data-icon="false">
-								<a href="#three"
-                                   data-ajax="false">家常菜</a>
-							</li>
-							<li data-icon="false">
-								<a href="#three"
-                                   data-ajax="false">川菜系列</a>
-							</li>
-							<li data-icon="false">
-								<a href="#three"
-                                   data-ajax="false">煲仔系列</a>
-							</li>
-						</ul>
-						<ul id="one"
-                            class="tablist-content order-list-listview"
-                            data-role="listview"
-                            data-inset="true">
-							<li data-icon="false">
-								<span>单点仙草1</span>
-								<br />
-								<span class="orange font-b">￥5</span>
+    <div data-role="footer"
+         class="text-center">
+        <button data-role="none"
+                class="order-footer-btn orange">选好了
+        </button>
+    </div>
+    <!-- /footer -->
 
-								<span class="btn-span">
-									<button data-role="none"
-                                            class="order-add-btn count-add"
-                                            onclick="addCount(this);">+</button>
-									<input data-role="none"
-                                           class="order-input dn"
-                                           readonly="readonly"
-                                           value="0" />
-									<button data-role="none"
-                                            class="order-add-btn count-cut dn"
-                                            onclick="cutCount(this);">-</button>
-								</span>
-							</li>
-							<li data-icon="false">
-								<span>单点仙草2</span>
-								<br />
-								<span class="orange font-b">￥10</span>
+</div>
+<!-- /page -->
 
-								<span class="btn-span">
-									<button data-role="none"
-                                            class="order-add-btn count-add"
-                                            onclick="addCount(this);">+</button>
-									<input data-role="none"
-                                           class="order-input dn"
-                                           readonly="readonly"
-                                           value="0" />
-									<button data-role="none"
-                                            class="order-add-btn count-cut dn"
-                                            onclick="cutCount(this);">-</button>
-								</span>
-							</li>
-						</ul>
-
-						<ul id="two"
-                            class="tablist-content order-list-listview"
-                            data-role="listview"
-                            data-inset="true">
-							<li data-icon="false">
-								<span>水煮鱼1</span>
-								<br />
-								<span class="orange font-b">￥20</span>
-
-								<span class="btn-span">
-									<button data-role="none"
-                                            class="order-add-btn count-add"
-                                            onclick="addCount(this);">+</button>
-									<input data-role="none"
-                                           class="order-input dn"
-                                           readonly="readonly"
-                                           value="0" />
-									<button data-role="none"
-                                            class="order-add-btn count-cut dn"
-                                            onclick="cutCount(this);">-</button>
-								</span>
-							</li>
-							<li data-icon="false">
-								<span>水煮鱼2</span>
-								<br />
-								<span class="orange font-b">￥40</span>
-
-								<span class="btn-span">
-									<button data-role="none"
-                                            class="order-add-btn count-add"
-                                            onclick="addCount(this);">+</button>
-									<input data-role="none"
-                                           class="order-input dn"
-                                           readonly="readonly"
-                                           value="0" />
-									<button data-role="none"
-                                            class="order-add-btn count-cut dn"
-                                            onclick="cutCount(this);">-</button>
-								</span>
-							</li>
-						</ul>
-
-						<ul id="three"
-                            class="tablist-content order-list-listview"
-                            data-role="listview"
-                            data-inset="true">
-							<li data-icon="false">
-								<span>鱼香肉丝1</span>
-								<br />
-								<span class="orange font-b">￥20</span>
-
-								<span class="btn-span">
-									<button data-role="none"
-                                            class="order-add-btn count-add"
-                                            onclick="addCount(this);">+</button>
-									<input data-role="none"
-                                           class="order-input dn"
-                                           readonly="readonly"
-                                           value="0" />
-									<button data-role="none"
-                                            class="order-add-btn count-cut dn"
-                                            onclick="cutCount(this);">-</button>
-								</span>
-							</li>
-							<li data-icon="false">
-								<span>鱼香肉丝1</span>
-								<br />
-								<span class="orange font-b">￥40</span>
-
-								<span class="btn-span">
-									<button data-role="none"
-                                            class="order-add-btn count-add"
-                                            onclick="addCount(this);">+</button>
-									<input data-role="none"
-                                           class="order-input dn"
-                                           readonly="readonly"
-                                           value="0" />
-									<button data-role="none"
-                                            class="order-add-btn count-cut dn"
-                                            onclick="cutCount(this);">-</button>
-								</span>
-							</li>
-						</ul>
-
-					</div>
-				</div>
-			</div>
-			<!-- /content -->
-
-			<div data-role="footer"
-                 class="text-center">
-				<button data-role="none"
-                        class="order-footer-btn orange">选好了</button>
-			</div><!-- /footer -->
-
-		</div>
-		<!-- /page -->
-
-	</body>
+</body>
 </html>
 

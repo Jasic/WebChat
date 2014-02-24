@@ -10,6 +10,7 @@
     String baPa = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + pa;
     String rePa = "/resource";
     String _cssPath = baPa + rePa + "/css";
+    String _restaurantPath = baPa + rePa + "/restaurant";
     String _imgPath = baPa + rePa + "/img";
     String _jspPath = baPa + rePa + "/js";%>
 <c:set var="basePath"
@@ -23,3 +24,5 @@
        value="<%=_jspPath%>"></c:set>
 <c:set var="_imgPath"
        value="<%=_imgPath%>"></c:set>
+<c:set var="_restaurantPath"
+       value="<%=_restaurantPath%>"></c:set>

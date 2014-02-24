@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * User: Jasic
@@ -38,5 +39,6 @@ public class GlobalCaches {
 
     public static StringBuilder SB = new StringBuilder();
 
-
+    // 用于装载餐馆相对应的sqlite数据库
+    public static Map<String, Map<String, List<SqlitePojo>>> DB_CACHE_RESTAURANT_SQLITE_DATA;
 }

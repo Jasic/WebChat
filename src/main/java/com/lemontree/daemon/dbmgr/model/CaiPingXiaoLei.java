@@ -2,12 +2,24 @@ package com.lemontree.daemon.dbmgr.model;
 
 import cn.tisson.framework.annotation.Id;
 
+import java.util.List;
+
 /**
  * Author Jasic
  * Date 13-12-18.
  * ---  3菜品小类
  */
 public class CaiPingXiaoLei extends SqlitePojo {
+
+    private List<CaiPing> caiPings;
+
+    public List<CaiPing> getCaiPings() {
+        return caiPings;
+    }
+
+    public void setCaiPings(List<CaiPing> caiPings) {
+        this.caiPings = caiPings;
+    }
 
     @Id
 

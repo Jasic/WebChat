@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lemontree.daemon.dbmgr.mapper.CaiPingXiaoLeiMapper" >
+  <resultMap id="BaseResultMap" type="com.lemontree.daemon.dbmgr.model.CaiPingXiaoLei" >
+    <result column="PID" property="pid" jdbcType="INTEGER" />
+    <result column="CaiPingXiaoLeiID" property="caipingxiaoleiid" jdbcType="VARCHAR" />
+    <result column="CaiPingXiaoLeiName" property="caipingxiaoleiname" jdbcType="VARCHAR" />
+    <result column="CaiPingXiaoLeiName2" property="caipingxiaoleiname2" jdbcType="VARCHAR" />
+    <result column="CaiPingXiaoLeiName3" property="caipingxiaoleiname3" jdbcType="VARCHAR" />
+    <result column="ShowOrder" property="showorder" jdbcType="INTEGER" />
+    <result column="Hide" property="hide" jdbcType="VARCHAR" />
+    <result column="DaiLei" property="dailei" jdbcType="VARCHAR" />
+    <result column="HideInPad" property="hideinpad" jdbcType="VARCHAR" />
+    <result column="BuJiChengTYZF" property="bujichengtyzf" jdbcType="VARCHAR" />
+    <result column="BuJiChengDLZF" property="bujichengdlzf" jdbcType="VARCHAR" />
+    <result column="NoShowZuoFa" property="noshowzuofa" jdbcType="VARCHAR" />
+  </resultMap>
+  <insert id="insert" parameterType="com.lemontree.daemon.dbmgr.model.CaiPingXiaoLei" >
+    insert into CaiPingXiaoLei (PID, CaiPingXiaoLeiID, CaiPingXiaoLeiName, 
+      CaiPingXiaoLeiName2, CaiPingXiaoLeiName3, 
+      ShowOrder, Hide, DaiLei, 
+      HideInPad, BuJiChengTYZF, BuJiChengDLZF, 
+      NoShowZuoFa)
+    values (#{pid,jdbcType=INTEGER}, #{caipingxiaoleiid,jdbcType=VARCHAR}, #{caipingxiaoleiname,jdbcType=VARCHAR}, 
+      #{caipingxiaoleiname2,jdbcType=VARCHAR}, #{caipingxiaoleiname3,jdbcType=VARCHAR}, 
+      #{showorder,jdbcType=INTEGER}, #{hide,jdbcType=VARCHAR}, #{dailei,jdbcType=VARCHAR}, 
+      #{hideinpad,jdbcType=VARCHAR}, #{bujichengtyzf,jdbcType=VARCHAR}, #{bujichengdlzf,jdbcType=VARCHAR}, 
+      #{noshowzuofa,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lemontree.daemon.dbmgr.model.CaiPingXiaoLei" >
+    insert into CaiPingXiaoLei
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pid != null" >
+        PID,
+      </if>
+      <if test="caipingxiaoleiid != null" >
+        CaiPingXiaoLeiID,
+      </if>
+      <if test="caipingxiaoleiname != null" >
+        CaiPingXiaoLeiName,
+      </if>
+      <if test="caipingxiaoleiname2 != null" >
+        CaiPingXiaoLeiName2,
+      </if>
+      <if test="caipingxiaoleiname3 != null" >
+        CaiPingXiaoLeiName3,
+      </if>
+      <if test="showorder != null" >
+        ShowOrder,
+      </if>
+      <if test="hide != null" >
+        Hide,
+      </if>
+      <if test="dailei != null" >
+        DaiLei,
+      </if>
+      <if test="hideinpad != null" >
+        HideInPad,
+      </if>
+      <if test="bujichengtyzf != null" >
+        BuJiChengTYZF,
+      </if>
+      <if test="bujichengdlzf != null" >
+        BuJiChengDLZF,
+      </if>
+      <if test="noshowzuofa != null" >
+        NoShowZuoFa,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pid != null" >
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="caipingxiaoleiid != null" >
+        #{caipingxiaoleiid,jdbcType=VARCHAR},
+      </if>
+      <if test="caipingxiaoleiname != null" >
+        #{caipingxiaoleiname,jdbcType=VARCHAR},
+      </if>
+      <if test="caipingxiaoleiname2 != null" >
+        #{caipingxiaoleiname2,jdbcType=VARCHAR},
+      </if>
+      <if test="caipingxiaoleiname3 != null" >
+        #{caipingxiaoleiname3,jdbcType=VARCHAR},
+      </if>
+      <if test="showorder != null" >
+        #{showorder,jdbcType=INTEGER},
+      </if>
+      <if test="hide != null" >
+        #{hide,jdbcType=VARCHAR},
+      </if>
+      <if test="dailei != null" >
+        #{dailei,jdbcType=VARCHAR},
+      </if>
+      <if test="hideinpad != null" >
+        #{hideinpad,jdbcType=VARCHAR},
+      </if>
+      <if test="bujichengtyzf != null" >
+        #{bujichengtyzf,jdbcType=VARCHAR},
+      </if>
+      <if test="bujichengdlzf != null" >
+        #{bujichengdlzf,jdbcType=VARCHAR},
+      </if>
+      <if test="noshowzuofa != null" >
+        #{noshowzuofa,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

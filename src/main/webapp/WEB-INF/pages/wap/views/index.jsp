@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="${_cssPath}/jquery.mobile-1.4.0.min.css" />
     <link rel="stylesheet" href="${_cssPath}/jqm-demos.css" />
     <link rel="stylesheet" href="${_cssPath}/idangerous.swiper.css" />
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700" />
     <link rel="stylesheet" href="${_cssPath}/common.css" />
     <link rel="stylesheet" href="${_cssPath}/index.css" />
 

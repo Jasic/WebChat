@@ -86,7 +86,15 @@
 <body>
 <div data-role="page">
     <div data-role="content" class="content">
+        <div data-role="header"
+             data-position="inline"
+             data-backbtn="false">
+            <a id="logout" onclick="location.history"
+               data-icon="cancle"
+               class="ui-btn-left">返回</a>
+            <h1>个人外卖地址</h1>
 
+        </div>
         <!-- 地址列表 -->
         <div class="ui-corner-all custom-corners">
             <div class="ui-body ui-body-a ui-bar-self">

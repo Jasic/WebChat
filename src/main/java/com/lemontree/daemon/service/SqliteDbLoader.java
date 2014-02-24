@@ -5,6 +5,7 @@ import cn.tisson.framework.dao.jdbc.MappingConvertor;
 import cn.tisson.framework.exception.MappingHandleException;
 import com.lemontree.common.GlobalVariables;
 import com.lemontree.daemon.dbmgr.model.SqlitePojo;
+import org.apache.ibatis.session.SqlSession;
 import org.jasic.util.ExceptionUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +21,7 @@ import java.util.Date;
  */
 public class SqliteDbLoader {
 
+    private static final Logger logger = LoggerFactory.getLogger(SqliteDbLoader.class);
 
     private Connection conn;
 
@@ -27,7 +29,6 @@ public class SqliteDbLoader {
 
     // 需要导出的表结构，KEY为表名、VALUE为自动名称
     private Map<String, List<String>> tblInfos = new LinkedHashMap<String, List<String>>();
-    private Logger logger = LoggerFactory.getLogger(getClass());
 
     public String getInDir() {
         return inDir;
@@ -37,7 +38,7 @@ public class SqliteDbLoader {
         this.inDir = inDir;
     }
 
-    public SqliteDbLoader() {
+    private SqliteDbLoader() {
         // 全局参数表
         List<String> attrs = new Vector<String>();
         attrs.add("PID");
@@ -336,32 +337,6 @@ public class SqliteDbLoader {
         return list;
     }
 
-
-    public static void main(String[] args) throws Exception {
-        ConfigHandler.loadConfigWithoutDB(GlobalVariables.class);
-
-        SqliteDbLoader sync = new SqliteDbLoader();
-        sync.setInDir("/opt/wspace/employ/WChatDining/src/main/java");
-
-        System.out.println("连接sqlite数据库" + (sync.crtDb() ? "成功" : "失败"));
-        List<String> tableNames = sync.getTables();
-
-
-        for (String tableName : tableNames) {
-            List<String> fields = sync.tblInfos.get(tableName);
-
-//            if (tableName.equals("QuanJuCanShu"))
-            {
-//                System.out.println(sync.exportInsertTbl(tableName, fields));
-                List<SqlitePojo> sqlitePojos = sync.exTblData(tableName, fields);
-                System.out.println(sqlitePojos + "\n");
-            }
-        }
-
-
-    }
-
-
     public List<SqlitePojo> exTblData(String tblName, List<String> attrs) {
         String attrSql = "";
         for (String attrName : attrs) {
@@ -381,8 +356,7 @@ public class SqliteDbLoader {
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(selectSql);
 
-
-            tblDataList = convertToEitity(rs, "com.lemontree.daemon.manager.pojo." + tblName);
+            tblDataList = convertToEitity(rs, "com.lemontree.daemon.dbmgr.model." + tblName);
         } catch (Exception e) {
             logger.error(ExceptionUtil.getStackTrace(e) + " tableName=" + tblName);
 
@@ -457,21 +431,15 @@ public class SqliteDbLoader {
             throw new ClassCastException(className + " is not son class of SqlitePojo");
         }
         try {
-
             int ii = 0;
-
 
             while (rs.next()) {
                 System.out.println("----------" + ii++);
                 vo = (SqlitePojo) entityClass.newInstance();
-
                 for (int i = 1; i <= rsm.getColumnCount(); i++) {
-
                     String variableName = MappingConvertor.toVariableName(rsm.getColumnName(i));
                     Object variableValue = getFieldValue(rs, entityClass, i, variableName);
-
                     System.out.println("variableName:--" + variableName + "\nvariableValue---" + variableValue);
-
                     String methodName = MappingConvertor.toSetMethodName(variableName);
                     Method method = entityClass.getMethod(methodName, new Class[]{entityClass.getDeclaredField(variableName).getType()});
                     method.invoke(vo, new Object[]{variableValue});
@@ -576,5 +544,55 @@ public class SqliteDbLoader {
         }
         valueDscrip = valueDscrip.substring(1, valueDscrip.length());
         return valueDscrip;
+    }
+
+
+    /**
+     * 根据目录的数据库文件获取数据（默认为lemontree.db）
+     *
+     * @param dbDir
+     * @return
+     */
+    public static Map<String, List<SqlitePojo>> getDataByDbDir(String dbDir) {
+        SqliteDbLoader sync = new SqliteDbLoader();
+        sync.setInDir(dbDir);
+
+        boolean status = sync.crtDb();
+        logger.info("连接sqlite数据库" + (status ? "成功" : "失败"));
+        Map<String, List<SqlitePojo>> sqlMap = new HashMap<String, List<SqlitePojo>>();
+        if (status) {
+            List<String> tableNames = sync.getTables();
+
+            for (String tableName : tableNames) {
+                List<String> fields = sync.tblInfos.get(tableName);
+                List<SqlitePojo> sqlitePojos = sync.exTblData(tableName, fields);
+                sqlMap.put(tableName, sqlitePojos);
+            }
+        }
+        return sqlMap;
+    }
+
+
+    public static void main(String[] args) throws Exception {
+        ConfigHandler.loadConfigWithoutDB(GlobalVariables.class);
+
+        SqliteDbLoader sync = new SqliteDbLoader();
+        sync.setInDir("/opt/wspace/employ/WebChat/doc");
+
+        System.out.println("连接sqlite数据库" + (sync.crtDb() ? "成功" : "失败"));
+        List<String> tableNames = sync.getTables();
+
+
+        SqlSession sqlSession;
+        for (String tableName : tableNames) {
+            List<String> fields = sync.tblInfos.get(tableName);
+
+//            if (tableName.equals("QuanJuCanShu"))
+            {
+//                System.out.println(sync.exportInsertTbl(tableName, fields));
+                List<SqlitePojo> sqlitePojos = sync.exTblData(tableName, fields);
+                System.out.println(sqlitePojos + "\n");
+            }
+        }
     }
 }

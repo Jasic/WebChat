@@ -5,6 +5,7 @@ import cn.tisson.framework.config.ConfigHandler;
 import cn.tisson.framework.global.AppVariables;
 import com.lemontree.common.GlobalVariables;
 import com.lemontree.common.RefreshHelper;
+import com.lemontree.common.SqliteRefresher;
 import com.lemontree.common.SystemInit;
 import com.lemontree.main.SystemRefresher;
 import org.slf4j.Logger;
@@ -55,6 +56,9 @@ public class MainListener extends org.springframework.web.context.ContextLoaderL
             refreshHelper.refresh();
 
             GlobalVariables.REFRESH_HELPER = refreshHelper;
+
+            SqliteRefresher sqliteRefresher = new SqliteRefresher();
+            sqliteRefresher.start();
 
 //            testInit();
             //刷新系统缓存
