@@ -2327,8 +2327,8 @@ if ( !$.support.boxShadow ) {
 			uiStateKey: "&ui-state",
 
 			// This scary looking regular expression parses an absolute URL or its relative
-			// variants (protocol, site, document, query, and hash), into the various
-			// components (protocol, host, path, query, fragment, etc that make up the
+			// variants (cn.tisson.webphone.protocol, site, document, query, and hash), into the various
+			// components (cn.tisson.webphone.protocol, host, path, query, fragment, etc that make up the
 			// URL as well as some other commonly used sub-parts. When used with RegExp.exec()
 			// or String.match, it parses the URL into a results array that looks like this:
 			//
@@ -2457,7 +2457,7 @@ if ( !$.support.boxShadow ) {
 
 			//Returns true for any relative variant.
 			isRelativeUrl: function( url ) {
-				// All relative Url variants have one thing in common, no protocol.
+				// All relative Url variants have one thing in common, no cn.tisson.webphone.protocol.
 				return path.parseUrl( url ).protocol === "";
 			},
 
@@ -2467,7 +2467,7 @@ if ( !$.support.boxShadow ) {
 			},
 
 			//Turn the specified realtive URL into an absolute one. This function
-			//can handle all relative variants (protocol, site, document, query, fragment).
+			//can handle all relative variants (cn.tisson.webphone.protocol, site, document, query, fragment).
 			makeUrlAbsolute: function( relUrl, absUrl ) {
 				if ( !path.isRelativeUrl( relUrl ) ) {
 					return relUrl;
@@ -2533,7 +2533,7 @@ if ( !$.support.boxShadow ) {
 				return ( /\// ).test( url );
 			},
 
-			//return a url path with the window's location protocol/hostname/pathname removed
+			//return a url path with the window's location cn.tisson.webphone.protocol/hostname/pathname removed
 			clean: function( url ) {
 				return url.replace( this.documentBase.domain, "" );
 			},
@@ -2556,7 +2556,7 @@ if ( !$.support.boxShadow ) {
 				return ( /^#[^#]+$/ ).test( hash );
 			},
 
-			//check whether a url is referencing the same domain, or an external domain or different protocol
+			//check whether a url is referencing the same domain, or an external domain or different cn.tisson.webphone.protocol
 			//could be mailto, etc
 			isExternal: function( url ) {
 				var u = path.parseUrl( url );
@@ -2692,7 +2692,7 @@ if ( !$.support.boxShadow ) {
 
 			// Some embedded browsers, like the web view in Phone Gap, allow
 			// cross-domain XHR requests if the document doing the request was loaded
-			// via the file:// protocol. This is usually to allow the application to
+			// via the file:// cn.tisson.webphone.protocol. This is usually to allow the application to
 			// "phone home" and fetch app specific data. We normally let the browser
 			// handle external/cross-domain urls, but if the allowCrossDomainPages
 			// option is true, we will allow cross-domain http/https requests to go
@@ -5836,13 +5836,13 @@ $.widget( "mobile.page", {
 			useDefaultUrlHandling = $link.is( "[rel='external']" ) || $link.is( ":jqmData(ajax='false')" ) || $link.is( "[target]" );
 
 			// Some embedded browsers, like the web view in Phone Gap, allow cross-domain XHR
-			// requests if the document doing the request was loaded via the file:// protocol.
+			// requests if the document doing the request was loaded via the file:// cn.tisson.webphone.protocol.
 			// This is usually to allow the application to "phone home" and fetch app specific
 			// data. We normally let the browser handle external/cross-domain urls, but if the
 			// allowCrossDomainPages option is true, we will allow cross-domain http/https
 			// requests to go through our page loading logic.
 
-			//check for protocol or rel and its not an embedded page
+			//check for cn.tisson.webphone.protocol or rel and its not an embedded page
 			//TODO overlap in logic from isExternal, rel=external check should be
 			//     moved into more comprehensive isExternalLink
 			isExternal = useDefaultUrlHandling || ( $.mobile.path.isExternal( href ) && !$.mobile.path.isPermittedCrossDomainRequest( documentUrl, href ) );
