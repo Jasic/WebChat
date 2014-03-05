@@ -17,8 +17,8 @@ public class TestSpring {
     public static void main(String[] args) {
         ConfigHandler.loadConfigWithoutDB(GlobalVariables.class);
 
-//        testAop();
-        testRegister();
+        testAop();
+//        testRegister();
         ;
     }
 
@@ -41,7 +41,7 @@ public class TestSpring {
 
 
     @Test
-    public void testAop() {
+    public static void testAop() {
         AnnotationConfigApplicationContext ctx2 = new AnnotationConfigApplicationContext(AppContextConfig.class);
 
 //        TestValidateAspect aspect = ctx2.getBean(TestValidateAspect.class);

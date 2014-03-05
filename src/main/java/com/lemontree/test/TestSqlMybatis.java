@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import javax.annotation.Resource;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -51,6 +52,10 @@ public class TestSqlMybatis {
         List<CaiPing> caiPings =caiPingMapper.getAll();
 //        caiPings = session.selectList("com.lemontree.daemon.dbmgr.mapper.CaiPingMapper.getAll");
         System.out.println(JSONUtils.toJSONString(caiPings));
+        session.commit();
+        session.close();
+
+
     }
 
 
