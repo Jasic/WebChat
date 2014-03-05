@@ -30,7 +30,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * User: Jasic
@@ -152,8 +151,7 @@ public class WapMainController {
         model.put("shopName", shopName == null ? shopId : shopName);
         model.put("shopId", shopId);
 
-        Map<String, List<SqlitePojo>> cache = GlobalCaches.DB_CACHE_RESTAURANT_SQLITE_DATA.get(shopId);
-        List<SqlitePojo> caiPingXiaoLeis = cache.get(CaiPingXiaoLei.class.getSimpleName());
+        List<CaiPingXiaoLei> caiPingXiaoLeis = GlobalCaches.CAIPINGXIAOLEI_SQLITE_DATA.get(shopId);
         model.put("caiPingXiaoLeis", caiPingXiaoLeis);
 
         return "orderDishes";

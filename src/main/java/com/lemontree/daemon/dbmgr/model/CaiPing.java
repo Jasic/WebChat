@@ -1,230 +1,254 @@
 package com.lemontree.daemon.dbmgr.model;
 
-import cn.tisson.framework.annotation.Id;
+public class CaiPing {
 
-/**
- * Author Jasic
- * Date 13-12-18.
- * 菜品表
- */
-public class CaiPing extends SqlitePojo {
+    private CaiPingXiaoLei caiPingXiaoLei;
 
-    @Id
-    private Integer PID;
-    private String CaiPingID;
-    private String CaiPingName;
-    private String CaiPingName2;
-    private String CaiPingName3;
-    private Long JiaGe;
-    private String MoRenDanWei;
-    private String MoRenDanWei2;
-    private String MoRenDanWei3;
-    private Integer ShowOrder;
-    private Integer YinCan;
-    private String JianJie;
-    private String JianJie2;
-    private String JianJie3;
-    private String XiaoLei;
-    private Integer YinCanInPad;
-    private String FuZhuID;
-    private String PingYing;
-    private Integer BuJiChengTYZF;
-    private Integer BuJiChengDLZF;
-    private Integer BuJiChengXLZF;
-    private Integer NoShowZuoFa;
-    private Integer ShiJia;
-    private Integer CanModName;
-
-
-    public Integer getPID() {
-        return PID;
+    public CaiPingXiaoLei getCaiPingXiaoLei() {
+        return caiPingXiaoLei;
     }
 
-    public void setPID(Integer PID) {
-        this.PID = PID;
+    public void setCaiPingXiaoLei(CaiPingXiaoLei caiPingXiaoLei) {
+        this.caiPingXiaoLei = caiPingXiaoLei;
     }
 
-    public String getCaiPingID() {
-        return CaiPingID;
+    private Integer pid;
+
+    private String caipingid;
+
+    private String caipingname;
+
+    private String caipingname2;
+
+    private String caipingname3;
+
+    private String jiage;
+
+    private String morendanwei;
+
+    private String morendanwei2;
+
+    private String morendanwei3;
+
+    private Integer showorder;
+
+    private String yincan;
+
+    private String jianjie;
+
+    private String jianjie2;
+
+    private String jianjie3;
+
+    private String xiaolei;
+
+    private String yincaninpad;
+
+    private String fuzhuid;
+
+    private String pingying;
+
+    private String bujichengtyzf;
+
+    private String bujichengdlzf;
+
+    private String bujichengxlzf;
+
+    private String noshowzuofa;
+
+    private String shijia;
+
+    private String canmodname;
+
+    public Integer getPid() {
+        return pid;
     }
 
-    public void setCaiPingID(String caiPingID) {
-        CaiPingID = caiPingID;
+    public void setPid(Integer pid) {
+        this.pid = pid;
     }
 
-    public String getCaiPingName() {
-        return CaiPingName;
+    public String getCaipingid() {
+        return caipingid;
     }
 
-    public void setCaiPingName(String caiPingName) {
-        CaiPingName = caiPingName;
+    public void setCaipingid(String caipingid) {
+        this.caipingid = caipingid == null ? null : caipingid.trim();
     }
 
-    public String getCaiPingName2() {
-        return CaiPingName2;
+    public String getCaipingname() {
+        return caipingname;
     }
 
-    public void setCaiPingName2(String caiPingName2) {
-        CaiPingName2 = caiPingName2;
+    public void setCaipingname(String caipingname) {
+        this.caipingname = caipingname == null ? null : caipingname.trim();
     }
 
-    public String getCaiPingName3() {
-        return CaiPingName3;
+    public String getCaipingname2() {
+        return caipingname2;
     }
 
-    public void setCaiPingName3(String caiPingName3) {
-        CaiPingName3 = caiPingName3;
+    public void setCaipingname2(String caipingname2) {
+        this.caipingname2 = caipingname2 == null ? null : caipingname2.trim();
     }
 
-    public Long getJiaGe() {
-        return JiaGe;
+    public String getCaipingname3() {
+        return caipingname3;
     }
 
-    public void setJiaGe(Long jiaGe) {
-        JiaGe = jiaGe;
+    public void setCaipingname3(String caipingname3) {
+        this.caipingname3 = caipingname3 == null ? null : caipingname3.trim();
     }
 
-    public String getMoRenDanWei() {
-        return MoRenDanWei;
+    public String getJiage() {
+        return jiage;
     }
 
-    public void setMoRenDanWei(String moRenDanWei) {
-        MoRenDanWei = moRenDanWei;
+    public void setJiage(String jiage) {
+        this.jiage = jiage == null ? null : jiage.trim();
     }
 
-    public String getMoRenDanWei2() {
-        return MoRenDanWei2;
+    public String getMorendanwei() {
+        return morendanwei;
     }
 
-    public void setMoRenDanWei2(String moRenDanWei2) {
-        MoRenDanWei2 = moRenDanWei2;
+    public void setMorendanwei(String morendanwei) {
+        this.morendanwei = morendanwei == null ? null : morendanwei.trim();
     }
 
-    public String getMoRenDanWei3() {
-        return MoRenDanWei3;
+    public String getMorendanwei2() {
+        return morendanwei2;
     }
 
-    public void setMoRenDanWei3(String moRenDanWei3) {
-        MoRenDanWei3 = moRenDanWei3;
+    public void setMorendanwei2(String morendanwei2) {
+        this.morendanwei2 = morendanwei2 == null ? null : morendanwei2.trim();
     }
 
-    public Integer getShowOrder() {
-        return ShowOrder;
+    public String getMorendanwei3() {
+        return morendanwei3;
     }
 
-    public void setShowOrder(Integer showOrder) {
-        ShowOrder = showOrder;
+    public void setMorendanwei3(String morendanwei3) {
+        this.morendanwei3 = morendanwei3 == null ? null : morendanwei3.trim();
     }
 
-    public Integer getYinCan() {
-        return YinCan;
+    public Integer getShoworder() {
+        return showorder;
     }
 
-    public void setYinCan(Integer yinCan) {
-        YinCan = yinCan;
+    public void setShoworder(Integer showorder) {
+        this.showorder = showorder;
     }
 
-    public String getJianJie() {
-        return JianJie;
+    public String getYincan() {
+        return yincan;
     }
 
-    public void setJianJie(String jianJie) {
-        JianJie = jianJie;
+    public void setYincan(String yincan) {
+        this.yincan = yincan == null ? null : yincan.trim();
     }
 
-    public String getJianJie2() {
-        return JianJie2;
+    public String getJianjie() {
+        return jianjie;
     }
 
-    public void setJianJie2(String jianJie2) {
-        JianJie2 = jianJie2;
+    public void setJianjie(String jianjie) {
+        this.jianjie = jianjie == null ? null : jianjie.trim();
     }
 
-    public String getJianJie3() {
-        return JianJie3;
+    public String getJianjie2() {
+        return jianjie2;
     }
 
-    public void setJianJie3(String jianJie3) {
-        JianJie3 = jianJie3;
+    public void setJianjie2(String jianjie2) {
+        this.jianjie2 = jianjie2 == null ? null : jianjie2.trim();
     }
 
-    public String getXiaoLei() {
-        return XiaoLei;
+    public String getJianjie3() {
+        return jianjie3;
     }
 
-    public void setXiaoLei(String xiaoLei) {
-        XiaoLei = xiaoLei;
+    public void setJianjie3(String jianjie3) {
+        this.jianjie3 = jianjie3 == null ? null : jianjie3.trim();
     }
 
-    public Integer getYinCanInPad() {
-        return YinCanInPad;
+    public String getXiaolei() {
+        return xiaolei;
     }
 
-    public void setYinCanInPad(Integer yinCanInPad) {
-        YinCanInPad = yinCanInPad;
+    public void setXiaolei(String xiaolei) {
+        this.xiaolei = xiaolei == null ? null : xiaolei.trim();
     }
 
-    public String getFuZhuID() {
-        return FuZhuID;
+    public String getYincaninpad() {
+        return yincaninpad;
     }
 
-    public void setFuZhuID(String fuZhuID) {
-        FuZhuID = fuZhuID;
+    public void setYincaninpad(String yincaninpad) {
+        this.yincaninpad = yincaninpad == null ? null : yincaninpad.trim();
     }
 
-    public String getPingYing() {
-        return PingYing;
+    public String getFuzhuid() {
+        return fuzhuid;
     }
 
-    public void setPingYing(String pingYing) {
-        PingYing = pingYing;
+    public void setFuzhuid(String fuzhuid) {
+        this.fuzhuid = fuzhuid == null ? null : fuzhuid.trim();
     }
 
-    public Integer getBuJiChengTYZF() {
-        return BuJiChengTYZF;
+    public String getPingying() {
+        return pingying;
     }
 
-    public void setBuJiChengTYZF(Integer buJiChengTYZF) {
-        BuJiChengTYZF = buJiChengTYZF;
+    public void setPingying(String pingying) {
+        this.pingying = pingying == null ? null : pingying.trim();
     }
 
-    public Integer getBuJiChengDLZF() {
-        return BuJiChengDLZF;
+    public String getBujichengtyzf() {
+        return bujichengtyzf;
     }
 
-    public void setBuJiChengDLZF(Integer buJiChengDLZF) {
-        BuJiChengDLZF = buJiChengDLZF;
+    public void setBujichengtyzf(String bujichengtyzf) {
+        this.bujichengtyzf = bujichengtyzf == null ? null : bujichengtyzf.trim();
     }
 
-    public Integer getBuJiChengXLZF() {
-        return BuJiChengXLZF;
+    public String getBujichengdlzf() {
+        return bujichengdlzf;
     }
 
-    public void setBuJiChengXLZF(Integer buJiChengXLZF) {
-        BuJiChengXLZF = buJiChengXLZF;
+    public void setBujichengdlzf(String bujichengdlzf) {
+        this.bujichengdlzf = bujichengdlzf == null ? null : bujichengdlzf.trim();
     }
 
-    public Integer getNoShowZuoFa() {
-        return NoShowZuoFa;
+    public String getBujichengxlzf() {
+        return bujichengxlzf;
     }
 
-    public void setNoShowZuoFa(Integer noShowZuoFa) {
-        NoShowZuoFa = noShowZuoFa;
+    public void setBujichengxlzf(String bujichengxlzf) {
+        this.bujichengxlzf = bujichengxlzf == null ? null : bujichengxlzf.trim();
     }
 
-    public Integer getShiJia() {
-        return ShiJia;
+    public String getNoshowzuofa() {
+        return noshowzuofa;
     }
 
-    public void setShiJia(Integer shiJia) {
-        ShiJia = shiJia;
+    public void setNoshowzuofa(String noshowzuofa) {
+        this.noshowzuofa = noshowzuofa == null ? null : noshowzuofa.trim();
     }
 
-    public Integer getCanModName() {
-        return CanModName;
+    public String getShijia() {
+        return shijia;
     }
 
-    public void setCanModName(Integer canModName) {
-        CanModName = canModName;
+    public void setShijia(String shijia) {
+        this.shijia = shijia == null ? null : shijia.trim();
+    }
+
+    public String getCanmodname() {
+        return canmodname;
+    }
+
+    public void setCanmodname(String canmodname) {
+        this.canmodname = canmodname == null ? null : canmodname.trim();
     }
 }

@@ -6,6 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.jasic.util.Asserter;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.slf4j.Logger;
 
 import java.io.IOException;
@@ -20,6 +22,8 @@ public abstract class MyBatisBaseClient {
     private static Logger logger = LogUtil.getLogger(MyBatisBaseClient.class);
 
     protected SqlSessionFactory factory;
+
+    private SqlSession session;
 
     MyBatisBaseClient() {
 
@@ -52,7 +56,8 @@ public abstract class MyBatisBaseClient {
      */
     public SqlSession getSession() {
         Asserter.notNull(factory, "请使用带有参数的MyBatisBaseClient构造函数初始化...");
-        return new org.mybatis.spring.SqlSessionTemplate(factory);
+        return session == null ? (session = new SqlSessionTemplate(factory)) : session;
+//        return session == null ? (session = new SqlSessionWrapped(factory)) : session;
     }
 
 

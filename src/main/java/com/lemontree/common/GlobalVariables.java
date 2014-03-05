@@ -18,6 +18,7 @@ public class GlobalVariables {
 
     //--------------------------------------- 路径设置 --------------------------------------
     public static String PATH_WEB_CHAT_TOKEN = "/platform/token";
+    public static String MYBATIS_SQLITE_CONFIG_PATH = "config/mybatis-sqlite.xml";
 
 
     // 微信错误码
@@ -50,6 +51,7 @@ public class GlobalVariables {
 
     // 排重延迟时间
     public static long WEB_CHAT_EXCLUDE_DUPLICATE_DELAY = 1;
+
 
 }
 

@@ -20,5 +20,6 @@
 
     <mappers>
         <mapper resource="config/mapper/CaiPingMapper.xml"/>
+        <mapper resource="config/mapper/CaiPingXiaoLeiMapper.xml"/>
     </mappers>
 </configuration>

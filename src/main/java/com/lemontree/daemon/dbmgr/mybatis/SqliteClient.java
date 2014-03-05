@@ -27,12 +27,15 @@ public class SqliteClient extends MyBatisBaseClient {
 
     /**
      * 创建sqlite端
+     *
      * @param resource 指定mybatis对sqlite的配置文件
-     * @param dbUrl sqlite的数据库文件
+     * @param dbUrl    sqlite的数据库文件
      * @throws IOException
      */
-    public SqliteClient(String resource, String dbUrl) throws IOException {
+    public SqliteClient(String resource, String dbUrl) {
         super();
+        this.dbUrl = dbUrl;
+        this.resource = resource;
         Reader reader = getReader(resource, dbUrl);
         super.factory = new SqlSessionFactoryBuilder().build(reader);
     }
@@ -42,7 +45,7 @@ public class SqliteClient extends MyBatisBaseClient {
 
         Reader reader = null;
         try {
-            reader = Resources.getResourceAsReader(resource);
+            reader = Resources.getResourceAsReader(path);
             BufferedReader bufferedReader = new BufferedReader(reader);
             StringBuffer sb = new StringBuffer();
 
@@ -57,5 +60,13 @@ public class SqliteClient extends MyBatisBaseClient {
             e.printStackTrace();
         }
         return reader;
+    }
+
+    public String getDbUrl() {
+        return dbUrl;
+    }
+
+    public String getResource() {
+        return resource;
     }
 }

@@ -54,4 +54,5 @@ public class GlobalConstants {
 
     public static final String RESTAURANT_SOURCE_TYPE_IMG = "img";
     public static final String RESTAURANT_SOURCE_TYPE_DB = "db";
+    public static final String RESTAURANT_SOURCE_DB_NAME = "lemontree.db";
 }

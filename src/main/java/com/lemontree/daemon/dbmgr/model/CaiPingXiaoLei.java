@@ -1,15 +1,8 @@
 package com.lemontree.daemon.dbmgr.model;
 
-import cn.tisson.framework.annotation.Id;
-
 import java.util.List;
 
-/**
- * Author Jasic
- * Date 13-12-18.
- * ---  3菜品小类
- */
-public class CaiPingXiaoLei extends SqlitePojo {
+public class CaiPingXiaoLei {
 
     private List<CaiPing> caiPings;
 
@@ -21,114 +14,123 @@ public class CaiPingXiaoLei extends SqlitePojo {
         this.caiPings = caiPings;
     }
 
-    @Id
+    private Integer pid;
 
-    private Integer PID;
-    private String CaiPingXiaoLeiID;
-    private String CaiPingXiaoLeiName;
-    private String CaiPingXiaoLeiName2;
-    private String CaiPingXiaoLeiName3;
-    private Integer ShowOrder;
-    private Integer Hide;
-    private String DaiLei;
-    private Integer HideInPad;
-    private Integer BuJiChengTYZF;
-    private Integer BuJiChengDLZF;
-    private Integer NoShowZuoFa;
+    private String caipingxiaoleiid;
 
-    public Integer getPID() {
-        return PID;
+    private String caipingxiaoleiname;
+
+    private String caipingxiaoleiname2;
+
+    private String caipingxiaoleiname3;
+
+    private Integer showorder;
+
+    private String hide;
+
+    private String dailei;
+
+    private String hideinpad;
+
+    private String bujichengtyzf;
+
+    private String bujichengdlzf;
+
+    private String noshowzuofa;
+
+    public Integer getPid() {
+        return pid;
     }
 
-    public void setPID(Integer PID) {
-        this.PID = PID;
+    public void setPid(Integer pid) {
+        this.pid = pid;
     }
 
-    public String getCaiPingXiaoLeiID() {
-        return CaiPingXiaoLeiID;
+    public String getCaipingxiaoleiid() {
+        return caipingxiaoleiid;
     }
 
-    public void setCaiPingXiaoLeiID(String caiPingXiaoLeiID) {
-        CaiPingXiaoLeiID = caiPingXiaoLeiID;
+    public void setCaipingxiaoleiid(String caipingxiaoleiid) {
+        this.caipingxiaoleiid = caipingxiaoleiid == null ? null : caipingxiaoleiid.trim();
     }
 
-    public String getCaiPingXiaoLeiName() {
-        return CaiPingXiaoLeiName;
+    public String getCaipingxiaoleiname() {
+        return caipingxiaoleiname;
     }
 
-    public void setCaiPingXiaoLeiName(String caiPingXiaoLeiName) {
-        CaiPingXiaoLeiName = caiPingXiaoLeiName;
+    public void setCaipingxiaoleiname(String caipingxiaoleiname) {
+        this.caipingxiaoleiname = caipingxiaoleiname == null ? null : caipingxiaoleiname.trim();
     }
 
-    public String getCaiPingXiaoLeiName2() {
-        return CaiPingXiaoLeiName2;
+    public String getCaipingxiaoleiname2() {
+        return caipingxiaoleiname2;
     }
 
-    public void setCaiPingXiaoLeiName2(String caiPingXiaoLeiName2) {
-        CaiPingXiaoLeiName2 = caiPingXiaoLeiName2;
+    public void setCaipingxiaoleiname2(String caipingxiaoleiname2) {
+        this.caipingxiaoleiname2 = caipingxiaoleiname2 == null ? null : caipingxiaoleiname2.trim();
     }
 
-    public String getCaiPingXiaoLeiName3() {
-        return CaiPingXiaoLeiName3;
+    public String getCaipingxiaoleiname3() {
+        return caipingxiaoleiname3;
     }
 
-    public void setCaiPingXiaoLeiName3(String caiPingXiaoLeiName3) {
-        CaiPingXiaoLeiName3 = caiPingXiaoLeiName3;
+    public void setCaipingxiaoleiname3(String caipingxiaoleiname3) {
+        this.caipingxiaoleiname3 = caipingxiaoleiname3 == null ? null : caipingxiaoleiname3.trim();
     }
 
-    public Integer getShowOrder() {
-        return ShowOrder;
+    public Integer getShoworder() {
+        return showorder;
     }
 
-    public void setShowOrder(Integer showOrder) {
-        ShowOrder = showOrder;
+    public void setShoworder(Integer showorder) {
+        this.showorder = showorder;
     }
 
-    public Integer getHide() {
-        return Hide;
+    public String getHide() {
+        return hide;
     }
 
-    public void setHide(Integer hide) {
-        Hide = hide;
+    public void setHide(String hide) {
+        this.hide = hide == null ? null : hide.trim();
     }
 
-    public String getDaiLei() {
-        return DaiLei;
+    public String getDailei() {
+        return dailei;
     }
 
-    public void setDaiLei(String daiLei) {
-        DaiLei = daiLei;
+    public void setDailei(String dailei) {
+        this.dailei = dailei == null ? null : dailei.trim();
     }
 
-    public Integer getHideInPad() {
-        return HideInPad;
+    public String getHideinpad() {
+        return hideinpad;
     }
 
-    public void setHideInPad(Integer hideInPad) {
-        HideInPad = hideInPad;
+    public void setHideinpad(String hideinpad) {
+        this.hideinpad = hideinpad == null ? null : hideinpad.trim();
     }
 
-    public Integer getBuJiChengTYZF() {
-        return BuJiChengTYZF;
+    public String getBujichengtyzf() {
+        return bujichengtyzf;
     }
 
-    public void setBuJiChengTYZF(Integer buJiChengTYZF) {
-        BuJiChengTYZF = buJiChengTYZF;
+    public void setBujichengtyzf(String bujichengtyzf) {
+        this.bujichengtyzf = bujichengtyzf == null ? null : bujichengtyzf.trim();
     }
 
-    public Integer getBuJiChengDLZF() {
-        return BuJiChengDLZF;
+    public String getBujichengdlzf() {
+        return bujichengdlzf;
     }
 
-    public void setBuJiChengDLZF(Integer buJiChengDLZF) {
-        BuJiChengDLZF = buJiChengDLZF;
+    public void setBujichengdlzf(String bujichengdlzf) {
+        this.bujichengdlzf = bujichengdlzf == null ? null : bujichengdlzf.trim();
     }
 
-    public Integer getNoShowZuoFa() {
-        return NoShowZuoFa;
+    public String getNoshowzuofa() {
+        return noshowzuofa;
     }
 
-    public void setNoShowZuoFa(Integer noShowZuoFa) {
-        NoShowZuoFa = noShowZuoFa;
+    public void setNoshowzuofa(String noshowzuofa) {
+        this.noshowzuofa = noshowzuofa == null ? null : noshowzuofa.trim();
     }
 }
