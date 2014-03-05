@@ -56,11 +56,11 @@
 
 
         <!-- 新增表 -->
-        <table tableName="CaiPingXiaoLei" domainObjectName="CaiPingXiaoLei" enableCountByExample="false"
+        <table tableName="CaiPingXiaoLei" domainObjectName="CaiPingXiaoLei" selectByPrimaryKeyQueryId="PID" enableCountByExample="false"
                enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"
                selectByExampleQueryId="false"/>
 
-        <table tableName="CaiPing" domainObjectName="CaiPing" enableCountByExample="false"
+        <table tableName="CaiPing" domainObjectName="CaiPing" selectByPrimaryKeyQueryId="PID enableCountByExample="false"
                enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"
                selectByExampleQueryId="false"/>
 

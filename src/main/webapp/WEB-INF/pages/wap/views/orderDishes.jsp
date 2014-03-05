@@ -84,11 +84,11 @@
                     class="tablist-left order-listview">
                     <c:forEach begin="0" step="1" items="${caiPingXiaoLeis}" var="caiPingXiaoLei"
                                varStatus="xaioLeiStatus">
-                        <c:if test="${caiPingXiaoLei.caiPingXiaoLeiName!=null}">
+                        <c:if test="${caiPingXiaoLei.caipingxiaoleiname!=null}">
                             <li data-icon="false">
                                 <a href="#link${xaioLeiStatus.count}"
                                    data-ajax="false">
-                                    <c:out value="${caiPingXiaoLei.caiPingXiaoLeiName}"/>
+                                    <c:out value="${caiPingXiaoLei.caipingxiaoleiname}"/>
                                 </a>
                             </li>
                         </c:if>
@@ -97,24 +97,24 @@
 
                 <c:forEach begin="0" step="1" items="${caiPingXiaoLeis}" var="caiPingXiaoLei"
                            varStatus="xaioLeiStatus">
-                    <c:if test="${caiPingXiaoLei.caiPingXiaoLeiName!=null}">
+                    <c:if test="${caiPingXiaoLei.caipingxiaoleiname!=null}">
                         <ul id="link${xaioLeiStatus.count}"
                             class="tablist-content order-list-listview"
                             data-role="listview"
                             data-inset="true">
                             <c:forEach begin="0" step="1" items="${caiPingXiaoLei.caiPings}" var="caiPing"
                                        varStatus="caiPingStatus">
-                                <c:if test="${caiPing.caiPingName!=null}">
+                                <c:if test="${caiPing.caipingname!=null}">
                                     <li data-icon="false">
                                         <div>
                                             <%
                                             // TODO 找不到图片则统一一个图片
                                             // %>
-                                            <img src="${_restaurantPath}/${shopId}/img/foods/${caiPing.caiPingID}.jpg" height="30%" width="30%" alt="">
+                                            <img src="${_restaurantPath}/${shopId}/img/foods/${caiPing.caipingid}.jpg" height="30%" width="30%" alt="">
 
                                             <br/>
-                                            <span><c:out value="${caiPing.caiPingName}"/></span>
-                                            <span class="orange font-b">￥${caiPing.jiaGe}</span>
+                                            <span><c:out value="${caiPing.caipingname}"/></span>
+                                            <span class="orange font-b">￥${caiPing.jiage}</span>
                                         </div>
                                     <span class="btn-span">
                                     <button data-role="none"
