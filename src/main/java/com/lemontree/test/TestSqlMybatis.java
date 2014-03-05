@@ -51,7 +51,7 @@ public class TestSqlMybatis {
 
         List<CaiPing> caiPings =caiPingMapper.getAll();
 //        caiPings = session.selectList("com.lemontree.daemon.dbmgr.mapper.CaiPingMapper.getAll");
-        System.out.println(JSONUtils.toJSONString(caiPings));
+        System.out.println((caiPings));
         session.commit();
         session.close();
 
