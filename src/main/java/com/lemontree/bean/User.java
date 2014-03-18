@@ -14,6 +14,16 @@ public class User {
     private ClientInfo clientInfo;
     private FansInfo fansInfo;
 
+    private boolean hasLogin;
+
+    public boolean isHasLogin() {
+        return hasLogin;
+    }
+
+    public void setHasLogin(boolean hasLogin) {
+        this.hasLogin = hasLogin;
+    }
+
     public User() {
         this.createTime = System.currentTimeMillis();
         this.lastSessionTime = createTime;

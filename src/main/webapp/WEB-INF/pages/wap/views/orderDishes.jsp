@@ -19,28 +19,97 @@
 
     <script language="javascript" src="${_jsPath}/jquery.js"></script>
     <script language="javascript" src="${_jsPath}/jquery.mobile-1.4.0.js"></script>
+    <script language="javascript" src="${_jsPath}/jquery.cookie.js"></script>
 
     <script type="text/javascript"><!--
-    $(function () {
-        // 增加
-        /*$(".count-add").click(function{
-         var count = parseInt($(this).parent().find("input").val());
-         if (count >= 0) {
-         $(this).find(".count-cut").removeClass("dn");
-         $(this).find("input").removeClass("dn");
-         }
-         $(this).parent().find("input").val(count + 1);
-         });
 
-         // 减少
-         $(".count-cut").click(function(){
-         var count = parseInt($(this).parent().find("input").val());
-         $(this).parent().find("input").val(count - 1);
-         if (count <= 1) {
-         $(this).find(".count-cut").addClass("dn");
-         $(this).find("input").addClass("dn");
-         }
-         });*/
+    $(function () {
+
+        /**
+         * 清除已选记录
+         */
+        $("#clearHistory").click(function(){
+            // 清除cookies
+            $.cookie("chooseMenu",null);
+            // TODO 清除当前选择的
+        });
+
+        /**
+         * 确定选择
+         */
+        $("#chooseok").click(function () {
+            var data = new Array()
+            var index = 0;
+            $(".order-input").each(function () {
+                if (Number($(this).val()) > 0) {
+                    var count = 0;
+                    var food = new Object();
+                    var id = $(this).attr("id");
+                    food["id"] = id;
+                    food["price"] = $(this).parent().parent().find(".price").text();
+                    food["name"] = $(this).parent().parent().find(".caiPingName").text();
+                    food["count"] = Number($(this).val()) + Number(count);
+                    data[index] = food;
+                    index++;
+                }
+            });
+
+            // alert("新增记录是:\n" + JSON.stringify(data));
+
+            // 循环cookie记录
+            var history = new Array();
+            history = JSON.parse($.cookie("chooseMenu"));
+            // alert("历史记录是:\n" + history);
+            if (history != null) {
+                $.each(history, function (key, val) {
+                    var obj = val;
+                    var sameId = false;
+                    $.each(data, function (key1, val1) {
+                        // alert("历史记录ID:［" + obj.id + "],循环中的新ID:[" + val1.id + "],它们" + (obj.id == val1.id));
+                        // id相同则将计数器相加
+                        if (obj.id == val1.id) {
+                            val1.count = (obj.count + val1.count);
+                            sameId = true;
+                        }
+                    });
+
+                    // Id不相同则直接将历史记录中的加进来
+                    if (!sameId) {
+                        data[index] = obj;
+                        index++;
+                    }
+                });
+            }
+            var json = JSON.stringify(data);
+            // alert("最终结果:\n" + json);
+
+            if (index > 0) {
+                $.cookie('chooseMenu', json, { expires: 1 }); //设置带时间的cookie 1天
+                var order = window.confirm("加入菜单成功，是否查看已选菜单?");
+                if (order) {
+                    window.location = "record";
+                }
+                // 提交
+//                $.ajax({
+//                    type: "POST",
+//                    url: "chooseMenu",
+//                    data: "json=" + json,
+//                    success: function (msg) {
+//                        if (msg == 'success') {
+//                            var order = window.confirm("加入菜单成功，是否立即下单！");
+//                            if (order) {
+//                                window.location = "record";
+//                            }
+//                        } else {
+//                            alert("下单错误，信息：" + msg);
+//                        }
+//                    }
+//                });
+            } else {
+                alert("未选择菜品,请先选择菜式！");
+            }
+        });
+
     });
 
     function addCount(obj) {
@@ -74,6 +143,8 @@
          class="ui-content order-ui-content">
         <div class="order-header">
             <span>${shopName}</span>
+            <span>
+            </span>
         </div>
 
         <div data-demo-html="true"
@@ -103,33 +174,34 @@
                             data-role="listview"
                             data-inset="true">
                             <c:forEach begin="0" step="1" items="${caiPingXiaoLei.caiPings}" var="caiPing"
-                                       varStatus="caiPingStatus">
+                                       varStatus="caipingstatus">
                                 <c:if test="${caiPing.caipingname!=null}">
                                     <li data-icon="false">
-                                        <div>
+                                        <span>
                                             <%
-                                            // TODO 找不到图片则统一一个图片
-                                            // %>
-                                            <img src="${_restaurantPath}/${shopId}/img/foods/${caiPing.caipingid}.jpg" height="30%" width="30%" alt="">
+                                                // TODO 找不到图片则统一一个图片
+                                                // %>
+                                            <img src="${_restaurantPath}/${shopId}/img/foods/${caiPing.caipingid}.jpg"
+                                                 height="30%" width="30%" alt="">
 
                                             <br/>
-                                            <span><c:out value="${caiPing.caipingname}"/></span>
-                                            <span class="orange font-b">￥${caiPing.jiage}</span>
-                                        </div>
-                                    <span class="btn-span">
-                                    <button data-role="none"
-                                            class="order-add-btn count-add"
-                                            onclick="addCount(this);">+
-                                    </button>
-                                    <input data-role="none"
-                                           class="order-input dn"
-                                           readonly="readonly"
-                                           value="0"/>
-                                    <button data-role="none"
-                                            class="order-add-btn count-cut dn"
-                                            onclick="cutCount(this);">-
-                                    </button>
-                                    </span>
+                                            <span class="caiPingName"><c:out value="${caiPing.caipingname}"/></span>
+                                            ￥<span class="price orange font-b">${caiPing.jiage}</span>
+                                        </span>
+                                        <span class="btn-span">
+                                            <button data-role="none"
+                                                    class="order-add-btn count-add"
+                                                    onclick="addCount(this);">+
+                                            </button>
+                                            <input id="${caiPing.caipingid}" data-role="none"
+                                                   class="order-input dn"
+                                                   readonly="readonly"
+                                                   value="0"/>
+                                            <button data-role="none"
+                                                    class="order-add-btn count-cut dn"
+                                                    onclick="cutCount(this);">-
+                                            </button>
+                                        </span>
                                     </li>
                                 </c:if>
                             </c:forEach>
@@ -140,15 +212,17 @@
             </div>
         </div>
     </div>
-    <!-- /content --
+    <!-- /content -->
 
     <div data-role="footer"
-         class="text-center">
-        <button data-role="none"
+         class="text-center" data-position="fixed" data-fullscreen="true">
+        <button id="chooseok" data-role="none"
                 class="order-footer-btn orange">选好了
         </button>
+        <button id="clearHistory" data-role="none"
+                class="order-footer-btn orange">清除
+        </button>
     </div>
-    <!-- /footer -->
 
 </div>
 <!-- /page -->

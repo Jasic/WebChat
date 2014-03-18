@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)http://14.146.224.119/m/cart/shoppingcart.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>我的订单-广东邮电大厦</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="author" content="www.hs.com">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<link rel="apple-touch-icon-precomposed" href="http://14.146.224.119/m/themes/default/images/default/itouch.png">
+<link rel="stylesheet" href="http://14.146.224.119/m/themes/default/common/wap.css">
+<link rel="stylesheet" type="text/css" href="./我的订单-广东邮电大厦_files/qqlife.css">
+<link rel="stylesheet" type="text/css" href="./我的订单-广东邮电大厦_files/wechatShare.css"><script type="text/javascript" src="./我的订单-广东邮电大厦_files/globalVar.js"></script>
+<script type="text/javascript" src="./我的订单-广东邮电大厦_files/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="./我的订单-广东邮电大厦_files/core.js"></script>
+<script type="text/javascript" src="./我的订单-广东邮电大厦_files/mobilefront.js"></script>
+<script type="text/javascript" src="./我的订单-广东邮电大厦_files/qqlife.js"></script>
+<style>abbr,article,aside,audio,canvas,datalist,details,dialog,eventsource,fieldset,figure,figcaption,footer,header,hgroup,mark,menu,meter,nav,output,progress,section,small,time,video,legend{display:block;}</style>
+<script type="text/javascript" src="./我的订单-广东邮电大厦_files/jquery.blockUI.js"></script>
+<script type="text/javascript" src="./我的订单-广东邮电大厦_files/myblockUI.js"></script>
+<script type="text/javascript">
+var $j = jQuery.noConflict();
+$j.ajaxSetup({
+   cache:false,
+   success:function(data, textStatus){
+		
+		if(data!=null && data!=undefined && data.indexOf("j_username")!=-1 && data.indexOf("j_password")!=-1 && data.indexOf("isLoginPage")!=-1){
+			window.location = __ctxPath+"/login.html";
+		}
+   }
+});
+
+$j.fn.extend({
+	loading:function(){
+		return this.each(function(){
+			$j(this).css({"position":"relative"}).append('<div class="loading_data">&nbsp;</div>');			
+		});
+	}
+});
+
+</script>
+
+</head>
+<body>
+	<div data-role="page">
+		
+
+	<div class="carte my_carte">
+        <div class="box_carte">	
+		<div id="shippingcartBillDiv" class="tips">
+			<span class="fl">您共点了8道菜</span>
+<span class="fr">共计：<strong class="red">303.00元</strong><font style="font-size: 10pt; color: #999999">(不含时价菜)</font></span></div>
+		
+        <div id="contentRt" class="content index_other" style="height: 783px;">
+         	<div class="title">
+             	<h4 class="fl">我的订单</h4>
+                 <div class="fr">
+                 	<a class="btn_green" onclick="goIndex()">加菜</a>
+                     <a class="btn_cle6e6e8" id="show" href="javascript:void(0)" onclick="clearCart();">清空</a>
+                 </div>
+                 <div class="clear"></div>
+             </div>
+        	 <ul class="">
+					<li>
+	                     <div class="cont_fl">
+	                         <div class="txt">
+	                             <h3><a href="./我的订单-广东邮电大厦_files/我的订单-广东邮电大厦.html">客家小盆菜</a></h3>
+	                             <p class="cl666"><span class="red">48.0元/
+										例</span>
+								  </p>
+	                         </div>
+	                     </div>
+	                     <div class="cont_fr cont_fr_other">
+	                         <a class="btn_subtract" href="javascript:void(0)" onclick="quantityMinus(&#39;00182&#39;, 1);"></a>
+	                         <span id="00182" name="quantitys" tabindex="1">5</span>
+	                         <a class="btn_add" href="javascript:void(0)" onclick="quantityPlus(&#39;00182&#39;, 1);"></a>
+	                         <input type="hidden" name="productSkuCodes" value="00182">
+	                     </div>
+	                 </li>
+					<li>
+	                     <div class="cont_fl">
+	                         <div class="txt">
+	                             <h3><a href="./我的订单-广东邮电大厦_files/我的订单-广东邮电大厦.html">连州腊味糯米鸡</a></h3>
+	                             <p class="cl666"><span class="red">20.0元/
+										笼</span>
+								  </p>
+	                         </div>
+	                     </div>
+	                     <div class="cont_fr cont_fr_other">
+	                         <a class="btn_subtract" href="javascript:void(0)" onclick="quantityMinus(&#39;00395&#39;, 2);"></a>
+	                         <span id="00395" name="quantitys" tabindex="2">1</span>
+	                         <a class="btn_add" href="javascript:void(0)" onclick="quantityPlus(&#39;00395&#39;, 2);"></a>
+	                         <input type="hidden" name="productSkuCodes" value="00395">
+	                     </div>
+	                 </li>
+					<li>
+	                     <div class="cont_fl">
+	                         <div class="txt">
+	                             <h3><a href="./我的订单-广东邮电大厦_files/我的订单-广东邮电大厦.html">金牌榴莲酥 </a></h3>
+	                             <p class="cl666"><span class="red">13.0元/
+										碟</span>
+								  </p>
+	                         </div>
+	                     </div>
+	                     <div class="cont_fr cont_fr_other">
+	                         <a class="btn_subtract" href="javascript:void(0)" onclick="quantityMinus(&#39;00420&#39;, 3);"></a>
+	                         <span id="00420" name="quantitys" tabindex="3">1</span>
+	                         <a class="btn_add" href="javascript:void(0)" onclick="quantityPlus(&#39;00420&#39;, 3);"></a>
+	                         <input type="hidden" name="productSkuCodes" value="00420">
+	                     </div>
+	                 </li>
+					<li>
+	                     <div class="cont_fl">
+	                         <div class="txt">
+	                             <h3><a href="./我的订单-广东邮电大厦_files/我的订单-广东邮电大厦.html">飘香榴莲酥</a></h3>
+	                             <p class="cl666"><span class="red">30.0元/
+										半打</span>
+								  </p>
+	                         </div>
+	                     </div>
+	                     <div class="cont_fr cont_fr_other">
+	                         <a class="btn_subtract" href="javascript:void(0)" onclick="quantityMinus(&#39;00268&#39;, 4);"></a>
+	                         <span id="00268" name="quantitys" tabindex="4">1</span>
+	                         <a class="btn_add" href="javascript:void(0)" onclick="quantityPlus(&#39;00268&#39;, 4);"></a>
+	                         <input type="hidden" name="productSkuCodes" value="00268">
+	                     </div>
+	                 </li>
+					</ul>
+        		<p class="cl999 reference">菜式价格仅供参考，以餐厅结算为准！</p>
+             
+            <!-- 是否是vip -->
+            <!-- 指定部长 begin  -->
+			<!-- 堂食 -->
+				<!-- -------- 指定部长 begin-------------->
+<div class="appoint">
+	<input id="ministerId" type="hidden" value="">
+    <div class="title2">
+        <a href="javascript:void(0);" onclick="toggleScreen(this)" indexid="" objid="waiter">
+        	<em class="icn_appoint" id="img"></em>指定部长：
+			<span id="spanTitle">不指定</span>
+		</a>
+    </div>
+    <div class="minister" id="waiter" style="display: none;">
+		<a href="javascript:void(0);" onclick="chooseMinister(this,&#39;&#39;)" value="" class="curr">不指定</a>
+		<a href="javascript:void(0);" onclick="chooseMinister(this,&#39;0&#39;)" value="7dbe5c7f-93b5-488e-ba87-f07dc1043ccb">吴秋英</a>
+		<a href="javascript:void(0);" onclick="chooseMinister(this,&#39;1&#39;)" value="e387d6c9-1aab-4878-a2cf-bc5605ff8a44">谢满香</a>
+		</div>
+    <div class="clear"></div>
+</div>
+<!-- -------- 指定部长 end-------------- -->
+
+<script type="text/javascript">
+	var controller;
+	$j(document).ready(function(){
+
+	});
+	
+	//显示编辑页面
+	function showEditPanel(moduleName, obj){
+		$j("#orderDetailSummaryPage").hide();	//隐藏主页
+		if(moduleName == "consignee" 
+			|| moduleName == "virtualConsignee" 
+			|| moduleName == "paymentMethod" 
+			|| moduleName == "shippingMethod"){
+			
+			controller.edit(moduleName, obj);		//渲染编辑视图
+		}
+		$j("#" + moduleName + "Page").show();	//显示编辑视图
+	}
+	
+	//显示主页,隐藏编辑页面
+	function showMainPanel(moduleName){
+		$j("#" + moduleName + "Page").hide();	//隐藏编辑视图
+		$j("#orderDetailSummaryPage").show();	//显示主页
+	}
+	
+	function placeOrder(obj) {
+		$j(obj).hide();	//隐藏按钮
+		$j(".loading").show();
+
+		var ministerId = $j("#ministerId").val();
+		ministerData = {
+			"ministerId"	: ministerId
+		}
+		DWREngine.setAsync(false);
+		checkoutDwr.saveMinisterData(ministerData);
+		
+		//view.showWaitMessage(__FMT.checkout_loading, obj);
+		setTimeout(function() {
+		DWREngine.setAsync(true);					//设置ajax为异步解决ie下"loading"信息不显示问题
+		checkoutDwr.placeOrder(
+			function(jsonText) {
+				var result = eval('('+jsonText+')');
+				if (result.error != null) {
+					alert(result.error);
+					data.error = result.error;
+				} else {
+					window.location = __ctxPath + "/cart/orderReview.html?doAction=checkoutSucc&orderNo="+result.orderNo;
+				}
+			}
+		);
+		},50);
+	}
+	
+	//显示 隐藏详细
+	function toggleScreen(linkDOM){
+		var jTrThis = $j(linkDOM);
+		var toggleButton = jTrThis.attr("objId");
+		var jTrFull = $j("#"+toggleButton);
+		var img = $j("#img");
+		if(jTrFull.is(":hidden")){
+			img.removeClass("icn_appoint");
+			img.addClass("icn_appoint_up");
+			jTrFull.show();
+		}else{
+			jTrFull.hide();
+			img.removeClass("icn_appoint_up");
+			img.addClass("icn_appoint");			
+		}
+	}
+
+	//选择部长
+	function chooseMinister(dom, index){
+		var dum = $j(dom);
+		var classSpan = $j("#classSpan_"+ index);
+		var chooseValue = $j(dom).attr("value");
+		$j("#ministerId").val(chooseValue);
+		$j("#spanTitle").html(dum.text());
+		var id = "waiter";
+		var aDivs = document.getElementById(id);
+		var aSpans = aDivs.getElementsByTagName("a");
+		for(i=0; i<aSpans.length; i++){
+			var aSpan = aSpans[i];
+			aSpan.className="";
+		}
+		//classSpan.addClass("on");
+		$j(dom).addClass("curr");
+		
+	}
+</script><!-- 指定部长 end  -->
+         </div>
+        </div>
+        <div class="clear"></div>
+        <div class="btn_my">
+        	<a id="goback" class="btn_my_green" href="http://14.146.224.119/m/index.html">返回菜单</a>
+        	<a id="goSalesOrder" class="btn_my_green" href="http://14.146.224.119/m/cart/shoppingcart.html#" onclick="goSalesOrder()">我的厨房</a>
+        	<a id="btnCheckout" href="javascript:void(0)" onclick="toCheckout();" class="btn_my_red">保存订单</a>
+					<a class="loading btn_my_red" style="display:none;">准备保存订单，请稍等</a>
+        		
+        	<!-- 
+            <span class="icn_number">0</span>
+             -->
+        </div>
+    </div>	
+    
+<div style="display:none">
+	<div id="divDlgcustomerBindPanel" style="visibility:hidden;position:absolute;overflow: auto;">
+	</div>
+<script type="text/javascript">
+var ui_dialog_customerBindPanel;
+var ui_dialog_customerBindPanel_hasKeepScene = false;
+var ui_dialog_customerBindPanel_needKeepScene = false;
+
+
+$j(document).ready(function(){
+	ui_dialog_customerBindPanel = $j("#divDlgcustomerBindPanel"); 
+}); 
+/**
+ * æ¾ç¤ºdialog
+ * @param {Object} param (å¯é) åéè³æå¡å¨ç key/value æ°æ®;JSONæ ¼å¼
+ */
+function dlgcustomerBindPanel_show(param)
+{
+	ui_dialog_customerBindPanel.css("visibility","visible");
+	
+		if(ui_dialog_customerBindPanel_needKeepScene && ui_dialog_customerBindPanel_hasKeepScene){
+			//å¦æéè¦ä¿æåºæ¯ï¼ä¸å·²ç»ajax load 
+			//do nothing
+		}else{
+			ui_dialog_customerBindPanel.empty();
+			if(!param)param={}; 
+			ui_dialog_customerBindPanel.loading().load("/m/bindMoblie/blank.html",param);
+			if(ui_dialog_customerBindPanel_needKeepScene){
+				ui_dialog_customerBindPanel_hasKeepScene = true;
+			}
+		}	
+	
+	//"" != null ? "" : "center"
+	var position = "" && "" ? [, ] : "";
+	position = position ? position :  "center";
+	ui_dialog_customerBindPanel.dialog({ 
+		title:"获取手机邀请码", 
+		modal: true, 
+		height:'80%',
+		width:'80%', 
+		bgiframe: true,
+		buttons: {},
+	    overlay: { opacity: 0.5, background: "black" },
+	    closeOnEscape:true,
+	    closeAfterFun: 'customerBindPanelCallback()',
+	    position : position
+	});
+	
+	//ç§»é¤TOPçå³é­æé®ï¼å¦æä¸ºtrueç§»é¤ï¼å¦åä¿ç
+	
+	
+	ui_dialog_customerBindPanel.dialog("open");
+	
+}
+
+
+function dlgcustomerBindPanel_close()
+{
+	ui_dialog_customerBindPanel.dialog("close");
+}
+
+/**
+ * ç¦ç¨dialog buttonsé¡¹ä¸­çæä¸ä¸ªbutton
+ * @param btnValue  button content value, e.g. <button>btnValue</button>
+ */
+function dlgcustomerBindPanel_disableBtn(btnValue){
+	ui_dialog_customerBindPanel.filter( function(){ $j(":button:contains("+btnValue+")").attr("disabled","true").attr("style", "background:#E6E6E6;border:1px solid #ccc;color:#bbb;"); } );
+}
+/**
+ * å¯ç¨dialog buttonsé¡¹ä¸­çæä¸ä¸ªbutton
+ * @param btnValue  button content value, e.g. <button>btnValue</button>
+ */
+function dlgcustomerBindPanel_enableBtn(btnValue){
+	ui_dialog_customerBindPanel.filter( function(){ $j(":button:contains("+btnValue+")").removeAttr("disabled").removeAttr("style"); } );
+}
+$j.fn.extend({
+	loading:function(){
+		return this.each(function(){
+			$j(this).empty().html('<div class="loading_box"><div class="progress_bar"><img src="'+__ctxPath+'/themes/default/images/no_txt/loadingBig.gif"/>loading...</div></div>');			
+		});
+	}
+});	
+</script></div>
+<script type="text/javascript" src="./我的订单-广东邮电大厦_files/checkoutDwr.js"></script>
+<script type="text/javascript" src="./我的订单-广东邮电大厦_files/bindMobileDwr.js"></script>	
+<script type="text/javascript" src="./我的订单-广东邮电大厦_files/customerBind.js"></script>
+
+<script type="text/javascript">
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+WeixinJSBridge.call('hideToolbar');
+});
+var ms_syouType = "";
+var ms_isVip = "0";
+$j(document).ready(function () {
+	
+	/*
+	var firstQuantity = $j('input[name="quantitys"]:first');
+	if(firstQuantity != null){
+		firstQuantity.focus();
+	}	
+	$j('input[name="quantitys"]').each(function(){
+		$j(this).bind('keydown',quantityOnEnter);
+	});
+	*/
+	//确认购物事件
+	function quantityOnEnter(event){
+		var jPrev = $j(this).parents('li:first').prev().find('input[name="quantitys"]');
+		var jNext = $j(this).parents('li:first').next().find('input[name="quantitys"]');
+		switch(event.keyCode){
+			case 13: 
+				//回车
+				if(jNext.length != 0){
+					//有下个，则焦点下移
+					$j(this).blur();
+					jNext.focus().select();
+				} 
+				//屏蔽回车提交表单事件
+				return false;
+			case 40	:
+				//下
+				if(jNext.length != 0){
+					$j(this).blur();
+					jNext.focus();
+				}	
+				break;
+			case 38	:
+				//上
+				if(jPrev.length != 0){
+					$j(this).blur();
+					jPrev.focus();
+				}	
+				break;	
+		}
+	}	
+	
+	
+	$j('#rpBoxesUL li').each(function(i,o){
+		$j(o).bind("mouseover",function(){
+			$j('#rpBoxesUL li').each(function(i,o){
+				$j(this).removeClass("curr");
+				$j('#rpBox'+this.id).hide();
+			});
+			$j(this).addClass("curr");
+			$j('#rpBox'+this.id).show();
+			
+		});
+	
+	});
+	
+	setHeight();
+	
+	ms_syouType = "2";
+	//$j("#optime").datepicker();
+	
+	//start 日期控件
+	 /* var newjavascript={
+    	 plugdatetime:function ($dateTxt,type) {
+//           var curr = new Date().getFullYear();
+           var opt = {}
+	   opt.time = {preset : type};
+           opt.date = {preset : type};
+           opt.datetime = { 
+		preset : type, 
+		minDate: new Date(2010,1,01,00,00), 
+		maxDate: new Date(2020,12,31,24,59), 
+		stepMinute: 1  
+	   };
+	  
+        $dateTxt.val('').scroller('destroy').scroller(
+		$.extend(opt[type], 
+			{ 
+				preset: 'datetime',
+						theme: "sense-ui", 
+						mode: "scroller", 
+						display: "modal", 
+						lang: "english",
+						yearText: "年",
+						monthText: "月",
+						dayText: "日",
+						hourText: "时",
+						minuteText: "分",
+						ampmText:"上午/下午",
+						setText: '确定',
+						cancelText: '取消',
+						dateOrder: 'yyyymmdd',
+						dateFormat: 'yyyy-mm-dd'
+			})
+		);
+      }
+	}
+    newjavascript.plugdatetime($("#text"), "datetime"); */
+	//end 日期控件
+});
+
+
+</script>
+
+<script type="text/javascript">
+
+function parseDate(dateStr){
+	if(dateStr.indexOf("PM") == -1){
+		return dateStr;
+	}
+	//2014-01-04 02:28 PM
+	dateStr = dateStr.split(" ");
+	var dayStr = dateStr[0];
+	var timeStr = dateStr[1];
+	timeStr = timeStr.split(":");
+	timeStr[0] = parseInt(timeStr[0]) + 12;
+	optime = dayStr + " " + timeStr[0] + ":" + timeStr[1];
+	return optime;
+}
+
+//结帐按钮
+function toCheckout() {
+	if(ms_syouType == "2"){
+		//是堂食才进行设置部长
+		var ministerId = $j("#ministerId").val();
+		var opamount = 0;
+		var optime = "";
+		var csnotes = "";
+		ministerData = {
+			"ministerId"	: ministerId
+		}
+		if(ms_isVip == 1){
+			//保存vip必须的信息
+			if(!ministerId){
+				alert("请选择部长！");
+				return;
+			}
+			opamount = $j("#opamount").val();
+			optime = $j("#optime_y").val() + "-" + $j("#optime_MM").val() + "-" + $j("#optime_d").val() + " " + $j("#optime_h").val() + ":" + $j("#optime_m").val();
+			csnotes = $j("#csnotes").val();
+			
+			var seltDate = new Date($j("#optime_y").val(), $j("#optime_MM").val(), $j("#optime_d").val()); 
+			var nowDate = new Date();
+						
+			/* if(nowDate.getTime() < seltDate.getTime()){
+				if(!window.confirm("所选时间小于当前时间，是否继续提交")){
+					return;
+				}
+				//alert("请输入就餐时间");
+			} */
+			
+			//optime = parseDate(optime);
+			ministerData.opamount = opamount;
+			ministerData.optime = optime;
+			ministerData.csnotes = csnotes;
+		}
+		
+		mask();
+		$j("#btnCheckout").hide();	//隐藏按钮
+		$j("#btnContinue").hide();
+		//$j(".btn_my").hide();
+		$j("#goSalesOrder").hide();
+		$j("#goback").hide();
+		$j("#sendOrder").hide();
+		$j(".loading").show();
+		
+		DWREngine.setAsync(false);
+		checkoutDwr.saveMinisterData(ministerData);
+		if(!isCustomerBindCheck()){
+			//未绑定,跳转到绑定页面
+			//window.location = __ctxPath+"/bindMoblie.html";
+			dlgcustomerBindPanel_show();
+			return;
+		}
+	}else if(ms_syouType == "3"){
+		//fast food
+		var address = $j("#address").val();
+		var name = $j("#name").val();
+		var telephone = $j("#telephone").val();
+		var checkcode = $j("#checkcode").val();
+		var attrVal = [address,name,telephone];
+		var attrMsg = ["请输入配送地址","请输入联系人姓名","请输入联系电话"];
+		var chkValid =  $j("#validationCodeLi").attr("chkValid");//是否需要校验验证码
+		if(chkValid == "1"){
+			attrVal.push(checkcode);
+			attrMsg.push("请输入验证码");		
+		}
+		
+		var len = attrVal.length; 
+		var index = 0 ;
+		var isNullInput = false;
+		for(; index < len; index ++){
+			if(!attrVal[index]){
+				isNullInput = true;
+				break;
+			}
+		}
+		if(isNullInput){
+			alert(attrMsg[index]);	
+			return;
+		}
+		
+		
+		var fastFoodData = {
+			"address"	: address,
+			"name"	: name,
+			"telephone"	: telephone,
+			"checkcode" : checkcode
+		}
+		
+		mask();
+		$j("#btnCheckout").hide();	//隐藏按钮
+		$j("#btnContinue").hide();
+		//$j(".btn_my").hide();
+		$j("#goSalesOrder").hide();
+		$j("#goback").hide();
+		$j("#sendOrder").hide();
+		$j(".loading").show();
+		
+		DWREngine.setAsync(false);
+		checkoutDwr.saveFastFoodData(fastFoodData);
+	}
+
+	/*
+	//1.读取页面上的采购数量
+	var productSkuCodes = new Array();
+	var quantitys = new Array();
+	var numberFormatExceptionOccur = false;
+	var errorElement;
+	$j("[name=productSkuCodes]").each(function (i) {
+		productSkuCodes.push(this.value);
+	});
+	$j("[name=quantitys]").each(function (i) {
+		if (isNaN(this.value)) {
+			errorElement = this;
+			numberFormatExceptionOccur = true;
+		} 
+		quantitys.push(this.value);
+	});
+	
+	//2.验证用户输入的采购数量
+	if (numberFormatExceptionOccur) {
+		alert("请输入需要购买的数量。");
+		$j(errorElement).focus();
+		$j(errorElement).select();
+		return;
+	}
+	*/
+	//3.保存采购数量进购物车
+
+//	changeQuantitys(productSkuCodes, quantitys, 
+//		function() {
+			//4.跳转到结帐页面
+			//window.location.href='/m/checkout.html';
+			
+			//setTimeout(function() {
+			//DWREngine.setAsync(true);					//设置ajax为异步解决ie下"loading"信息不显示问题
+			checkoutDwr.placeOrder(
+		
+				function(jsonText) {
+					var result = eval('('+jsonText+')');
+					if (result.error != null) {
+						alert(result.error);
+						//data.error = result.error;
+					} else {
+						//window.location = __ctxPath + "/cart/orderReview.html?doAction=checkoutSucc&orderNo="+result.orderNo;
+						if(ms_syouType == "2" && ms_isVip != "1"){
+							window.location = __ctxPath + "/order/myOrder.html?type=2";
+						}else if(ms_syouType == "3"){
+							window.location = __ctxPath + "/order/myOrder.html";
+						}else if(ms_syouType == "2" && ms_isVip == "1"){
+							window.location = __ctxPath + "/order/myOrder.html?type=vip";
+						}else{
+							window.location = __ctxPath + "/order/myOrder.html";
+						}
+						
+					}
+					unmask();
+				}
+			);
+			//},50);
+/*		},
+		function() {
+			//失败回调函数--把按钮恢复显示
+			$j(".loading").hide();
+			$j("#btnCheckout").show();
+			$j("#btnContinue").show();
+		}
+	);*/
+}
+
+//删除商品项
+function deleteItem(productSkuCode, obj) {
+	//if(confirm("你确定要删除吗？")){
+		showWaitMessage("loading", obj);
+		delProductItem(productSkuCode, function() {
+			$j(obj).parents("li:first").remove();
+			refreshBill();
+			
+			var len = $j('span[name="quantitys"]').length;
+			if(len <=0 ){
+				//window.location.href='/m/cart/shoppingcart.html';
+				$j("#btnCheckout").hide();
+				$j(".appoint").hide();
+			}
+		});
+	//}
+}
+
+//购买数量减1
+function quantityMinus(productSkuCode, tabindex) {
+	var filter = "span[name=quantitys][tabindex=" + tabindex + "]";
+	var quantityElement = $j(filter);
+	var quantity = 1;
+	if(quantityElement.text()!="" && parseInt(quantityElement.text())>1) {
+		quantity = parseInt(quantityElement.text()) - 1;
+		quantityElement.text(quantity);
+		quantityOnChange(productSkuCode, quantity);
+	}else {
+		deleteItem(productSkuCode, quantityElement);
+	}
+}
+
+//购买数量加1
+function quantityPlus(productSkuCode, tabindex) {
+	var filter = "span[name=quantitys][tabindex=" + tabindex + "]";
+	var quantityElement = $j(filter);
+	var quantity = 1;
+	if(quantityElement.text()!="")
+		quantity = parseInt(quantityElement.text()) + 1;
+	quantityElement.text(quantity);
+	quantityOnChange(productSkuCode, quantity);
+}
+
+//更新商品项数量输入框触发事件
+function quantityOnChange(productSkuCode, quantity) {
+	changeQuantity(productSkuCode, quantity, afterQuantityChanged);		//定义在cart.js
+}
+
+
+//清空购物车
+function clearCart(){
+	if(confirm("你确定要清空吗？")){
+		clearShoppingcart(deleteCartCallback);
+	}
+}
+//刷新购物车帐单信息
+function refreshBill() {
+	$j("#shippingcartBillDiv").load("/m/cart/shoppingcart.html?doAction=refreshBill&decorator=blank");
+	//refreshPromo();
+}
+
+//刷新购物车促销信息
+function refreshPromo() {
+	$j("#shippingcartPromoDiv").load("/m/cart/shoppingcart.html?doAction=refreshPromo&decorator=blank");
+}
+
+//刷新商品项信息
+function refreshItems() {
+	$j("#shoppingcartItemsDiv").load("/m/cart/shoppingcart.html?doAction=refreshItems&decorator=blank");
+	refreshPromo();
+}
+
+//商品加入购物车后的回调函数
+function addToCartCallback(json,sourceEvent) {
+	alert("商品已成功添加到购物车");
+	refreshItems();
+	refreshBill();
+}
+
+//商品添加到收藏夹后的回调函数
+function addFavoriteProductCallback(json,sourceEvent){
+	promptFavoriteMessage(json, sourceEvent);
+	$j("#rpBox2").load("/m/cart/shoppingcart.html?doAction=refreshShoppingcartFavorite&decorator=blank");
+	
+}
+//删除收藏夹商品的回调函数
+function deleteFavoriteCallback(){
+	if($j('#favoriteListDiv li').length==0){
+		html = '<div class="msg">???shoppingcart.favorite.noItems???</div>';
+		$j("#rpBox2").html(html);
+	}
+				
+		
+}
+//清空商品的回调函数
+function deleteCartCallback(){
+	window.location='/m/cart/shoppingcart.html';
+}
+
+//显示等待信息，例如“正在读取XXX信息，请稍等”
+showWaitMessage = function(info, obj) {
+	try{
+		if (obj == null) return;
+		clearWaitMessage();
+		$j(obj).hide();
+		$j("<i class='loading'>" + info + "</i>").insertAfter(obj);
+	}catch(e){ alert(e); }
+} 
+	
+//清除等待信息
+clearWaitMessage = function(obj) {
+	try {
+		$j(".loading").remove();
+		if (obj != null) $j(obj).show();
+	} catch(e){ alert(e); }
+}
+
+//具体促销显示
+function getPromoValue(event){
+  $importDwr(function() {
+	shoppingcartDwr.getPromoValue(function(jsonText) {
+	    var str="";
+		var json = eval("(" + jsonText + ")");
+		for(var i=0; i< json.length; i++){
+			str+="<li>"+json[i].messages1+"</li>";
+		};
+		$j("#proms").html(str);
+	})
+  })
+}
+
+//判断输入是否是数字
+isNumber = function (e) {
+	if ($j.browser.msie) {
+		if ( ((event.keyCode > 47) && (event.keyCode < 58)) ||  (event.keyCode == 8) ) {
+			return true;
+		} else {
+			return false;
+		}
+	} else {
+		if ( ((e.which > 47) && (e.which < 58)) ||  (e.which == 8) ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+}
+
+	function customerBindPanel_close(){
+		dlgcustomerBindPanel_close();
+		toCheckout();
+	}
+	
+	function customerBindPanelCallback(){
+	
+	}
+	
+	function goSalesOrder(){
+		window.location = "/m/order/salesOrder.html";
+	}
+	
+	function goIndex(){
+		window.location = "/m/index.html?isSelClientAccount=N";
+	}
+</script>
+<div style="display: none;">
+			<script type="text/javascript">
+//if(__FMT == undefined){
+//	var __FMT = {};
+//	var __FMTExtend = {};
+//}
+
+
+//__FMTExtend = {
+//	common_loading:"正在保存信息，请稍等",
+//	common_loading2:"数据加载中,请稍等",
+//	store_hello:"您好，",
+//	store_welcome:"欢迎来到",
+//	customer_login:"[请登录]",
+//	customer_logout:"[退出]",
+//	customer_signup:"[免费注册] ",
+//    store_title:"广东邮电大厦",
+//    common_message_dwrException:"您的操作过时，本页面将会重新刷新。"
+//};
+//$j.extend(__FMT, __FMTExtend);
+
+
+
+//__FMTExtend = {
+//	shoppingcart_continueShopping:"继续购物",
+//	shoppingcart_goToShoppingcart:"去购物车结算",
+//	shoppingcart_viewFavorite:"查看收藏夹",
+//	minicart_subtotal:"总计",
+//	minicart_product:"商品",
+//	minicart_totalQuantity:"共",
+//    minicart_addToCartSuccess:"恭喜添加成功！",
+//    minicart_cart:"购物车",
+//    minicart_unit:'种',
+//    button_close:"???button.close???",
+//    stockNotify_sign_confirm:"???stockNotify.sign.confirm???"
+//};
+//$j.extend(__FMT, __FMTExtend);
+
+//var __vaMsg = {
+//	notPass:"数据验证未通过。",
+//	pass:"验证通过。",
+//	required:"必填。",
+//	number:"必须为数字。",
+//	integer:"必须为0到2147483647之间的整数。",
+//	short:"必须为不大于32767的整数。",
+//	double:"必须为整数或小数(1-2位小数)。",
+//	long:"???validate.long???",
+//	maxValue:"数值必须小于或等于",
+//	minValue:"数值必须大于或等于",
+//	maxlength:"长度必须小于或等于",
+//	minlength:"长度必须大于或等于",
+//	price:"价格/金额无效或者过大，必须为整数或小数，整数位不能超过10位数，小数位不能超过2位数。",
+//	money:"价格/金额无效或者过大，必须为整数或小数，整数位不能超过10位数，小数位不能超过2位数。",
+//	code:"由字母,数字,下划线,减号组成。",
+//	chineseCode:"必须为字母、数字、下划线、减号或中文字符组成的字符串。",
+//	phone:"格式为区号-号码(例如：020-12345678)。",
+//	mobile:"必须是13[0-9]、15[0,3,6-9]、18[6,8,9]开头的11位号码。",
+//	email:"无效邮件地址。",
+//	positiveInteger:"必须为1到2147483647之间的整数。",
+//	double4:"必须为整数或小数(1-4位小数)。",
+//	noHtml:"不能有HTML代码。",
+//	radio:"必须至少选择一项。",
+//	url:"URL格式不正确。",
+//	date:"错误的日期格式，正确格式必须为yyyy-MM-dd (例如:2011-08-18)。",
+//	mask:"表达式验证不通过。",
+//	twofields:"两次输入不一致。",
+//	bill_n:"本网站不支持发票",
+//	wrap_n:"本网站不支持包装服务��您的商品不需要包装",
+//	gcno_null:"礼券编号不能为空!",
+//	userName:"用户名格式错误,必须由字母,数字,下划线,减号或邮箱地址组成"
+//};
+</script>
+<!--<script type="text/javascript" src="./我的订单-广东邮电大厦_files/shoppingcartDwr.js"></script>-->
+	<!--<script type="text/javascript" src="./我的订单-广东邮电大厦_files/cart.js"></script>-->
+<!--<script type="text/javascript" src="./我的订单-广东邮电大厦_files/validationFront.js"></script>-->
+<!--<script type="text/javascript" src="./我的订单-广东邮电大厦_files/engine.min.js"></script>	-->
+	<!--<script type="text/javascript" src="./我的订单-广东邮电大厦_files/ui.core.js"></script>-->
+<!--<script type="text/javascript" src="./我的订单-广东邮电大厦_files/ui.dialog.js"></script>-->
+	<!--<script type="text/javascript" src="./我的订单-广东邮电大厦_files/jquery.bgiframe.js"></script>-->
+<!--<script type="text/javascript" src="./我的订单-广东邮电大厦_files/ui.resizable.js"></script>-->
+<!--<script type="text/javascript" src="./我的订单-广东邮电大厦_files/ui.draggable.js"></script>-->
+<!--<link rel="stylesheet" href="./我的订单-广东邮电大厦_files/ui.all.css" type="text/css">-->
+<script type="text/javascript">
+$j(document).ready(function(){
+});
+</script>
+<script type="text/javascript" src="./我的订单-广东邮电大厦_files/syouDwr.js"></script>
+<script type="text/javascript" src="./我的订单-广东邮电大厦_files/wechatShare.js"></script></div>
+
+		</div>	
+
+
+</body></html>

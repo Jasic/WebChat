@@ -1,0 +1,19 @@
+
+var HOMEPAGE="/m/index.html";
+var __ctxPath = "/m";
+var __mediaPath = "/m/media/";
+var __theme = "default";
+var __local = "zh_CN";
+var __imagePath = "/m/themes/default/images";
+var __noTxtImagePath = "/m/themes/default/images/no_txt";
+var __txtImagePath = "/m/themes/default/images/txt/zh_CN";
+var __defaultImage = "/m/themes/default/images/default/defaultNoPhoto.jpg";
+var __defaultImage_s0 = "/m/themes/default/images/default/defaultNoPhoto_s0.jpg";
+var __defaultImage_s1 = "/m/themes/default/images/default/defaultNoPhoto_s1.jpg";
+var __defaultImage_s2 = "/m/themes/default/images/default/defaultNoPhoto_s2.jpg";
+var __defaultImage_m0 = "/m/themes/default/images/default/defaultNoPhoto_m0.jpg";
+var __defaultImage_brand = "/m/themes/default/images/default/defaultNoPhoto_brand.jpg";
+var __defaultImage_pc = "/m/themes/default/images/default/defaultNoPhoto_productCategory.jpg";
+var __defaultCurrencySymbol = "¥";
+var __defDatePattern='yyyy-MM-dd';
+var __isOpenCasService = "0";

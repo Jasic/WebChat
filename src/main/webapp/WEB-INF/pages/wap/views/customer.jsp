@@ -39,7 +39,14 @@
                 location.href = "orderDishes.html";
             });
 
-            $("#myAddress").click(function () {
+            /**
+             * 返回首页
+             */
+            $("#home").click(function() {
+                location.href = "/wap/${shopId}";
+            });
+
+            $("#myAddress").click(function() {
                 location.href = "address";
             });
 
@@ -107,7 +114,7 @@
 
     <div data-role="footer"
          class="footer">
-        <a href="#"
+        <a id="home" href="#"
            class="footer-menu"
            data-icon="home">首页</a>
         <a href="#"

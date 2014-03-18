@@ -38,11 +38,14 @@ public class GlobalConstants {
     public static final String STATUS_NO_EFFETIVE = "A010";
     // 待验证状态
     public static final String STATUS_WAITING_VERIFY = "A011";
+    // 登录模式(根据微信号自动登录)
+    public static final String LOGIN_MODE_AUTO = "Y";
+    // 登录模式(根据微信号手动登录)
+    public static final String LOGIN_MODE_MANUAL = "N";
 
     // ---------------------------------- 与wap网站相关 ------------------------------------
     public static final String SESSION_USER_KEY = "LOGIN_USER_KEY";
     public static final String SESSION_FANSINFOID_KEY = "fansInfoId";
-    public static final String SESSION_CLIENTINFO_KEY = "clientInfo";
     public static final String ADDRESS_ADD = "add";
     public static final String ADDRESS_DELETE = "delete";
     public static final String ADDRESS_UPDATE = "update";

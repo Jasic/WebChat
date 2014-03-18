@@ -2,12 +2,12 @@
 BEGIN TRANSACTION;
 
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'CaiPing')
-  DROP TABLE [CaiPing];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'CaiPing')
+DROP TABLE [CaiPing];
 CREATE TABLE CaiPing (
-    PID           INT
+    PID           INT  PRIMARY KEY
   , CaiPingID     VARCHAR(255)
   , CaiPingName   VARCHAR(255)
   , CaiPingName2  VARCHAR(255)
@@ -35,12 +35,12 @@ CREATE TABLE CaiPing (
 
 -- 2菜品大类
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'CaiPingDaiLei')
-  DROP TABLE [CaiPingDaiLei];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'CaiPingDaiLei')
+DROP TABLE [CaiPingDaiLei];
 CREATE TABLE CaiPingDaiLei (
-    PID                INT
+    PID                INT  PRIMARY KEY
   , CaiPingDaiLeiID    VARCHAR(255)
   , CaiPingDaiLeiName  VARCHAR(255)
   , CaiPingDaiLeiName2 VARCHAR(255)
@@ -54,12 +54,12 @@ CREATE TABLE CaiPingDaiLei (
 
 ---  3菜品小类
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'CaiPingXiaoLei')
-  DROP TABLE [CaiPingXiaoLei];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'CaiPingXiaoLei')
+DROP TABLE [CaiPingXiaoLei];
 CREATE TABLE CaiPingXiaoLei (
-    PID                 INT
+    PID                 INT  PRIMARY KEY
   , CaiPingXiaoLeiID    VARCHAR(255)
   , CaiPingXiaoLeiName  VARCHAR(255)
   , CaiPingXiaoLeiName2 VARCHAR(255)
@@ -74,12 +74,12 @@ CREATE TABLE CaiPingXiaoLei (
 );
 ---4、菜品做法
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'CaiPingZuoFa')
-  DROP TABLE [CaiPingZuoFa];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'CaiPingZuoFa')
+DROP TABLE [CaiPingZuoFa];
 CREATE TABLE CaiPingZuoFa (
-    PID                  INT
+    PID                  INT  PRIMARY KEY
   , CaiPingZuoFaID       VARCHAR(255)
   , CaiPingZuoFaName     VARCHAR(255)
   , CaiPingZuoFaName2    VARCHAR(255)
@@ -96,12 +96,12 @@ CREATE TABLE CaiPingZuoFa (
 );
 -- 5、
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'CPDanWeiJiaGe')
-  DROP TABLE [CPDanWeiJiaGe];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'CPDanWeiJiaGe')
+DROP TABLE [CPDanWeiJiaGe];
 CREATE TABLE CPDanWeiJiaGe (
-    PID             INT
+    PID             INT  PRIMARY KEY
   , ID              VARCHAR(255)
   , DanWeiMing      VARCHAR(255)
   , BiLv            NUMERIC(19, 10)
@@ -118,12 +118,12 @@ CREATE TABLE CPDanWeiJiaGe (
 
 --- 6、
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'MN_CaiAndSubCai')
-  DROP TABLE [MN_CaiAndSubCai];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'MN_CaiAndSubCai')
+DROP TABLE [MN_CaiAndSubCai];
 CREATE TABLE MN_CaiAndSubCai (
-    PID       INT
+    PID       INT  PRIMARY KEY
   , ID        VARCHAR(255)
   , Name      VARCHAR(255)
   , MainCai   VARCHAR(255)
@@ -137,12 +137,12 @@ CREATE TABLE MN_CaiAndSubCai (
 
 ---7 菜品
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'MN_CaiPinAndMember')
-  DROP TABLE [MN_CaiPinAndMember];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'MN_CaiPinAndMember')
+DROP TABLE [MN_CaiPinAndMember];
 CREATE TABLE MN_CaiPinAndMember (
-    PID        INT
+    PID        INT  PRIMARY KEY
   , ID         VARCHAR(255)
   , Name       VARCHAR(255)
   , Cai        VARCHAR(255)
@@ -154,12 +154,12 @@ CREATE TABLE MN_CaiPinAndMember (
 
 -- 8\
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'QuanJuCanShu')
-  DROP TABLE [QuanJuCanShu];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'QuanJuCanShu')
+DROP TABLE [QuanJuCanShu];
 CREATE TABLE QuanJuCanShu (
-    PID       INT
+    PID       INT  PRIMARY KEY
   , ID        VARCHAR(255)
   , Name      VARCHAR(255)
   , StrVal    VARCHAR(255)
@@ -172,12 +172,12 @@ CREATE TABLE QuanJuCanShu (
 );
 --9
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'TuiCaiYanYing')
-  DROP TABLE [TuiCaiYanYing];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'TuiCaiYanYing')
+DROP TABLE [TuiCaiYanYing];
 CREATE TABLE TuiCaiYanYing (
-    PID                INT
+    PID                INT  PRIMARY KEY
   , TuiCaiYanYingID    VARCHAR(255)
   , TuiCaiYanYingName  VARCHAR(255)
   , TuiCaiYanYingName2 VARCHAR(255)
@@ -186,13 +186,13 @@ CREATE TABLE TuiCaiYanYing (
 
 --- 10
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'WL_Appraise')
-  DROP TABLE [WL_Appraise];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'WL_Appraise')
+DROP TABLE [WL_Appraise];
 
 CREATE TABLE WL_Appraise (
-    PID   INT
+    PID   INT  PRIMARY KEY
   , ID    VARCHAR(255)
   , Name  VARCHAR(255)
   , Name2 VARCHAR(255)
@@ -202,12 +202,12 @@ CREATE TABLE WL_Appraise (
 
 --11
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'WL_AppraiseItem')
-  DROP TABLE [WL_AppraiseItem];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'WL_AppraiseItem')
+DROP TABLE [WL_AppraiseItem];
 CREATE TABLE WL_AppraiseItem (
-    PID      INT
+    PID      INT  PRIMARY KEY
   , ID       VARCHAR(255)
   , Name     VARCHAR(255)
   , Name2    VARCHAR(255)
@@ -217,12 +217,12 @@ CREATE TABLE WL_AppraiseItem (
 
 --12
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'WL_Food')
-  DROP TABLE [WL_Food];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'WL_Food')
+DROP TABLE [WL_Food];
 CREATE TABLE WL_Food (
-    PID       INT
+    PID       INT  PRIMARY KEY
   , ID        VARCHAR(255)
   , Name      VARCHAR(255)
   , Hide      TINYINT
@@ -233,12 +233,12 @@ CREATE TABLE WL_Food (
 
 ---13 Drop Table [WL_FoodPage];
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'WL_FoodPage')
-  DROP TABLE [WL_FoodPage];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'WL_FoodPage')
+DROP TABLE [WL_FoodPage];
 CREATE TABLE WL_FoodPage (
-    PID       INT
+    PID       INT  PRIMARY KEY
   , ID        VARCHAR(255)
   , Name      VARCHAR(255)
   , Hide      TINYINT
@@ -248,12 +248,12 @@ CREATE TABLE WL_FoodPage (
 );
 --14
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'WL_FoodSuperType')
-  DROP TABLE [WL_FoodSuperType];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'WL_FoodSuperType')
+DROP TABLE [WL_FoodSuperType];
 CREATE TABLE WL_FoodSuperType (
-    PID       INT
+    PID       INT  PRIMARY KEY
   , ID        VARCHAR(255)
   , Name      VARCHAR(255)
   , Name2     VARCHAR(255)
@@ -266,12 +266,12 @@ CREATE TABLE WL_FoodSuperType (
 
 --  Drop Table [WL_FoodType];
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'WL_FoodType')
-  DROP TABLE [WL_FoodType];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'WL_FoodType')
+DROP TABLE [WL_FoodType];
 CREATE TABLE WL_FoodType (
-    PID           INT
+    PID           INT  PRIMARY KEY
   , ID            VARCHAR(255)
   , Name          VARCHAR(255)
   , Name2         VARCHAR(255)
@@ -283,12 +283,12 @@ CREATE TABLE WL_FoodType (
 
 --16
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'WL_StrResource')
-  DROP TABLE [WL_StrResource];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'WL_StrResource')
+DROP TABLE [WL_StrResource];
 CREATE TABLE WL_StrResource (
-    PID    INT
+    PID    INT  PRIMARY KEY
   , ID     VARCHAR(255)
   , Type   VARCHAR(255)
   , StrKey VARCHAR(255)
@@ -300,36 +300,36 @@ CREATE TABLE WL_StrResource (
 
 --17
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'XiTongYongHu')
-  DROP TABLE [XiTongYongHu];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'XiTongYongHu')
+DROP TABLE [XiTongYongHu];
 CREATE TABLE XiTongYongHu (
-    PID       INT
+    PID       INT  PRIMARY KEY
   , StaffID   VARCHAR(255)
   , StaffName VARCHAR(255)
 );
 
 --18
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'ZuoFaLeiBie')
-  DROP TABLE [ZuoFaLeiBie];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'ZuoFaLeiBie')
+DROP TABLE [ZuoFaLeiBie];
 CREATE TABLE ZuoFaLeiBie (
-    PID  INT
+    PID  INT  PRIMARY KEY
   , ID   VARCHAR(255)
   , Name VARCHAR(255)
 );
 
 --19
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'ZuoTai')
-  DROP TABLE [ZuoTai];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'ZuoTai')
+DROP TABLE [ZuoTai];
 CREATE TABLE ZuoTai (
-    PID         INT
+    PID         INT  PRIMARY KEY
   , ZuoTaiID    VARCHAR(255)
   , ZuoTaiName  VARCHAR(255)
   , ZuoTaiName2 VARCHAR(255)
@@ -338,12 +338,12 @@ CREATE TABLE ZuoTai (
 );
 --- 20
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'ZuoTaiQuYu')
-  DROP TABLE [ZuoTaiQuYu];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'ZuoTaiQuYu')
+DROP TABLE [ZuoTaiQuYu];
 CREATE TABLE ZuoTaiQuYu (
-    PID             INT
+    PID             INT  PRIMARY KEY
   , ZuoTaiQuYuID    VARCHAR(255)
   , ZuoTaiQuYuName  VARCHAR(255)
   , ZuoTaiQuYuName2 VARCHAR(255)
@@ -355,89 +355,89 @@ CREATE TABLE ZuoTaiQuYu (
 ---------------------------------------- 新增 ---------------------------------
 -- 17.客户类型（ClientType）
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'ClientType')
-  DROP TABLE [ClientType];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'ClientType')
+DROP TABLE [ClientType];
 
 --删除表：
 --.10.	推送消息记录（PushMessageRecord）
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'PushMessageRecord')
-  DROP TABLE [PushMessageRecord];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'PushMessageRecord')
+DROP TABLE [PushMessageRecord];
 
 -- 9.	推送的模板消息（TemplateMessage）
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'TemplateMessage')
-  DROP TABLE [TemplateMessage];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'TemplateMessage')
+DROP TABLE [TemplateMessage];
 
 --.8.	预订食物信息（BookFoodInfo）
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'BookFoodInfo')
-  DROP TABLE [BookFoodInfo];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'BookFoodInfo')
+DROP TABLE [BookFoodInfo];
 
 --7.	订单信息（BillInfo）
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'BillInfo')
-  DROP TABLE [BillInfo];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'BillInfo')
+DROP TABLE [BillInfo];
 
 --6.	注册用户信息（ClientInfo）
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'ClientInfo')
-  DROP TABLE [ClientInfo];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'ClientInfo')
+DROP TABLE [ClientInfo];
 
 --5.	粉丝信息(FansInfo)
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'FansInfo')
-  DROP TABLE [FansInfo];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'FansInfo')
+DROP TABLE [FansInfo];
 
 --4	微信服务号（订阅号）信息（ServiceInfo）
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'ServiceInfo')
-  DROP TABLE [ServiceInfo];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'ServiceInfo')
+DROP TABLE [ServiceInfo];
 
 --3、后台管理用户信息表（DaemonAdminInfo）
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'DaemonAdminInfo')
-  DROP TABLE [DaemonAdminInfo];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'DaemonAdminInfo')
+DROP TABLE [DaemonAdminInfo];
 
 --2、餐厅信息表（RestaurantInfo）
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'RestaurantInfo')
-  DROP TABLE [RestaurantInfo];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'RestaurantInfo')
+DROP TABLE [RestaurantInfo];
 
 --1、餐厅集团信息（RestaurantGroup）
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'RestaurantGroup')
-  DROP TABLE [RestaurantGroup];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'RestaurantGroup')
+DROP TABLE [RestaurantGroup];
 
 
 --1、餐厅集团信息（RestaurantGroup）
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'RestaurantGroup')
-  DROP TABLE [RestaurantGroup];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'RestaurantGroup')
+DROP TABLE [RestaurantGroup];
 CREATE TABLE RestaurantGroup (
     PID       INT IDENTITY (1, 1) PRIMARY KEY
   , GroupName VARCHAR(255) NOT NULL UNIQUE
@@ -445,10 +445,10 @@ CREATE TABLE RestaurantGroup (
 
 --2、餐厅信息表（RestaurantInfo）
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'RestaurantInfo')
-  DROP TABLE [RestaurantInfo];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'RestaurantInfo')
+DROP TABLE [RestaurantInfo];
 -- 分店GroupID、Name、Address复合键唯一
 CREATE TABLE RestaurantInfo (
     PID      INT IDENTITY (1, 1) PRIMARY KEY
@@ -465,10 +465,10 @@ ALTER TABLE RestaurantInfo ADD CONSTRAINT GNA_U UNIQUE (GroupID, Name, Address)
 
 --3、后台管理用户信息表（DaemonAdminInfo）
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'DaemonAdminInfo')
-  DROP TABLE [DaemonAdminInfo];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'DaemonAdminInfo')
+DROP TABLE [DaemonAdminInfo];
 CREATE TABLE DaemonAdminInfo (
     PID       INT IDENTITY (1, 1) PRIMARY KEY
   , RestID    INT FOREIGN KEY REFERENCES RestaurantInfo (PID)
@@ -478,10 +478,10 @@ CREATE TABLE DaemonAdminInfo (
 
 --4	微信服务号（订阅号）信息（ServiceInfo）
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'ServiceInfo')
-  DROP TABLE [ServiceInfo];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'ServiceInfo')
+DROP TABLE [ServiceInfo];
 CREATE TABLE ServiceInfo (
     PID       INT IDENTITY (1, 1) PRIMARY KEY
   , RestID    INT
@@ -494,10 +494,10 @@ CREATE TABLE ServiceInfo (
 
 --5.	粉丝信息(FansInfo)
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'FansInfo')
-  DROP TABLE [FansInfo];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'FansInfo')
+DROP TABLE [FansInfo];
 CREATE TABLE FansInfo (
     PID           INT IDENTITY (1, 1) PRIMARY KEY
   , WebChatID     VARCHAR(64) NOT NULL UNIQUE
@@ -511,28 +511,28 @@ CREATE TABLE FansInfo (
 
 --6.	注册用户信息（ClientInfo）
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'ClientInfo')
-  DROP TABLE [ClientInfo];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'ClientInfo')
+DROP TABLE [ClientInfo];
 CREATE TABLE ClientInfo (
     PID          INT IDENTITY (1, 1) PRIMARY KEY
   , MemberNO     VARCHAR(64) NOT NULL UNIQUE
   , FanInfoId    INT         NOT NULL FOREIGN KEY REFERENCES FansInfo (PID)
   , Email        VARCHAR(64)
+  , LoginMode        VARCHAR(2) NOT NULL DEFAULT 'N'
   , ClientName   VARCHAR(64)
   , Password     VARCHAR(64) NOT NULL
   , Address      VARCHAR(128)
   , ClientTypeId INT
 );
 
-
 --7.	订单信息（BillInfo）
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'BillInfo')
-  DROP TABLE [BillInfo];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'BillInfo')
+DROP TABLE [BillInfo];
 CREATE TABLE BillInfo (
     PID           INT IDENTITY (1, 1) PRIMARY KEY
   , BilllID       VARCHAR(255) UNIQUE NOT NULL
@@ -551,10 +551,10 @@ CREATE TABLE BillInfo (
 
 --.8.	预订食物信息（BookFoodInfo）
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'BookFoodInfo')
-  DROP TABLE [BookFoodInfo];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'BookFoodInfo')
+DROP TABLE [BookFoodInfo];
 CREATE TABLE BookFoodInfo (
     PID         INT IDENTITY (1, 1) PRIMARY KEY
   , BillInfoID  INT NOT NULL FOREIGN KEY REFERENCES BillInfo (PID)
@@ -565,10 +565,10 @@ CREATE TABLE BookFoodInfo (
 
 --.9.	推送的模板消息（TemplatedMessage）
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'TemplateMessage')
-  DROP TABLE [TemplateMessage];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'TemplateMessage')
+DROP TABLE [TemplateMessage];
 CREATE TABLE TemplateMessage (
     PID         INT IDENTITY (1, 1) PRIMARY KEY
   , ToAllUser   BIT           NOT NULL DEFAULT 1
@@ -580,10 +580,10 @@ CREATE TABLE TemplateMessage (
 
 --.10.	推送消息记录（PushMessageRecord）
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'PushMessageRecord')
-  DROP TABLE [PushMessageRecord];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'PushMessageRecord')
+DROP TABLE [PushMessageRecord];
 CREATE TABLE PushMessageRecord (
     PID          INT IDENTITY (1, 1) PRIMARY KEY
   , WebChatID    VARCHAR(64) NOT NULL
@@ -594,10 +594,10 @@ CREATE TABLE PushMessageRecord (
 
 -- 11.	关注事件推送消息表（AdvertisementInfo）
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'AdvertisementInfo')
-  DROP TABLE [AdvertisementInfo];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'AdvertisementInfo')
+DROP TABLE [AdvertisementInfo];
 CREATE TABLE AdvertisementInfo (
     PID         INT IDENTITY (1, 1) PRIMARY KEY
   , ImgUrl      VARCHAR(255)
@@ -607,10 +607,10 @@ CREATE TABLE AdvertisementInfo (
 
 -- 12.	关注事件推送消息表（AdvertisedSchedule）
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'AdvertisedSchedule')
-  DROP TABLE [AdvertisedSchedule];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'AdvertisedSchedule')
+DROP TABLE [AdvertisedSchedule];
 CREATE TABLE AdvertisedSchedule (
     PID       INT IDENTITY (1, 1) PRIMARY KEY
   , ShopId    VARCHAR(64)
@@ -623,10 +623,10 @@ CREATE TABLE AdvertisedSchedule (
 
 -- 13.	关注事件推送消息表（SubcEventPushMsg）
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'SubcEventPushMsg')
-  DROP TABLE [SubcEventPushMsg];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'SubcEventPushMsg')
+DROP TABLE [SubcEventPushMsg];
 CREATE TABLE SubcEventPushMsg (
     PID           INT IDENTITY (1, 1) PRIMARY KEY
   , ServiceInfoID INT         NOT NULL UNIQUE
@@ -636,10 +636,10 @@ CREATE TABLE SubcEventPushMsg (
 
 -- 14.	图文消息表（NewsMsg）
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'NewsMsg')
-  DROP TABLE [NewsMsg];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'NewsMsg')
+DROP TABLE [NewsMsg];
 CREATE TABLE NewsMsg (
     PID         INT IDENTITY (1, 1) PRIMARY KEY
   , Description VARCHAR(255)
@@ -647,10 +647,10 @@ CREATE TABLE NewsMsg (
 
 -- 15.	文章描述表（Article）
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'Article')
-  DROP TABLE [Article];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'Article')
+DROP TABLE [Article];
 CREATE TABLE Article (
     PID         INT IDENTITY (1, 1) PRIMARY KEY
   , NewsMsgID   INT
@@ -661,10 +661,10 @@ CREATE TABLE Article (
 );
 -- 16.回复文字表（Text）
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'Text')
-  DROP TABLE [Text];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'Text')
+DROP TABLE [Text];
 CREATE TABLE Text (
     PID         INT IDENTITY (1, 1) PRIMARY KEY
   , Content     VARCHAR(255)
@@ -672,10 +672,10 @@ CREATE TABLE Text (
 );
 -- 17.客户类型（ClientType）
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'ClientType')
-  DROP TABLE [ClientType];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'ClientType')
+DROP TABLE [ClientType];
 CREATE TABLE ClientType (
     PID         INT IDENTITY (1, 1) PRIMARY KEY
   , Type        VARCHAR(255) NOT NULL
@@ -684,10 +684,10 @@ CREATE TABLE ClientType (
 
 -- 18.	外卖地址信息（TakeOutAddress）
 IF EXISTS(SELECT
-            *
-          FROM INFORMATION_SCHEMA.TABLES
-          WHERE TABLE_NAME = 'TakeOutAddress')
-  DROP TABLE [TakeOutAddress];
+*
+FROM INFORMATION_SCHEMA.TABLES
+WHERE TABLE_NAME = 'TakeOutAddress')
+DROP TABLE [TakeOutAddress];
 CREATE TABLE TakeOutAddress (
     PID         INT IDENTITY (1, 1) PRIMARY KEY
   , MemberNO    VARCHAR(64)  NOT NULL

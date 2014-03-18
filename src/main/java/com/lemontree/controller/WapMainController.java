@@ -3,8 +3,6 @@ package com.lemontree.controller;
 import cn.tisson.framework.utils.MD5Utils;
 import cn.tisson.framework.utils.StringUtils;
 import com.lemontree.bean.User;
-import com.lemontree.common.GlobalCaches;
-import com.lemontree.common.GlobalConstants;
 import com.lemontree.common.LogicHelper;
 import com.lemontree.daemon.dbmgr.model.*;
 import com.lemontree.daemon.dbmgr.service.ClientInfoService;
@@ -30,6 +28,9 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.lemontree.common.GlobalCaches.*;
+import static com.lemontree.common.GlobalConstants.*;
 
 /**
  * User: Jasic
@@ -64,13 +65,35 @@ public class WapMainController {
         List<AdvertisedSchedule> ases = restInfo.getAdvertisedSchedules();
         model.put("ases", ases);
         model.put("shopId", shopId);
-        String fanInfoId = request.getParameter(GlobalConstants.SESSION_FANSINFOID_KEY);
-        request.getSession().setAttribute(GlobalConstants.SESSION_FANSINFOID_KEY, fanInfoId);
-        ClientInfo clientInfo = null;
-        if (StringUtils.isNumeric(fanInfoId)) {
-            Integer fid = Integer.valueOf(fanInfoId);
-            clientInfo = clientInfoService.selectByFanInfoId(fid);
-            request.getSession().setAttribute(GlobalConstants.SESSION_CLIENTINFO_KEY, clientInfo);
+
+        if (LogicHelper.getUser(request.getSession()) == null) {
+            // 获取粉丝信息
+            FansInfo fansInfo = null;
+            String fanInfoId = request.getParameter(SESSION_FANSINFOID_KEY);
+            if (StringUtils.isNumeric(fanInfoId)) {
+                fansInfo = DB_CACHE_FANS_INFO.get(Integer.valueOf(fanInfoId));
+            }
+
+            // 获取平台信息
+            ClientInfo clientInfo = null;
+            if (fansInfo != null) {
+                Integer fid = fansInfo.getPid();
+                clientInfo = clientInfoService.selectByFanInfoId(fid);
+            }
+
+            LogicHelper.saveSessionUser(request.getSession(), clientInfo, fansInfo);
+
+            if (clientInfo != null) {
+                // 自动登录模式
+                if (LOGIN_MODE_AUTO.equalsIgnoreCase(clientInfo.getLoginmode())) {
+                    LogicHelper.getUser(request.getSession()).setHasLogin(true);
+                }
+
+                // 手动登录
+                else {
+                    LogicHelper.getUser(request.getSession()).setHasLogin(false);
+                }
+            }
         }
         return "wapindex";
     }
@@ -95,9 +118,8 @@ public class WapMainController {
             return null;
         }
 
-        Object o = request.getSession().getAttribute(GlobalConstants.SESSION_USER_KEY);
+        Object o = request.getSession().getAttribute(SESSION_USER_KEY);
         if (o == null) {
-
             model.put("user", null);
         } else if (o instanceof User) {
             User user = (User) o;
@@ -151,7 +173,7 @@ public class WapMainController {
         model.put("shopName", shopName == null ? shopId : shopName);
         model.put("shopId", shopId);
 
-        List<CaiPingXiaoLei> caiPingXiaoLeis = GlobalCaches.CAIPINGXIAOLEI_SQLITE_DATA.get(shopId);
+        List<CaiPingXiaoLei> caiPingXiaoLeis = CAIPINGXIAOLEI_SQLITE_DATA.get(shopId);
         model.put("caiPingXiaoLeis", caiPingXiaoLeis);
 
         return "orderDishes";
@@ -176,7 +198,7 @@ public class WapMainController {
             return null;
         }
 
-        List clientTypes = new ArrayList(GlobalCaches.DB_CACHE_CLIENT_TYPE);
+        List clientTypes = new ArrayList(DB_CACHE_CLIENT_TYPE);
 
         // Add default
         {
@@ -252,12 +274,12 @@ public class WapMainController {
         String name = request.getParameter("name");
         String phone = request.getParameter("phone");
         String address = request.getParameter("address");
-        String type = request.getParameter(GlobalConstants.EDIT_ADDRESS_TYPE);
-        if (type.equalsIgnoreCase(GlobalConstants.ADDRESS_UPDATE)) {
-            model.put(GlobalConstants.EDIT_ADDRESS_TYPE, type);
+        String type = request.getParameter(EDIT_ADDRESS_TYPE);
+        if (type.equalsIgnoreCase(ADDRESS_UPDATE)) {
+            model.put(EDIT_ADDRESS_TYPE, type);
             model.put("pid", request.getParameter("pid"));
         } else {
-            model.put(GlobalConstants.EDIT_ADDRESS_TYPE, GlobalConstants.ADDRESS_ADD);
+            model.put(EDIT_ADDRESS_TYPE, ADDRESS_ADD);
         }
         model.put("name", name);
         model.put("phone", phone);
@@ -288,6 +310,26 @@ public class WapMainController {
         return "editAddress";
     }
 
+    /**
+     * 订单记录页面
+     *
+     * @return
+     */
+    @RequestMapping(value = "/{shopId:[\\S]{1,30}}/record", method = {RequestMethod.GET, RequestMethod.POST})
+    public String orderFrame(ModelMap model, HttpServletRequest request, @PathVariable("shopId") final String shopId) {
+
+        String path = request.getContextPath();
+        String baPath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path;
+
+        RestaurantInfo restInfo = LogicHelper.findResturant(shopId);
+
+        if (restInfo == null) {
+            // TODO 没找到相关餐馆
+            return null;
+        }
+
+        return "record";
+    }
 
     /**
      * -------------------------------------- Action 处理 ------------------------------------------
@@ -304,10 +346,24 @@ public class WapMainController {
         model.put("shopId", shopId);
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String keepLogin = request.getParameter("keepLogin");
 
-        ClientInfo clientInfo = (ClientInfo) request.getSession().getAttribute(GlobalConstants.SESSION_CLIENTINFO_KEY);
+        if (LOGIN_MODE_AUTO.equalsIgnoreCase(keepLogin)) {
+            keepLogin = LOGIN_MODE_AUTO;
+        } else {
+            keepLogin = LOGIN_MODE_MANUAL;
+        }
+
+        User user = LogicHelper.getUser(request.getSession());
+
+        ClientInfo clientInfo = (user == null) ? null : user.getClientInfo();
+
+        // 使用手机号码作为会员码
+        if (!clientInfo.getMemberno().equals(username)) {
+            clientInfo = null;
+        }
+
         clientInfo = (clientInfo != null) ? clientInfo : clientInfoService.selectByMemNo(username);
-
 
         if (clientInfo == null) {
             return "用户绑定手机号码[" + username + "]不在存";
@@ -320,9 +376,13 @@ public class WapMainController {
 //            return "密码不正确";
 //        }
 
-        Integer fansInfoId = Integer.valueOf((String) request.getSession().getAttribute(GlobalConstants.SESSION_FANSINFOID_KEY));
-        FansInfo fansInfo = GlobalCaches.DB_CACHE_FANS_INFO.get(fansInfoId);
-        LogicHelper.saveSessionUser(request.getSession(), clientInfo, fansInfo);
+        // 设置登录模块并更新
+        if (keepLogin != null && !clientInfo.getLoginmode().equalsIgnoreCase(keepLogin)) {
+            clientInfo.setLoginmode(keepLogin);
+            clientInfoService.updateByPrimaryKeySelective(clientInfo);
+        }
+
+        LogicHelper.getUser(request.getSession()).setHasLogin(true);
         return "success";
     }
 
@@ -335,10 +395,14 @@ public class WapMainController {
     public String logoutAction(ModelMap model, RedirectAttributes attr, HttpServletRequest request, HttpServletResponse response, @PathVariable("shopId") final String shopId) throws IOException {
 
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute(GlobalConstants.SESSION_USER_KEY);
-        attr.addAttribute(GlobalConstants.SESSION_FANSINFOID_KEY, user.getFansInfo().getPid());
+        User user = LogicHelper.getUser(session);
+        attr.addAttribute(SESSION_FANSINFOID_KEY, user.getFansInfo().getPid());
         model.addAttribute(attr);
-        session.removeAttribute(GlobalConstants.SESSION_USER_KEY);
+        user.setHasLogin(false);
+
+        ClientInfo clientInfo = user.getClientInfo();
+        clientInfo.setLoginmode(LOGIN_MODE_MANUAL);
+        clientInfoService.updateByPrimaryKeySelective(clientInfo);
         return "redirect:/wap/" + shopId;
     }
 
@@ -347,7 +411,7 @@ public class WapMainController {
      *
      * @return
      */
-    @RequestMapping(value = "/{shopId:[\\S]{1,30}}/registerAction", params = {GlobalConstants.SESSION_FANSINFOID_KEY}, method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "/{shopId:[\\S]{1,30}}/registerAction", params = {SESSION_FANSINFOID_KEY}, method = {RequestMethod.GET, RequestMethod.POST})
     public
     @ResponseBody
     String registerAction(ModelMap model, HttpServletRequest request, @PathVariable("shopId") final String shopId) {
@@ -364,7 +428,7 @@ public class WapMainController {
                 // TODO 没找到相关餐馆
                 return null;
             }
-            String fanInfoIdStr = request.getParameter(GlobalConstants.SESSION_FANSINFOID_KEY);
+            String fanInfoIdStr = request.getParameter(SESSION_FANSINFOID_KEY);
             if (!StringUtils.isNumeric(fanInfoIdStr)) {
                 return "系统参数错误！";
             }
@@ -387,11 +451,11 @@ public class WapMainController {
             }
 
             clientInfo = clientInfoService.selectByFanInfoId(fanInfoId);
-            if (clientInfo == null) {
+            if (clientInfo != null) {
                 return "已经绑定手机号码[" + clientInfo.getMemberno() + "]";
             }
 
-//            if (!StringUtil.isMatch(GlobalConstants.PHONE_REGEX_STR, phone)) {
+//            if (!StringUtil.isMatch(PHONE_REGEX_STR, phone)) {
 //                return "不是完整的11位手机号或者正确的手机号前七位";
 //            }
 //
@@ -424,7 +488,7 @@ public class WapMainController {
             User user = new User();
             user.setClientInfo(clientInfo);
             user.setFansInfo(fansInfo);
-            request.getSession().setAttribute(GlobalConstants.SESSION_USER_KEY, user);
+            request.getSession().setAttribute(SESSION_USER_KEY, user);
 
             return "success";
         } catch (Exception e) {
@@ -438,16 +502,16 @@ public class WapMainController {
      *
      * @return
      */
-    @RequestMapping(value = "/{shopId:[\\S]{1,30}}/addressAction", params = {GlobalConstants.EDIT_ADDRESS_TYPE}, method = {RequestMethod.GET, RequestMethod.POST})
+    @RequestMapping(value = "/{shopId:[\\S]{1,30}}/addressAction", params = {EDIT_ADDRESS_TYPE}, method = {RequestMethod.GET, RequestMethod.POST})
     public
     @ResponseBody
     String addressAction(ModelMap model, RedirectAttributes attr, HttpServletRequest request, HttpServletResponse response, @PathVariable("shopId") final String shopId) throws IOException {
 
 //        HttpSession session = request.getSession();
-//        User user = (User) session.getAttribute(GlobalConstants.SESSION_USER_KEY);
-//        attr.addAttribute(GlobalConstants.SESSION_FANSINFOID_KEY, user.getFansInfo().getPid());
+//        User user = (User) session.getAttribute(SESSION_USER_KEY);
+//        attr.addAttribute(SESSION_FANSINFOID_KEY, user.getFansInfo().getPid());
 //        model.addAttribute(attr);
-//        session.removeAttribute(GlobalConstants.SESSION_USER_KEY);
+//        session.removeAttribute(SESSION_USER_KEY);
 
         User user = LogicHelper.getUser(request.getSession());
 
@@ -468,7 +532,7 @@ public class WapMainController {
 
         // 增加
         // 更改
-        if (type.equalsIgnoreCase(GlobalConstants.ADDRESS_ADD) || type.equalsIgnoreCase(GlobalConstants.ADDRESS_UPDATE)) {
+        if (type.equalsIgnoreCase(ADDRESS_ADD) || type.equalsIgnoreCase(ADDRESS_UPDATE)) {
             if (StringUtils.hasEmpty(name)) {
                 return "联系人不能为空";
             }
@@ -493,10 +557,13 @@ public class WapMainController {
         }
 
         // 删除
-        else if (type.equalsIgnoreCase(GlobalConstants.ADDRESS_DELETE)) {
+        else if (type.equalsIgnoreCase(ADDRESS_DELETE)) {
             if (pid != null) {
                 int count = takeOutAddressService.deleteByPrimaryKey(pid);
-                logger.info("删除[" + phone + "]的外卖地址数量为" + count);
+                TakeOutAddress addr = takeOutAddressService.selectByPrimaryKey(pid);
+                if (addr != null) {
+                    logger.info("删除[" + addr.getPhone() + "]的外卖地址数量为" + count);
+                }
             }
         } else {
             return "系统错误，没指定操作类型!";

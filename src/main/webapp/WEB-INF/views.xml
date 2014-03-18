@@ -21,6 +21,10 @@
         <property name="url" value="/WEB-INF/pages/wap/views/login.jsp"/>
     </bean>
 
+    <bean id="record" class="org.springframework.web.servlet.view.JstlView">
+        <property name="url" value="/WEB-INF/pages/wap/views/record.jsp"/>
+    </bean>
+
     <bean id="orderDishes" class="org.springframework.web.servlet.view.JstlView">
         <property name="url" value="/WEB-INF/pages/wap/views/orderDishes.jsp"/>
     </bean>

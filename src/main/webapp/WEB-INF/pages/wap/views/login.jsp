@@ -1,3 +1,5 @@
+<%@ page import="com.lemontree.bean.User" %>
+<%@ page import="com.lemontree.common.LogicHelper" %>
 <%@ page contentType="text/html;charset=UTF-8"
          language="java"
          pageEncoding="UTF-8" %>
@@ -5,21 +7,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type"
-          content="text/html; charset=utf-8" />
+          content="text/html; charset=utf-8"/>
     <meta name="viewport"
-          content="width=device-width, initial-scale=1" />
+          content="width=device-width, initial-scale=1"/>
 
     <title>${shopId}商户登录</title>
     <link rel="stylesheet"
-          href="${_cssPath}/jquery.mobile-1.4.0.css" />
+          href="${_cssPath}/jquery.mobile-1.4.0.css"/>
     <link rel="stylesheet"
-          href="${_cssPath}/jqm-demos.css" />
+          href="${_cssPath}/jqm-demos.css"/>
     <link rel="stylesheet"
-          href="${_cssPath}/idangerous.swiper.css" />
+          href="${_cssPath}/idangerous.swiper.css"/>
     <link rel="stylesheet"
-          href="${_cssPath}/common.css" />
+          href="${_cssPath}/common.css"/>
     <link rel="stylesheet"
-          href="${_cssPath}/index.css" />
+          href="${_cssPath}/index.css"/>
 
     <script language="javascript"
             src="${_jsPath}/jquery.js"></script>
@@ -45,7 +47,8 @@
                         data: $("form#loginform").serialize(),
                         success: function (msg) {
                             if (msg == 'success') {
-                                $.mobile.changePage("customer", "slidedown", true, true);
+                                window.location = "customer";
+//                                $.mobile.changePage("customer", "slidedown", true, true);
                             } else {
                                 alert(msg);
                             }
@@ -101,25 +104,28 @@
                            name="username"
                            id="username"
                            placeholder="输入注册时的11位手机号码"
-                            <c:if test="${sessionScope.clientInfo!=null}">
-           <c:out value="value=${sessionScope.clientInfo.memberno}" />
-            </c:if> />
+                            <c:if test="${sessionScope.LOGIN_USER_KEY.clientInfo!=null}">
+                                <c:out value="value=${sessionScope.LOGIN_USER_KEY.clientInfo.memberno}"/>
+                            </c:if> />
                     <br>
                     <input type="password"
                            name="password"
                            id="password"
                            placeholder="输入密码"
-                           value="" />
+                           value=""/>
                     <fieldset data-role="controlgroup">
+
                         <input type="checkbox"
-                               name="checkbox-1"
+                               name="keepLogin"
                                id="checkbox-1"
-                               class="custom" />
+                               class="custom"
+                               checked="true"
+                               value="Y"/>
                         <label for="checkbox-1">保持登录状态</label>
                     </fieldset>
-                                   <a data-role="button"
-                                      id="submit"
-                                      data-theme="b">登录</a>
+                    <a data-role="button"
+                       id="submit"
+                       data-theme="b">登录</a>
                 </form>
             </div>
         </div>

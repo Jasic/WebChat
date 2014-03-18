@@ -85,7 +85,7 @@
             <mvc:exclude-mapping path="/wap/*/registerAction"/>
             <mvc:exclude-mapping path="/wap/*/"/>
 
-            <bean class="com.lemontree.webchat.interceptor.WapSecurityIntc" />
+            <bean class="com.lemontree.interceptor.WapSecurityIntc" />
         </mvc:interceptor>
     </mvc:interceptors>
 

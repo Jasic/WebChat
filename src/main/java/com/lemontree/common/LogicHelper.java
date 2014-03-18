@@ -126,6 +126,13 @@ public class LogicHelper {
         return null;
     }
 
+    /**
+     * 将用户信息保存在session中
+     *
+     * @param session
+     * @param clientInfo
+     * @param fansInfo
+     */
     public static void saveSessionUser(HttpSession session, ClientInfo clientInfo, FansInfo fansInfo) {
         User user = new User();
         user.setClientInfo(clientInfo);
@@ -133,13 +140,14 @@ public class LogicHelper {
         session.setAttribute(GlobalConstants.SESSION_USER_KEY, user);
     }
 
+    /**
+     * 获取用户信息
+     *
+     * @param session
+     * @return
+     */
     public static User getUser(HttpSession session) {
-
-        Object o = session.getAttribute(GlobalConstants.SESSION_USER_KEY);
-        if (o == null || !(o instanceof User)) {
-            return null;
-        }
-
-        return (User) o;
+        Object oUser = session.getAttribute(GlobalConstants.SESSION_USER_KEY);
+        return oUser == null ? null : (User) oUser;
     }
 }

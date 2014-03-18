@@ -9,6 +9,8 @@ public class ClientInfo {
 
     private String email;
 
+    private String loginmode;
+
     private String clientname;
 
     private String password;
@@ -47,6 +49,14 @@ public class ClientInfo {
 
     public void setEmail(String email) {
         this.email = email == null ? null : email.trim();
+    }
+
+    public String getLoginmode() {
+        return loginmode;
+    }
+
+    public void setLoginmode(String loginmode) {
+        this.loginmode = loginmode == null ? null : loginmode.trim();
     }
 
     public String getClientname() {

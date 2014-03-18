@@ -1,0 +1,58 @@
+/**
+ * ΢���_����
+ * @author luanluan, yanwenkai, shiyanchao
+ */
+
+body,article,section,h1,h2,hgroup,p,a,ul,ol,li,em,div,small,span,footer,canvas,figure,figcaption,input{margin:0;padding:0;}
+body{background-color:#fff;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-user-select:none;}
+img{border:none;}
+input:focus{outline:0 none;
+	-webkit-user-modify:read-write-plaintext-only;-webkit-tap-highlight-color:rgba(0,0,0,0);}
+input[type=search]{-webkit-appearance:none;}
+*[hidden]{display:none !important;}
+a{text-decoration:none;cursor:pointer;}
+a.autotel{text-decoration:none;color:inherit;}
+small,small em{font-size:15px;}
+figure[hidden]{display:none;}
+.box:after{ clear: both; display: block; visibility: hidden; height: 0; content: "."; }
+.box{ *zoom: 1; }
+.inner{display:block;height:100%;padding:0 7px;text-align:center;}
+.center{width:320px;margin:0 auto;position:relative;}
+.pdo{position:absolute;top:0;left:0;display:inline-block;}
+.pdo[hidden]{display:none;}
+.footFix{width:100%;text-align:center;position:fixed;left:0;bottom:0;z-index:99;}
+
+/*ѡ������*/
+#page_count{
+	-webkit-background-size:100% 161px; background-size:100% 161px;
+	padding-bottom:35px;
+}
+
+#page_count .main{padding-top:35px;
+	background:url('../images/wei_canyin/pagecount_main_bk.jpg') no-repeat 50% 35px;
+	-webkit-background-size:173px 173px; background-size:173px 173px;
+}
+#page_count section{width:318px;margin:0 1px;overflow:hidden;}
+
+#page_count li.curr{font-size:80px;color:#fff;text-shadow:1px 1px #877562;font-weight:bold;
+	-webkit-transition:font-size .2s ease-in-out;
+	transition:font-size .2s ease-in-out;
+}
+#page_count li.left{padding-right:58px;width:48px;
+	background:url('../images/wei_canyin/pagecount_main_arrow_l.png') no-repeat 42px 50%;
+	-webkit-background-size:43px 23px;background-size:43px 23px;
+}
+#page_count li.right{padding-left:58px;width:48px;
+	background:url('../images/wei_canyin/pagecount_main_arrow_r.png') no-repeat 26px 50%;
+	-webkit-background-size:43px 23px;background-size:43px 23px;
+}
+
+#page_count .notice {
+    padding-top: 12px;
+    text-align: center;
+}
+#page_count .notice b {
+    color: #5E6060;
+    font-size: 16px;
+    line-height: 28px;
+}

@@ -43,13 +43,13 @@
 
             $("#customer").click(function(){
                 <c:choose>
-                <c:when test="${clientInfo==null}">
+                <c:when test="${sessionScope.LOGIN_USER_KEY.clientInfo==null}">
                 var redrect = window.confirm("您未进行绑定，请先绑定个人信息！");
                 if (redrect) {
                     location.href = "/wap/${shopId}/register";
                 }
                 </c:when>
-                <c:when test="${sessionScope.LOGIN_USER_KEY==null}">
+                <c:when test="${!sessionScope.LOGIN_USER_KEY.hasLogin}">
                 var redrect = window.confirm("您未登录，请先登录！");
                 if (redrect) {
                     location.href = "/wap/${shopId}/login";

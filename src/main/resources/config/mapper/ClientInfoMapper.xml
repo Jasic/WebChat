@@ -6,13 +6,14 @@
     <result column="MemberNO" property="memberno" jdbcType="VARCHAR" />
     <result column="FanInfoId" property="faninfoid" jdbcType="INTEGER" />
     <result column="Email" property="email" jdbcType="VARCHAR" />
+    <result column="LoginMode" property="loginmode" jdbcType="VARCHAR" />
     <result column="ClientName" property="clientname" jdbcType="VARCHAR" />
     <result column="Password" property="password" jdbcType="VARCHAR" />
     <result column="Address" property="address" jdbcType="VARCHAR" />
     <result column="ClientTypeId" property="clienttypeid" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    PID, MemberNO, FanInfoId, Email, ClientName, Password, Address, ClientTypeId
+    PID, MemberNO, FanInfoId, Email, LoginMode, ClientName, Password, Address, ClientTypeId
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -20,29 +21,19 @@
     from ClientInfo
     where PID = #{pid,jdbcType=INTEGER}
   </select>
-    <select id="selectByMemNo" resultMap="BaseResultMap" parameterType="java.lang.String" >
-        select
-        <include refid="Base_Column_List" />
-        from ClientInfo
-        where MemberNO = #{MemberNO,jdbcType=VARCHAR}
-    </select>
-    <select id="selectByFanInfoId" resultMap="BaseResultMap" parameterType="java.lang.String">
-        select
-        <include refid="Base_Column_List"/>
-        from ClientInfo
-        where FanInfoId = #{FanInfoId,jdbcType=INTEGER}
-    </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from ClientInfo
     where PID = #{pid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.lemontree.daemon.dbmgr.model.ClientInfo" >
     insert into ClientInfo (PID, MemberNO, FanInfoId, 
-      Email, ClientName, Password, 
-      Address, ClientTypeId)
+      Email, LoginMode, ClientName, 
+      Password, Address, ClientTypeId
+      )
     values (#{pid,jdbcType=INTEGER}, #{memberno,jdbcType=VARCHAR}, #{faninfoid,jdbcType=INTEGER}, 
-      #{email,jdbcType=VARCHAR}, #{clientname,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{address,jdbcType=VARCHAR}, #{clienttypeid,jdbcType=INTEGER})
+      #{email,jdbcType=VARCHAR}, #{loginmode,jdbcType=VARCHAR}, #{clientname,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{clienttypeid,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.lemontree.daemon.dbmgr.model.ClientInfo" >
     insert into ClientInfo
@@ -58,6 +49,9 @@
       </if>
       <if test="email != null" >
         Email,
+      </if>
+      <if test="loginmode != null" >
+        LoginMode,
       </if>
       <if test="clientname != null" >
         ClientName,
@@ -85,6 +79,9 @@
       <if test="email != null" >
         #{email,jdbcType=VARCHAR},
       </if>
+      <if test="loginmode != null" >
+        #{loginmode,jdbcType=VARCHAR},
+      </if>
       <if test="clientname != null" >
         #{clientname,jdbcType=VARCHAR},
       </if>
@@ -111,6 +108,9 @@
       <if test="email != null" >
         Email = #{email,jdbcType=VARCHAR},
       </if>
+      <if test="loginmode != null" >
+        LoginMode = #{loginmode,jdbcType=VARCHAR},
+      </if>
       <if test="clientname != null" >
         ClientName = #{clientname,jdbcType=VARCHAR},
       </if>
@@ -131,10 +131,24 @@
     set MemberNO = #{memberno,jdbcType=VARCHAR},
       FanInfoId = #{faninfoid,jdbcType=INTEGER},
       Email = #{email,jdbcType=VARCHAR},
+      LoginMode = #{loginmode,jdbcType=VARCHAR},
       ClientName = #{clientname,jdbcType=VARCHAR},
       Password = #{password,jdbcType=VARCHAR},
       Address = #{address,jdbcType=VARCHAR},
       ClientTypeId = #{clienttypeid,jdbcType=INTEGER}
     where PID = #{pid,jdbcType=INTEGER}
   </update>
+
+    <select id="selectByMemNo" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from ClientInfo
+        where MemberNO = #{MemberNO,jdbcType=VARCHAR}
+    </select>
+    <select id="selectByFanInfoId" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from ClientInfo
+        where FanInfoId = #{FanInfoId,jdbcType=INTEGER}
+    </select>
 </mapper>

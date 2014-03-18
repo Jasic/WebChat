@@ -20,7 +20,7 @@ public class GlobalCaches {
     // 微信服务号（订阅号）信息（ServiceInfo）(微信号|实体）
     public static Map<String, ServiceInfo> DB_CACHE_SERVICE_INFO = new HashMap<String, ServiceInfo>();
 
-    // 粉丝信息(FansInfo)
+    // 粉丝信息(FansInfo)(PID|实体)
     public static Map<Integer, FansInfo> DB_CACHE_FANS_INFO = new HashMap<Integer, FansInfo>();
     // 餐饮组信息(FansInfo)
     public static Map<Integer, RestaurantGroup> DB_CACHE_RESTAURANT_GROUP_INFO = new HashMap<Integer, RestaurantGroup>();

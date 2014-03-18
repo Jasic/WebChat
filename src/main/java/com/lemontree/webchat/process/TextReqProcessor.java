@@ -30,7 +30,7 @@ public class TextReqProcessor extends AProcessor<TextReqMsg> {
         respMsg.setFromUserName(msg.getToUserName());
         String respText = null;
 
-        respText = "<a href='http://192.168.1.111:8080/wap/ZCX?fansInfoId=1'>" + msg.getContent() +" </a>";
+        respText = "<a href='http://192.168.1.100:8080/wap/ZCX?fansInfoId=1'>" + msg.getContent() +" </a>";
 
         respMsg.setContent(respText);
         respMsg.setCreateTime(System.currentTimeMillis() / 1000);

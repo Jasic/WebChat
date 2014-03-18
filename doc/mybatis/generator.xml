@@ -7,10 +7,10 @@
     <!-- 引入数据库驱动包路径 -->
 
     <!-- sqlserver驱动-->
-    <!--<classPathEntry location="sqljdbc4.jar"/>-->
+    <classPathEntry location="sqljdbc4.jar"/>
 
     <!-- sqlite驱动-->
-    <classPathEntry location="/opt/wspace/employ/WebChat/src/main/webapp/WEB-INF/lib/sqlite-jdbc-3.6.20.1.jar"/>
+    <!--<classPathEntry location="/opt/wspace/employ/WebChat/src/main/webapp/WEB-INF/lib/sqlite-jdbc-3.6.20.1.jar"/>-->
 
 
     <context id="Tables" targetRuntime="MyBatis3">
@@ -20,18 +20,18 @@
         </commentGenerator>
 
         <!-- sqlserver-->
-        <!--<jdbcConnection driverClass="com.microsoft.sqlserver.jdbc.SQLServerDriver"-->
-                        <!--connectionURL="jdbc:sqlserver://192.168.1.18:1433;databaseName=WebChatDining"-->
-                        <!--userId="sa"-->
-                        <!--password="sa123">-->
-        <!--</jdbcConnection>-->
+        <jdbcConnection driverClass="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+                        connectionURL="jdbc:sqlserver://192.168.1.18:1433;databaseName=WebChatDining"
+                        userId="sa"
+                        password="sa123">
+        </jdbcConnection>
 
         <!-- sqlite-->
-        <jdbcConnection driverClass="org.sqlite.JDBC"
-                        connectionURL="jdbc:sqlite:/opt/wspace/employ/WebChat/doc/lemontree.db"
-                        userId=""
-                        password="">
-        </jdbcConnection>
+        <!--<jdbcConnection driverClass="org.sqlite.JDBC"-->
+                        <!--connectionURL="jdbc:sqlite:/opt/wspace/employ/WebChat/doc/lemontree.db"-->
+                        <!--userId=""-->
+                        <!--password="">-->
+        <!--</jdbcConnection>-->
 
 
         <javaTypeResolver>
@@ -56,13 +56,13 @@
 
 
         <!-- 新增表 -->
-        <table tableName="CaiPingXiaoLei" domainObjectName="CaiPingXiaoLei" selectByPrimaryKeyQueryId="PID" enableCountByExample="false"
-               enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"
-               selectByExampleQueryId="false"/>
+        <!--<table tableName="CaiPingXiaoLei" domainObjectName="CaiPingXiaoLei" selectByPrimaryKeyQueryId="PID" enableCountByExample="false"-->
+               <!--enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
 
-        <table tableName="CaiPing" domainObjectName="CaiPing" selectByPrimaryKeyQueryId="PID enableCountByExample="false"
-               enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"
-               selectByExampleQueryId="false"/>
+        <!--<table tableName="CaiPing" domainObjectName="CaiPing" selectByPrimaryKeyQueryId="PID" enableCountByExample="false"-->
+               <!--enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
 
 
         <!--<table tableName="AdvertisedSchedule" domainObjectName="AdvertisedSchedule" enableCountByExample="false"-->
@@ -100,9 +100,9 @@
                <!--enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"-->
                <!--selectByExampleQueryId="false"/>-->
 
-        <!--<table tableName="ClientInfo" domainObjectName="ClientInfo" enableCountByExample="false"-->
-               <!--enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"-->
-               <!--selectByExampleQueryId="false"/>-->
+        <table tableName="ClientInfo" domainObjectName="ClientInfo" enableCountByExample="false"
+               enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"
+               selectByExampleQueryId="false"/>
         <!--<table tableName="ClientType" domainObjectName="ClientType" enableCountByExample="false"-->
                <!--enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"-->
                <!--selectByExampleQueryId="false"/>-->
