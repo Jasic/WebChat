@@ -46,8 +46,10 @@ public class RefreshHelper {
     @Resource
     ClientTypeService clientTypeService;
 
-    public void refresh() throws Exception {
+    @Resource
+    TextService textService;
 
+    public void refresh() throws Exception {
 
         refreshRestaurantGroup();
         refreshServiceInfo();
@@ -56,6 +58,7 @@ public class RefreshHelper {
         refreshSubcEventPushMsg();
         refreshNewsMsg();
         refreshClientType();
+        refreshTextMsg();
 
     }
 
@@ -76,6 +79,21 @@ public class RefreshHelper {
         logger.info("--刷新餐厅组数量:" + list.size());
     }
 
+    /**
+     * 文字推送消息表(TextMsg)
+     */
+    public void refreshTextMsg() throws Exception {
+
+        List<Text> list = textService.getAll();
+        synchronized (GlobalCaches.DB_CACHE_TEXT_MSG) {
+            GlobalCaches.DB_CACHE_TEXT_MSG = new HashMap<Integer, Text>();
+
+            for (Text info : list) {
+                GlobalCaches.DB_CACHE_TEXT_MSG.put(info.getPid(), info);
+            }
+        }
+        logger.info("--文字推送消息表数量:" + list.size());
+    }
     /**
      * 刷新服务号、订阅号
      *

@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <title>微订餐首页</title>
 
@@ -81,7 +81,7 @@
                 <c:forEach var="i" items="${ases}">
                 <div class="swiper-slide" title="activity.html">
                     <a href="${i.advertisementInfo.forwardurl}">
-                     <img src="${_imgPath}/shopx/${shopId}/${i.advertisementInfo.imgurl}" title="${i.advertisementInfo.description}" width="100%" />
+                     <img src="${_restaurantPath}/${shopId}/img/${i.advertisementInfo.imgurl}" title="${i.advertisementInfo.description}" width="100%" />
                     </a>
                 </div>
                 </c:forEach>
@@ -95,7 +95,7 @@
                 <div class="ui-block-a ui-block-item">
                     <div id="shake" class="ui-bar ui-bar-a padding-0 back-yaoyiyao">
                         <span class="small-menu-title">刮刮卡</span>
-                        <span>99元外卖红包欢乐..</span>
+                        <span>大奖等你拿</span>
                     </div>
                 </div>
                 <div class="ui-block-b ui-block-item">
@@ -120,7 +120,7 @@
                 <div class="ui-block-b ui-block-item">
                     <div id="takeOut" class="ui-bar ui-bar-a padding-0 back-waimai">
                         <span class="big-menu-title green">外卖</span>
-                        <span>点外卖返现50%</span>
+                        <span>点外卖送餐</span>
                     </div>
                 </div>
                 <div class="ui-block-a ui-block-item">

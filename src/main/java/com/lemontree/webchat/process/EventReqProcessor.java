@@ -1,10 +1,7 @@
 package com.lemontree.webchat.process;
 
 import com.lemontree.common.GlobalCaches;
-import com.lemontree.daemon.dbmgr.model.FansInfo;
-import com.lemontree.daemon.dbmgr.model.NewsMsg;
-import com.lemontree.daemon.dbmgr.model.ServiceInfo;
-import com.lemontree.daemon.dbmgr.model.SubcEventPushMsg;
+import com.lemontree.daemon.dbmgr.model.*;
 import com.lemontree.daemon.dbmgr.service.FansInfoService;
 import com.lemontree.util.MessageUtil;
 import com.lemontree.util.SpringContextUtil;
@@ -16,6 +13,7 @@ import com.lemontree.webchat.protocol.req.event.SubEventReqMsg;
 import com.lemontree.webchat.protocol.req.event.UnsubEventReqMsg;
 import com.lemontree.webchat.protocol.resp.BaseRespMsg;
 import com.lemontree.webchat.protocol.resp.NewsRespMsg;
+import com.lemontree.webchat.protocol.resp.TextRespMsg;
 import org.jasic.util.ExceptionUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -134,6 +132,7 @@ public class EventReqProcessor extends AProcessor<EventReqMsg> {
             }
         } else {
             // TODO 服务号已不存在或者分店用户服务到期则不提供服务
+            logger.error("服务号[" + toUserName + "]没有配置");
             return null;
         }
     }
@@ -155,6 +154,8 @@ public class EventReqProcessor extends AProcessor<EventReqMsg> {
 
         String type = subcEventPushMsg.getType().toLowerCase().trim();
         Integer msgId = subcEventPushMsg.getMsgid();
+
+        BaseRespMsg respMsg = null;
 
         /**
          * 图文
@@ -183,7 +184,7 @@ public class EventReqProcessor extends AProcessor<EventReqMsg> {
             newsRespMsg.setArticles(arts);
             newsRespMsg.setArticleCount(arts.size());
 
-            return newsRespMsg;
+            respMsg = newsRespMsg;
         }
 
         /**
@@ -191,17 +192,37 @@ public class EventReqProcessor extends AProcessor<EventReqMsg> {
          */
         else if (type.equals(MessageUtil.RESP_MESSAGE_TYPE_TEXT.toLowerCase().trim())) {
 
-
-            return null;
+            TextRespMsg textRespMsg = new TextRespMsg();
+            textRespMsg.setFromUserName(msg.getToUserName());
+            textRespMsg.setToUserName(msg.getFromUserName());
+            textRespMsg.setCreateTime(System.currentTimeMillis() / 1000);
+            Text text = GlobalCaches.DB_CACHE_TEXT_MSG.get(msgId);
+            textRespMsg.setContent(text.getContent());
+            respMsg = textRespMsg;
         }
 
         /**
          * 设置默认的
          */
         else {
-
-            return null;
+            TextRespMsg textRespMsg = new TextRespMsg();
+            textRespMsg.setFromUserName(msg.getToUserName());
+            textRespMsg.setToUserName(msg.getFromUserName());
+            textRespMsg.setCreateTime(System.currentTimeMillis() / 1000);
+            textRespMsg.setContent("欢迎注注[" + info.getRestaurantInfo().getName() + "]");
+            respMsg = textRespMsg;
         }
+
+        if (respMsg == null) {
+            TextRespMsg textRespMsg = new TextRespMsg();
+            textRespMsg.setFromUserName(msg.getToUserName());
+            textRespMsg.setToUserName(msg.getFromUserName());
+            textRespMsg.setCreateTime(System.currentTimeMillis() / 1000);
+            textRespMsg.setContent("没有配置[" + msg.getToUserName() + "]的关注回复信息");
+            respMsg = textRespMsg;
+        }
+
+        return respMsg;
     }
 
 

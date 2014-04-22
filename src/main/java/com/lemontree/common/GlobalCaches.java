@@ -35,6 +35,10 @@ public class GlobalCaches {
     public static Map<Integer, SubcEventPushMsg> DB_CACHE_SUBC_EVENT_PUSH_MSG = new HashMap<Integer, SubcEventPushMsg>();
     // 图文消息表(NewsMsg)(PID/BEAN)
     public static Map<Integer, NewsMsg> DB_CACHE_NEWS_MSG = new HashMap<Integer, NewsMsg>();
+    // 文字回复(Text)(PID/BEAN)
+    public static Map<Integer, Text> DB_CACHE_TEXT_MSG = new HashMap<Integer, Text>();
+
+
 
     public static StringBuilder SB = new StringBuilder();
 

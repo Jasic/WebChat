@@ -64,7 +64,7 @@
                <!--enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"-->
                <!--selectByExampleQueryId="false"/>-->
 
-
+        <!-- sqlserver-->
         <!--<table tableName="AdvertisedSchedule" domainObjectName="AdvertisedSchedule" enableCountByExample="false"-->
                <!--enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"-->
                <!--selectByExampleQueryId="false"/>-->
@@ -100,9 +100,12 @@
                <!--enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"-->
                <!--selectByExampleQueryId="false"/>-->
 
-        <table tableName="ClientInfo" domainObjectName="ClientInfo" enableCountByExample="false"
+        <table tableName="Text" domainObjectName="Text" enableCountByExample="false"
                enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"
                selectByExampleQueryId="false"/>
+        <!--<table tableName="ClientInfo" domainObjectName="ClientInfo" enableCountByExample="false"-->
+               <!--enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"-->
+               <!--selectByExampleQueryId="false"/>-->
         <!--<table tableName="ClientType" domainObjectName="ClientType" enableCountByExample="false"-->
                <!--enableSelectByExample="false" enableDeleteByExample="false" enableUpdateByExample="false"-->
                <!--selectByExampleQueryId="false"/>-->

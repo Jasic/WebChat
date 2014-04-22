@@ -7,7 +7,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>我的订单-</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="author" content="www.hs.com">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -74,7 +74,7 @@
 <div class="carte my_carte">
     <div class="box_carte">
         <div id="shippingcartBillDiv" class="tips">
-            <span class="fl">您共点了8道菜</span>
+            <span class="fl">您共点了<a id="foodCount" href="#">0</a>道菜</span>
         <span class="fr">共计：<strong class="red">303.00元</strong><font
                 style="font-size: 10pt; color: #999999">(不含时价菜)</font></span></div>
 
@@ -100,7 +100,7 @@
                      **/
                 %>
                 <div style="display: none" id="foodHTML">
-                    <li>
+                    <li id="foodLi[id]">
                         <div class="cont_fl">
                             <div class="txt">
                                 <h3><a href="#">[name][name]</a></h3>
@@ -238,19 +238,14 @@ function toCheckout() {
 //删除商品项
 function deleteItem(productSkuCode, obj) {
     if(confirm("你确定要删除吗？")){
-//    showWaitMessage("loading", obj);
-    delProductItem(productSkuCode, function () {
+        alert(productSkuCode);
+        var id = "#foodLi" +productSkuCode;
 
-        $j(obj).parents("li:first").remove();
-//        refreshBill();
+        // 1.删除页面的显示
+        $j(id).remove();
 
-        var len = $j('span[name="quantitys"]').length;
-        if (len <= 0) {
-            //window.location.href='/m/cart/shoppingcart.html';
-            $j("#btnCheckout").hide();
-            $j(".appoint").hide();
-        }
-    });
+        // 2.删除cookies的记录
+        deleteCookieFoodById("chooseMenu",productSkuCode);
     }
 }
 
@@ -262,7 +257,7 @@ function quantityMinus(productSkuCode, tabindex) {
     if (quantityElement.text() != "" && parseInt(quantityElement.text()) > 1) {
         quantity = parseInt(quantityElement.text()) - 1;
         quantityElement.text(quantity);
-//        quantityOnChange(productSkuCode, quantity);
+        quantityOnChange(productSkuCode,-1);
     } else {
         deleteItem(productSkuCode, quantityElement);
     }
@@ -278,21 +273,95 @@ function quantityPlus(productSkuCode, tabindex) {
         quantity = parseInt(quantityElement.text()) + 1;
     }
     quantityElement.text(quantity);
-//    quantityOnChange(productSkuCode, quantity);
+    quantityOnChange(productSkuCode, 1);
 }
 
 //更新商品项数量输入框触发事件
-function quantityOnChange(productSkuCode, quantity) {
-    changeQuantity(productSkuCode, quantity, afterQuantityChanged);		//定义在cart.js
+function quantityOnChange(productSkuCode,count) {
+
+    // 1.改变cookies的记录
+    changeCookieFoodById("chooseMenu",productSkuCode,count);
 }
 
 
 //清空购物车
 function clearCart() {
     if (confirm("你确定要清空吗？")) {
-        clearShoppingcart(deleteCartCallback);
+        $j("#cookieMenu").html("");
+        // 清除菜单的cookies
+        $j.cookie("chooseMenu",null);
     }
 }
+
+
+/**
+ * 根据食物的id删除cookie菜单中的食物
+ * cookie:当前用户的cookie
+ * id:当前食物的id
+ */
+function deleteCookieFoodById(cookie,id){
+
+    // 循环cookie记录
+    var history = new Array();
+    history = JSON.parse($j.cookie(cookie));
+
+    var data = history;
+    // alert("历史记录是:\n" + history);
+
+    var index = -1;
+    if (history != null) {
+        $j.each(history, function (key, val) {
+
+            if (val.id == id) {
+                index = key;
+            }
+        });
+    }
+
+    // 删除当前id
+    if(index != -1){
+        data.splice(index,1);
+    }
+    var json = JSON.stringify(data);
+    $j.cookie(cookie, json, { expires: 1 })
+}
+
+
+/**
+ * 根据食物的id更改cookie菜单中的食物数量
+ * cookie:当前用户的cookie
+ * id:当前食物的id
+ */
+function changeCookieFoodById(cookie,id,count){
+
+    // 循环cookie记录
+    var history = new Array();
+    history = JSON.parse($j.cookie(cookie));
+
+    var data = history;
+    // alert("历史记录是:\n" + history);
+
+    if (history != null) {
+        $j.each(history, function (key, val) {
+            if (val.id == id) {
+                val.count = val.count + Number(count);
+            }
+        });
+    }
+
+    var json = JSON.stringify(data);
+    $j.cookie(cookie, json, { expires: 1 })
+
+    alert(json);
+
+    refreshPrices();
+}
+
+//刷新购物车帐单信息
+function refreshPrices() {
+
+}
+
 //刷新购物车帐单信息
 function refreshBill() {
     $j("#shippingcartBillDiv").load("/m/cart/shoppingcart.html?doAction=refreshBill&decorator=blank");
@@ -331,10 +400,6 @@ function deleteFavoriteCallback() {
     }
 
 
-}
-//清空商品的回调函数
-function deleteCartCallback() {
-    window.location = '/m/cart/shoppingcart.html';
 }
 
 //显示等待信息，例如“正在读取XXX信息，请稍等”

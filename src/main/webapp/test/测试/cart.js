@@ -188,25 +188,6 @@ function changeQuantity(skuCode, quantity, callback){
 }
 
 /**
- * 删除普通商品项
- * @param skuCode	要删除的商品的sku code
- * @callback		操作成功后的回调函数。
- */
-function delProductItem(skuCode, callback) {
-	mask();
-	$importDwr(function() {
-		shoppingcartDwr.delProductItem(skuCode, function(jsonText){
-			if ($j.isFunction(callback)) {
-				callback();
-   			} else {
-				goToCart();
-			}
-			refreshMinicart();
-		})
-	})
-}
-
-/**
  * 删除礼品券项
  * @param shoppingcartItemGcId	要删除礼品券的ID
  * @callback					操作成功后的回调函数。

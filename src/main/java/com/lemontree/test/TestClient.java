@@ -19,6 +19,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.util.EntityUtils;
+import org.junit.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,9 +31,10 @@ import java.util.ArrayList;
 public class TestClient {
 
     public static void main(String[] args) throws IOException {
-        testGet();
+//        testGet();
 //        testPost();
 //        System.out.println(testJsonCmd());
+        System.out.println( testJsonCmd());
     }
 
     public static void testGet() throws IOException {
@@ -164,6 +166,5 @@ public class TestClient {
 
         return jsonStr;
     }
-
 
 }
